@@ -2,9 +2,8 @@ package functions;
 
 import static org.testng.Assert.*;
 
-public class SqrFunctionTest {
+public class MultiplyFunctionTest {
     double apply(double x) {
-        double y = 2;
-        return Math.pow(x, y);
+        return x * x;
     }
 }

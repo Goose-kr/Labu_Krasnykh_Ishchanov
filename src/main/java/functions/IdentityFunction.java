@@ -1,7 +1,7 @@
 package functions;
 
 public class IdentityFunction {
-    double aplly (double x) {
+    double aplly(double x) {
         return x;
     }
 }
