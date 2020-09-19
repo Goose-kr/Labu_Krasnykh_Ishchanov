@@ -1,10 +1,14 @@
 package functions;
 
+import org.testng.annotations.Test;
+
 import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
-    double apply(double x) {
-        double y = 2;
-        return Math.pow(x, y);
+    public MathFunction sqr = new SqrFunction();
+
+    @Test
+    public void testSqr() {
+        assertEquals(sqr.apply(5), 25, 0.00001);
     }
 }
