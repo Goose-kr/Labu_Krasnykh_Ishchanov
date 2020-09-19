@@ -10,5 +10,6 @@ public class UnitFunctionTest {
     @Test
     public void testUnit() {
         assertEquals(unit.apply(7), 1, 0.000001);
+        assertEquals(unit.apply(34637642),1,0.00000001);
     }
 }

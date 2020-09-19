@@ -11,6 +11,7 @@ public class CompositeFunctionTest {
     @Test
     public void testFunction(){
         assertEquals(composite.apply(5),100,0.000001);
+        assertEquals(composite.apply(-4),64,0.00001);
     }
 
 

@@ -9,6 +9,7 @@ public class ZeroFunctionTest {
     @Test
     public void testZero(){
         assertEquals(zero.apply(1),0,0.0001);
+        assertEquals(zero.apply(2362468),0,0.0000001);
     }
 
 }

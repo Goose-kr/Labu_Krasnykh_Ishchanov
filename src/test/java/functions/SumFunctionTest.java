@@ -9,5 +9,6 @@ public class SumFunctionTest {
     @Test
     public void testSum(){
         assertEquals(sum.apply(5),10,0.0000001);
+        assertEquals(sum.apply(-5),-10,0.00001);
     }
 }

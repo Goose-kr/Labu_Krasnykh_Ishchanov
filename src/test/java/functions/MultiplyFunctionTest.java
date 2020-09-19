@@ -9,5 +9,6 @@ public class MultiplyFunctionTest {
     @Test
     public void applyTest (){
         assertEquals(multiply.apply(5),25,0.000001);
+        assertEquals(multiply.apply(-5),25,0.0001);
     }
 }
