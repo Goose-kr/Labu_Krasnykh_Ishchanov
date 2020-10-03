@@ -15,4 +15,7 @@ public class CompositeFunction implements MathFunction {
     public double apply(double x) {
         return secondFunction.apply(firstFunction.apply(x));
     }
+
+
 }
+
