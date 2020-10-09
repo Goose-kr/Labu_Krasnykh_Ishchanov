@@ -13,7 +13,7 @@ public interface TabulatedFunction extends MathFunction {
 
     int indexOfY(double y);
 
-    double LeftBound();
+    double leftBound();
 
     double rightBound();
 }
