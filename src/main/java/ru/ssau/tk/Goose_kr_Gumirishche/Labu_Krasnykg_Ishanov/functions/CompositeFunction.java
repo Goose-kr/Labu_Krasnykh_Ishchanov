@@ -1,6 +1,4 @@
-package functions;
-
-import java.lang.Math;
+package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 public class CompositeFunction implements MathFunction {
     private final MathFunction firstFunction;

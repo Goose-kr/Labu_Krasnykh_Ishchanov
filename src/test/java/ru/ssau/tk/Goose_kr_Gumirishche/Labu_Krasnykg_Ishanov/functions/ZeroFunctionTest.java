@@ -1,4 +1,4 @@
-package functions;
+package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 import org.testng.annotations.Test;
 
