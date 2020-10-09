@@ -59,7 +59,13 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-        return 0;
+            if (x == x0) {
+                return 0;
+            }
+            if (x==x1){
+                return 1;
+            }
+        return -1;
     }
 
     @Override
