@@ -9,58 +9,63 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     protected int floorIndexOfX(double x) {
         if (x < x0) {
             return 0;
-        }
-        else if (x >= x0 && x <= x1) {
+        } else if (x >= x0 && x <= x1) {
             return 1;
-        }
-        else {
+        } else {
             return 2;
         }
     }
-    protected double extrapolateLeft(double x){
-        return interpolate(x,x0,x1,y0,y1);
+
+    protected double extrapolateLeft(double x) {
+        return interpolate(x, x0, x1, y0, y1);
     }
-    protected double extrapolateRight(double x){
-        return interpolate(x,x0,x1,y0,y1);
+
+    protected double extrapolateRight(double x) {
+        return interpolate(x, x0, x1, y0, y1);
     }
-    protected double interpolate(double x, int floorIndex){
-        return interpolate(x,x0,x1,y0,y1);
+
+    protected double interpolate(double x, int floorIndex) {
+        return interpolate(x, x0, x1, y0, y1);
     }
-    public double apply(double x){
+
+    public double apply(double x) {
         return super.apply(x);
 
     }
-    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY){
-        return super.interpolate(x,leftX,rightX,leftY,rightY);
+
+    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+        return super.interpolate(x, leftX, rightX, leftY, rightY);
     }
-    public int getCount(){
+
+    public int getCount() {
         return 2;
     }
-   public double getX(int index){
-        return 0;
-   }
 
-    public double getY(int index){
+    public double getX(int index) {
         return 0;
     }
 
-    public void setY(int index, double value){
-
-    }
-
-    public int indexOfX(double x){
+    public double getY(int index) {
         return 0;
     }
 
-    public int indexOfY(double y){
+    public void setY(int index, double value) {
+
+    }
+
+    public int indexOfX(double x) {
         return 0;
     }
 
-    public double leftBound(){
+    public int indexOfY(double y) {
+        return 0;
+    }
+
+    public double leftBound() {
         return x0;
     }
 
-    public double rightBound(){
+    public double rightBound() {
         return x1;
     }
 }
