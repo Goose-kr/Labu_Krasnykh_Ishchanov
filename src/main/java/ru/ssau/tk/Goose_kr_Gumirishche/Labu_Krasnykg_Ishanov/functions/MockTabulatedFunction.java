@@ -36,17 +36,31 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     public int getCount(){
         return 2;
     }
-    double getX(int index);
+   public double getX(int index){
+        return 0;
+   }
 
-    double getY(int index);
+    public double getY(int index){
+        return 0;
+    }
 
-    void setY(int index, double value);
+    public void setY(int index, double value){
 
-    int indexOfX(double x);
+    }
 
-    int indexOfY(double y);
+    public int indexOfX(double x){
+        return 0;
+    }
 
-    double leftBound();
+    public int indexOfY(double y){
+        return 0;
+    }
 
-    double rightBound();
+    public double leftBound(){
+        return x0;
+    }
+
+    public double rightBound(){
+        return x1;
+    }
 }
