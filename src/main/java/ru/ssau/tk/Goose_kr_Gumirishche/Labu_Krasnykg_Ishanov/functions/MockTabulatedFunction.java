@@ -17,16 +17,36 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
             return 2;
         }
     }
-    protected double extrapolateleft(double x){
+    protected double extrapolateLeft(double x){
         return interpolate(x,x0,x1,y0,y1);
     }
-    protected double extrapolateright(double x){
+    protected double extrapolateRight(double x){
         return interpolate(x,x0,x1,y0,y1);
     }
     protected double interpolate(double x, int floorIndex){
         return interpolate(x,x0,x1,y0,y1);
     }
+    public double apply(double x){
+        return super.apply(x);
+
+    }
+    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY){
+        return super.interpolate(x,leftX,rightX,leftY,rightY);
+    }
     public int getCount(){
         return 2;
     }
+    double getX(int index);
+
+    double getY(int index);
+
+    void setY(int index, double value);
+
+    int indexOfX(double x);
+
+    int indexOfY(double y);
+
+    double leftBound();
+
+    double rightBound();
 }
