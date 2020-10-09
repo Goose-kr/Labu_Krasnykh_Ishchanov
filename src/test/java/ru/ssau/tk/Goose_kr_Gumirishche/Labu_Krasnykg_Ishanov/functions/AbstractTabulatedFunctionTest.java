@@ -10,6 +10,8 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public  void testApply(){
-
+    assertEquals(mock.apply(4.0),3,ACCURACY);
+   /* assertEquals(mock.apply(5.0),4,ACCURACY);
+    assertEquals(mock.apply(7.0),6,ACCURACY);*/
     }
 }
