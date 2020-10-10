@@ -1,18 +1,11 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
-import org.w3c.dom.Node;
+
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count;
     private Node head;
     private Node last;
-
-    static protected class Node {
-        public Node next;
-        public Node prev;
-        public double x;
-        public double y;
-    }
 
     private void addNode(double x, double y) {
         Node node = new Node();
@@ -144,7 +137,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
-    protected double extrapolateLeft(double x) {
+    protected double extrapolateRight(double x) {
         if (head.x == last.x) {
             return head.y;
         }
@@ -158,5 +151,35 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node node = getNode(floorIndex);
         Node nodeNext = node.next;
         return interpolate(x, node.x, nodeNext.x, node.y, nodeNext.y);
+    }
+
+    protected Node floorNodeOfX(double x) {
+        Node node = head;
+        if (node.x > x) {
+            return head;
+        }
+        for (int i = 0; i < count; i++) {
+            if (node.x < x) {
+                node = node.next;
+            } else {
+                return node.prev;
+            }
+        }
+        return last;
+    }
+
+    public double apply(double x) {
+        if (x < leftBound()) {
+            return extrapolateLeft(x);
+        } else if (x > rightBound()) {
+            return extrapolateRight(x);
+        } else {
+            Node node = floorNodeOfX(x);
+            if (node.x == x) {
+                return node.y;
+            } else {
+                return interpolate(x, node.x, node.next.x, node.y, node.next.y);
+            }
+        }
     }
 }
