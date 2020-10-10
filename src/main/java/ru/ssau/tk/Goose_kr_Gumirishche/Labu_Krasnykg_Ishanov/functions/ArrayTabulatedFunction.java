@@ -22,16 +22,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             if (i == 0) {
                 xValues[i] = xFrom;
                 yValues[i] = source.apply(xFrom);
-                i++;
             } else if (i == count - 1) {
                 xValues[i] = xTo;
                 yValues[i] = source.apply(xTo);
-                i++;
             } else {
                 xFrom = xFrom + step;
                 xValues[i] = xFrom;
                 yValues[i] = source.apply(xFrom);
-                i++;
             }
         }
     }
