@@ -1,7 +1,6 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 
-
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count;
     private Node head;
@@ -28,12 +27,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        this.count=xValues.length;
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        this.count=count;
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
             addNode(xFrom, source.apply(xFrom));
@@ -168,6 +169,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return last;
     }
 
+    @Override
     public double apply(double x) {
         if (x < leftBound()) {
             return extrapolateLeft(x);
