@@ -149,7 +149,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (head.x == last.x) {
             return head.y;
         }
-        return interpolate(x, getNode(floorIndex).x, last.x, getNode(floorIndex).y, last.y);
+        return interpolate(x, getNode(floorIndex).x, getNode(floorIndex+1).x, getNode(floorIndex).y, getNode(floorIndex+1).y);
     }
 
     protected Node floorNodeOfX(double x) {

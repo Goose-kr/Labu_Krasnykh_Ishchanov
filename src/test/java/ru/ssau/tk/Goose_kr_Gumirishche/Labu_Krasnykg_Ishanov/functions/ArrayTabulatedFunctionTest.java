@@ -100,10 +100,10 @@ public class ArrayTabulatedFunctionTest {
     }
     @Test
     public void testInterpolate(){
-        assertEquals(arrayTabulatedFunction2.interpolate(16,2),40,0.000001);
-        assertEquals(arrayTabulatedFunction2.interpolate(20,2),48,0.0001);
-        assertEquals(arrayTabulatedFunction2.interpolate(20,6),112,0.00001);
-        assertEquals(arrayTabulatedFunction3.interpolate(15,3),180,0.00001);
-        assertEquals(arrayTabulatedFunction3.interpolate(-20,6),0.0/0.0,0.00001);
+        assertEquals(arrayTabulatedFunction2.interpolate(16,2),-50,0.000001);
+        assertEquals(arrayTabulatedFunction2.interpolate(20,2),-62,0.0001);
+        assertEquals(arrayTabulatedFunction2.interpolate(20,6),94,0.00001);
+        assertEquals(arrayTabulatedFunction3.interpolate(15,3),60,0.00001);
+        assertEquals(arrayTabulatedFunction3.interpolate(-20,5),-424,0.00001);
     }
 }

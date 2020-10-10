@@ -113,7 +113,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double interpolate(double x, int floorIndex) {
-        return yValues[floorIndex] + ((yValues[count - 1] - yValues[floorIndex]) / (xValues[count - 1] - xValues[floorIndex])) * (x - xValues[floorIndex]);
+        return yValues[floorIndex] + ((yValues[floorIndex+1] - yValues[floorIndex]) / (xValues[floorIndex+1] - xValues[floorIndex])) * (x - xValues[floorIndex]);
     }
 
 }
