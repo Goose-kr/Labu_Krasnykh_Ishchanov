@@ -23,7 +23,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             node.next = head;
             last = node;
         }
-        count = +1;
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
@@ -66,7 +65,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 }
 
             }
-        } else {
+        }
+        else {
             iNode = last;
             for (int i = count - 1; i >= count / 2; i--) {
                 if (i == index) {
@@ -76,7 +76,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 }
             }
         }
-        return null;
+        return iNode;
     }
 
     @Override
@@ -149,9 +149,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (head.x == last.x) {
             return head.y;
         }
-        Node node = getNode(floorIndex);
-        Node nodeNext = node.next;
-        return interpolate(x, node.x, nodeNext.x, node.y, nodeNext.y);
+        return interpolate(x, getNode(floorIndex).x, last.x, getNode(floorIndex).y, last.y);
     }
 
     protected Node floorNodeOfX(double x) {
@@ -168,7 +166,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return last;
     }
-
     @Override
     public double apply(double x) {
         if (x < leftBound()) {
