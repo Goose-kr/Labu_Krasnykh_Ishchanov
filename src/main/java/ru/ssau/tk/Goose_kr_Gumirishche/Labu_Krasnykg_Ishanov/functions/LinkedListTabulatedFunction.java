@@ -32,7 +32,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
     }
 
-    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) { ;
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
             addNode(xFrom, source.apply(xFrom));
