@@ -8,17 +8,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private void addNode(double x, double y) {
         Node newNode = new Node();
         if (head == null) {
-            newNode.x=x;
-            newNode.y=y;
+            newNode.x = x;
+            newNode.y = y;
             newNode.next = newNode;
-            newNode.prev=newNode;
+            newNode.prev = newNode;
             head = newNode;
 
-        }
-        else {
-            newNode.x=x;
-            newNode.y=y;
-            Node last =head.prev;
+        } else {
+            newNode.x = x;
+            newNode.y = y;
+            Node last = head.prev;
             last.next = newNode;
             head.prev = newNode;
             newNode.prev = last;
