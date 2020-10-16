@@ -10,10 +10,10 @@ public class LinkedListTabulatedFunctionTest {
     protected final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
     protected final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
 
-    LinkedListTabulatedFunction linkedListTabulatedFunction1 = new LinkedListTabulatedFunction(xValues1, yValues1);
-    LinkedListTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValues2, yValues2);
-    CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
-    LinkedListTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
+    private final LinkedListTabulatedFunction linkedListTabulatedFunction1 = new LinkedListTabulatedFunction(xValues1, yValues1);
+    private final LinkedListTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValues2, yValues2);
+    private final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
+    private final LinkedListTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
 
     @Test
     public void testCount() {
@@ -118,5 +118,17 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(linkedListTabulatedFunction2.interpolate(20, 6), 94, 0.00001);
         assertEquals(linkedListTabulatedFunction3.interpolate(15, 3), 60, 0.00001);
         assertEquals(linkedListTabulatedFunction3.interpolate(-20, 5), -424, 0.00001);
+    }
+
+    @Test
+    public void testApply() {
+        assertEquals(linkedListTabulatedFunction1.apply(16), 46, 0.00001);
+        assertEquals(linkedListTabulatedFunction1.apply(-16), 46, 0.000001);
+        assertEquals(linkedListTabulatedFunction1.apply(-2), 4, 0.0001);
+        assertEquals(linkedListTabulatedFunction1.apply(0.5), 0.5, 0.000001);
+        assertEquals(linkedListTabulatedFunction3.apply(-4), 56, 0.00001);
+        assertEquals(linkedListTabulatedFunction3.apply(5), 76, 0.00001);
+        assertEquals(linkedListTabulatedFunction3.apply(-2), 16, 0.00001);
+        assertEquals(linkedListTabulatedFunction3.apply(-1.5), 10, 0.00001);
     }
 }

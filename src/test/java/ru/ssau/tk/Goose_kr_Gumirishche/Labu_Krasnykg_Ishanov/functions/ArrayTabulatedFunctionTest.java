@@ -118,8 +118,16 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction3.interpolate(15, 3), 60, 0.00001);
         assertEquals(arrayTabulatedFunction3.interpolate(-20, 5), -424, 0.00001);
     }
+
     @Test
-    public void testApply(){
-        assertEquals(arrayTabulatedFunction1.apply(16));
+    public void testApply() {
+        assertEquals(arrayTabulatedFunction1.apply(16), 46, 0.00001);
+        assertEquals(arrayTabulatedFunction1.apply(-16), 46, 0.000001);
+        assertEquals(arrayTabulatedFunction1.apply(-2), 4, 0.0001);
+        assertEquals(arrayTabulatedFunction1.apply(0.5), 0.5, 0.000001);
+        assertEquals(arrayTabulatedFunction3.apply(-4), 56, 0.00001);
+        assertEquals(arrayTabulatedFunction3.apply(5), 76, 0.00001);
+        assertEquals(arrayTabulatedFunction3.apply(-2), 16, 0.00001);
+        assertEquals(arrayTabulatedFunction3.apply(-1.5), 10, 0.00001);
     }
 }
