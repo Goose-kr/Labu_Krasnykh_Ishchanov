@@ -5,45 +5,48 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
-    public AbstractTabulatedFunction arrayTabulatedFunction1(){
+    public AbstractTabulatedFunction arrayTabulatedFunction1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         final AbstractTabulatedFunction arrayTabulatedFunction1 = new ArrayTabulatedFunction(xValues1, yValues1);
         return arrayTabulatedFunction1;
     }
-    public AbstractTabulatedFunction arrayTabulatedFunction2(){
+
+    public AbstractTabulatedFunction arrayTabulatedFunction2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
         final AbstractTabulatedFunction arrayTabulatedFunction2 = new ArrayTabulatedFunction(xValues2, yValues2);
         return arrayTabulatedFunction2;
     }
-    public AbstractTabulatedFunction arrayTabulatedFunction3(){
+
+    public AbstractTabulatedFunction arrayTabulatedFunction3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
         final AbstractTabulatedFunction arrayTabulatedFunction3 = new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
         return arrayTabulatedFunction3;
     }
-    public AbstractTabulatedFunction arrayTabulatedFunctionSet1(){
+
+    public AbstractTabulatedFunction arrayTabulatedFunctionSet1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         final AbstractTabulatedFunction arrayTabulatedFunction1 = new ArrayTabulatedFunction(xValues1, yValues1);
         arrayTabulatedFunction1.setY(0, 16);
         return arrayTabulatedFunction1;
     }
-    public AbstractTabulatedFunction arrayTabulatedFunctionSet2(){
+
+    public AbstractTabulatedFunction arrayTabulatedFunctionSet2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
         final AbstractTabulatedFunction arrayTabulatedFunction2 = new ArrayTabulatedFunction(xValues2, yValues2);
         arrayTabulatedFunction2.setY(4, -20);
         return arrayTabulatedFunction2;
     }
-    public AbstractTabulatedFunction arrayTabulatedFunctionSet3(){
+
+    public AbstractTabulatedFunction arrayTabulatedFunctionSet3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
         final AbstractTabulatedFunction arrayTabulatedFunction3 = new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
         arrayTabulatedFunction3.setY(3, 16);
         return arrayTabulatedFunction3;
     }
-
-
 
 
     @Test
