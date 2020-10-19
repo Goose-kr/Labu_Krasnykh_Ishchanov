@@ -5,47 +5,27 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
+    AbstractTabulatedFunction link1;
+    AbstractTabulatedFunction link2;
+    AbstractTabulatedFunction link3;
+
     public AbstractTabulatedFunction linkedListTabulatedFunction1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        final AbstractTabulatedFunction linkedListTabulatedFunction1 = new LinkedListTabulatedFunction(xValues1, yValues1);
-        return linkedListTabulatedFunction1;
+        return link1 = new LinkedListTabulatedFunction(xValues1, yValues1);
     }
 
     public AbstractTabulatedFunction linkedListTabulatedFunction2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
-        final AbstractTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValues2, yValues2);
-        return linkedListTabulatedFunction2;
+        new LinkedListTabulatedFunction(xValues2, yValues2);
+        return link2 = new LinkedListTabulatedFunction(xValues2, yValues2);
     }
 
     public AbstractTabulatedFunction linkedListTabulatedFunction3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
-        final AbstractTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
-        return linkedListTabulatedFunction3;
-    }
-
-    public AbstractTabulatedFunction linkedListTabulatedFunctionSet1() {
-        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
-        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        final AbstractTabulatedFunction linkedListTabulatedFunction1 = new LinkedListTabulatedFunction(xValues1, yValues1);
-        linkedListTabulatedFunction1.setY(0, 16);
-        return linkedListTabulatedFunction1;
-    }
-
-    public AbstractTabulatedFunction linkedListTabulatedFunctionSet2() {
-        final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
-        final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
-        final AbstractTabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunction(xValues2, yValues2);
-        linkedListTabulatedFunction2.setY(4, -20);
-        return linkedListTabulatedFunction2;
-    }
-
-    public AbstractTabulatedFunction linkedListTabulatedFunctionSet3() {
-        final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
-        final AbstractTabulatedFunction linkedListTabulatedFunction3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
-        linkedListTabulatedFunction3.setY(3, 16);
-        return linkedListTabulatedFunction3;
+        new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
+        return link3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
     }
 
     @Test
@@ -73,9 +53,12 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        assertEquals(linkedListTabulatedFunctionSet1().getY(0), 16, 0.000001);
-        assertEquals(linkedListTabulatedFunctionSet2().getY(4), -20, 0.000001);
-        assertEquals(linkedListTabulatedFunctionSet3().getY(3), 16, 0.00001);
+        linkedListTabulatedFunction1().setY(0, 16);
+        linkedListTabulatedFunction2().setY(4, -20);
+        linkedListTabulatedFunction3().setY(3, 16);
+        assertEquals(link1.getY(0), 16, 0.000001);
+        assertEquals(link2.getY(4), -20, 0.000001);
+        assertEquals(link3.getY(3), 16, 0.00001);
     }
 
     @Test
