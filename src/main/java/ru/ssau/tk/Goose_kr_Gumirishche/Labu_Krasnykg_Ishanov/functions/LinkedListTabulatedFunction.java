@@ -5,6 +5,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count;
     private Node head;
 
+    private static class Node {
+        public Node next;
+        public Node prev;
+        public double x;
+        public double y;
+    }
+
+
+
+
     private void addNode(double x, double y) {
         Node newNode = new Node();
         if (head == null) {
