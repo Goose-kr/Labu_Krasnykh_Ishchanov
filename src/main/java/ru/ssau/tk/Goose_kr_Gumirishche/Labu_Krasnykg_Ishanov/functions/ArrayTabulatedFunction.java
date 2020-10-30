@@ -1,5 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
@@ -8,7 +10,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        checkLengthIsTheSame(xValues,yValues);
+        checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
@@ -110,6 +112,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         if (count == 1) {
             return x;
+        } else if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+            throw new InterpolationException("x is out of bounds of interpolation");
         }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }

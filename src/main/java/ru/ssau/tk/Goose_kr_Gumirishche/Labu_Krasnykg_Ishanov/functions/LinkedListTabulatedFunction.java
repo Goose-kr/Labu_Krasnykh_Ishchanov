@@ -176,7 +176,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (head.x == head.prev.x) {
             return head.y;
         }
-        if (x < getNode(0).x || x > getNode(count - 1).x){
+        if (x < getNode(floorIndex).x || x > getNode(floorIndex+1).x){
             throw new IllegalArgumentException("x out bounds");
         }
         return interpolate(x, getNode(floorIndex).x, getNode(floorIndex + 1).x, getNode(floorIndex).y, getNode(floorIndex + 1).y);

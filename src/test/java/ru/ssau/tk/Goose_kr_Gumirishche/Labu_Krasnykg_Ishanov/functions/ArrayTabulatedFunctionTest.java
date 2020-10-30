@@ -1,6 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
 
 import static org.testng.Assert.*;
 
@@ -127,6 +128,10 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction2().interpolate(20, 6), 94, 0.00001);
         assertEquals(arrayTabulatedFunction3().interpolate(15, 3), 60, 0.00001);
         assertEquals(arrayTabulatedFunction3().interpolate(-20, 5), -424, 0.00001);
+
+        assertThrows(InterpolationException.class,()->{
+            arrayTabulatedFunction1().interpolate(0.5,1);
+        });
     }
 
     @Test
