@@ -1,6 +1,8 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private int count;
     private Node head;
@@ -176,7 +178,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (head.x == head.prev.x) {
             return head.y;
         }
-        if (x < getNode(floorIndex).x || x > getNode(floorIndex+1).x){
+        if (x < getNode(floorIndex).x || x > getNode(floorIndex + 1).x) {
             throw new IllegalArgumentException("x out bounds");
         }
         return interpolate(x, getNode(floorIndex).x, getNode(floorIndex + 1).x, getNode(floorIndex).y, getNode(floorIndex + 1).y);
@@ -187,7 +189,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (node.x > x) {
             return head;
         }
-        if(x<head.x){
+        if (x < head.x) {
             throw new IllegalArgumentException("X out left bound");
         }
         for (int i = 0; i < count; i++) {
@@ -214,5 +216,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 return interpolate(x, node.x, node.next.x, node.y, node.next.y);
             }
         }
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
