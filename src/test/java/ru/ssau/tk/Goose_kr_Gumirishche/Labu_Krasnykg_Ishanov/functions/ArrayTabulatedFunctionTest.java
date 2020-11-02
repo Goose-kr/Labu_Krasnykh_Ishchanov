@@ -1,5 +1,8 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.testng.annotations.Test;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
 
@@ -9,6 +12,8 @@ public class ArrayTabulatedFunctionTest {
     AbstractTabulatedFunction array1;
     AbstractTabulatedFunction array2;
     AbstractTabulatedFunction array3;
+    ArrayTabulatedFunction array4;
+
 
     public AbstractTabulatedFunction arrayTabulatedFunction1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
@@ -25,6 +30,12 @@ public class ArrayTabulatedFunctionTest {
     public AbstractTabulatedFunction arrayTabulatedFunction3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
         return array3 = new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
+    }
+
+    public ArrayTabulatedFunction arrayTabulatedFunction4() {
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+        return array4 = new ArrayTabulatedFunction(xValues1, yValues1);
     }
 
     @Test
@@ -140,5 +151,22 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction3().apply(5), 76, 0.00001);
         assertEquals(arrayTabulatedFunction3().apply(-2), 16, 0.00001);
         assertEquals(arrayTabulatedFunction3().apply(-1.5), 10, 0.00001);
+    }
+
+    @Test
+    public void testIterator() {
+        Iterator<Point> iterator = arrayTabulatedFunction4().iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(point.x, arrayTabulatedFunction4().getX(i++));
+        }
+        assertThrows(NoSuchElementException.class, () -> {
+            Point point = iterator.next();
+        });
+        i = 0;
+        for (Point point : arrayTabulatedFunction4()) {
+            assertEquals(point.x, arrayTabulatedFunction4().getX(i++));
+        }
     }
 }

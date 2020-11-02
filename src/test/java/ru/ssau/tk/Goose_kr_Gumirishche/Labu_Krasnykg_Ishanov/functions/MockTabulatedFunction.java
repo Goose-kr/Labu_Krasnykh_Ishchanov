@@ -1,5 +1,8 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
     final double x0 = 2.0;
     final double x1 = 5.0;
@@ -15,6 +18,28 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
         } else {
             return 2;
         }
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<>() {
+            int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < 1;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(x0, y0);
+                i++;
+                return point;
+            }
+        };
     }
 
     @Override
