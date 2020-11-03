@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
 
 import static org.testng.Assert.*;
@@ -151,6 +153,33 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction3().apply(5), 76, 0.00001);
         assertEquals(arrayTabulatedFunction3().apply(-2), 16, 0.00001);
         assertEquals(arrayTabulatedFunction3().apply(-1.5), 10, 0.00001);
+    }
+
+    @Test
+    public void testInterpolationException() {
+        assertThrows(InterpolationException.class, () -> {
+            arrayTabulatedFunction1().interpolate(-2, 1);
+            arrayTabulatedFunction2().interpolate(-1, 5);
+            arrayTabulatedFunction2().interpolate(-2, 3);
+        });
+    }
+
+    @Test
+    public void testCheckLengthIsTheSame() {
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            new ArrayTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
+            new ArrayTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
+            new ArrayTabulatedFunction(new double[]{1}, new double[]{});
+        });
+    }
+
+    @Test
+    public void testCheckSorted() {
+        assertThrows(ArrayIsNotSortedException.class, () -> {
+            new ArrayTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
+            new ArrayTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
+            new ArrayTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
+        });
     }
 
     @Test

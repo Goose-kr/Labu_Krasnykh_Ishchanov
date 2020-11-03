@@ -114,7 +114,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         if (count == 1) {
             return x;
-        } else if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+        }
+        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);

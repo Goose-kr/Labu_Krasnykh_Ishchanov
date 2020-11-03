@@ -1,6 +1,8 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
+
 import java.util.Iterator;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
@@ -46,7 +48,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         if (xValues.length < 2) {
-            throw new IllegalArgumentException("Lenght < 2");
+            throw new IllegalArgumentException("Length < 2");
         }
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
@@ -55,7 +57,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) {
-            throw new IllegalArgumentException("Lenght < 2");
+            throw new IllegalArgumentException("Length < 2");
         }
         if (xFrom >= xTo) {
             throw new IllegalArgumentException("bounds left");
@@ -179,7 +181,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             return head.y;
         }
         if (x < getNode(floorIndex).x || x > getNode(floorIndex + 1).x) {
-            throw new IllegalArgumentException("x out bounds");
+            throw new InterpolationException("x is out of bounds of interpolation");
         }
         return interpolate(x, getNode(floorIndex).x, getNode(floorIndex + 1).x, getNode(floorIndex).y, getNode(floorIndex + 1).y);
     }

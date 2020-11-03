@@ -1,6 +1,9 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
 
 import static org.testng.Assert.*;
 
@@ -15,7 +18,8 @@ public class LinkedListTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         return link1 = new LinkedListTabulatedFunction(xValues1, yValues1);
     }
-     public AbstractTabulatedFunction linkedListTabulatedFunction2() {
+
+    public AbstractTabulatedFunction linkedListTabulatedFunction2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
         new LinkedListTabulatedFunction(xValues2, yValues2);
@@ -27,7 +31,8 @@ public class LinkedListTabulatedFunctionTest {
         new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
         return link3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
     }
-    public LinkedListTabulatedFunction getListOfArray(){
+
+    public LinkedListTabulatedFunction getListOfArray() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         return new LinkedListTabulatedFunction(xValues1, yValues1);
@@ -74,8 +79,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(link3.getY(3), 16, 0.00001);
 
         assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().setY(200, 1));
-        assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().setY(-4,4));
-        assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().setY(5,1));
+        assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().setY(-4, 4));
+        assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().setY(5, 1));
     }
 
     @Test
@@ -151,7 +156,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(linkedListTabulatedFunction3().interpolate(15, 3), 60, 0.00001);
         assertEquals(linkedListTabulatedFunction3().interpolate(-20, 5), -424, 0.00001);
 
-        assertThrows(IllegalArgumentException.class, () -> getListOfArray().interpolate(5,3));;
+        assertThrows(IllegalArgumentException.class, () -> getListOfArray().interpolate(5, 3));
+        ;
     }
 
     @Test
@@ -165,12 +171,39 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(linkedListTabulatedFunction3().apply(-2), 16, 0.00001);
         assertEquals(linkedListTabulatedFunction3().apply(-1.5), 10, 0.00001);
     }
-    public void testGetNode (){
+
+    @Test
+    public void testInterpolationException() {
+        assertThrows(InterpolationException.class, () -> {
+            linkedListTabulatedFunction1().interpolate(-2, 1);
+            linkedListTabulatedFunction2().interpolate(-1, 5);
+            linkedListTabulatedFunction2().interpolate(-2, 3);
+        });
+    }
+
+    @Test
+    public void testCheckLengthIsTheSame() {
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
+            new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
+            new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
+            new LinkedListTabulatedFunction(new double[]{1}, new double[]{});
+        });
+    }
+
+    @Test
+    public void testCheckSorted() {
+        assertThrows(ArrayIsNotSortedException.class, () -> {
+            new LinkedListTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
+            new LinkedListTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
+            new LinkedListTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
+        });
+    }
+    /*public void testGetNode (){
     LinkedListTabulatedFunction listOfArray = getListOfArray();
 
     assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(200));
     assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(-4));
     assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(5));
-    }
+    }*/
 
 }
