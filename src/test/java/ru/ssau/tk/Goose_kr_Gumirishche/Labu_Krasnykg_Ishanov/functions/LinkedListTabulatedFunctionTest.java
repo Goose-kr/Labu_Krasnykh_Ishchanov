@@ -120,12 +120,12 @@ public class LinkedListTabulatedFunctionTest {
     public void testFloorIndexOfX() {
         assertEquals(linkedListTabulatedFunction2().floorIndexOfX(-3.5), 0, 0.00001);
         assertEquals(linkedListTabulatedFunction2().floorIndexOfX(-0.1421), 3, 0.00001);
-        assertEquals(linkedListTabulatedFunction1().floorIndexOfX(-10), 0, 0.00001);
+        assertEquals(linkedListTabulatedFunction1().floorIndexOfX(-1.5), 0, 0.00001);
         assertEquals(linkedListTabulatedFunction3().floorIndexOfX(1.5), 4, 0.0001);
         assertEquals(linkedListTabulatedFunction3().floorIndexOfX(-2.5), 0, 0.0001);
 
-        assertThrows(IllegalArgumentException.class, () -> getListOfArray().floorIndexOfX(0));
-        assertThrows(IllegalArgumentException.class, () -> getListOfArray().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getListOfArray().floorIndexOfX(-3));
+        assertThrows(IllegalArgumentException.class, () -> getListOfArray().floorIndexOfX(-4));
     }
 
     @Test
@@ -194,12 +194,13 @@ public class LinkedListTabulatedFunctionTest {
             new LinkedListTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
         });
     }
-    /*public void testGetNode (){
-    LinkedListTabulatedFunction listOfArray = getListOfArray();
+    @Test
+     public void testGetNode () {
+         LinkedListTabulatedFunction listOfArray = getListOfArray();
 
-    assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(200));
-    assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(-4));
-    assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(5));
-    }*/
+         assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(200));
+         assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(-4));
+         assertThrows(IndexOutOfBoundsException.class, () -> getListOfArray().getNode(5));
+     }
 
 }
