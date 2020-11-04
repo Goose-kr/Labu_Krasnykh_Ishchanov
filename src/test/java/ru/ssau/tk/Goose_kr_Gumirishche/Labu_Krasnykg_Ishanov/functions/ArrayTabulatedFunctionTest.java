@@ -39,6 +39,11 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         return array4 = new ArrayTabulatedFunction(xValues1, yValues1);
     }
+    public LinkedListTabulatedFunction getListOfArray() {
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+        return new LinkedListTabulatedFunction(xValues1, yValues1);
+    }
 
     @Test
     public void testCount() {
@@ -53,6 +58,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction1().getX(4), 2, 0.0001);
         assertEquals(arrayTabulatedFunction2().getX(4), 0, 0.000001);
         assertEquals(arrayTabulatedFunction3().getX(3), 0, 0.00001);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            getListOfArray().getX(200);
+            getListOfArray().getX(5);
+            getListOfArray().getX(-2);
+        });
     }
 
     @Test
@@ -61,6 +72,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction1().getY(4), 4, 0.0001);
         assertEquals(arrayTabulatedFunction2().getY(4), 0, 0.000001);
         assertEquals(arrayTabulatedFunction3().getY(4), 4, 0.000001);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            getListOfArray().getY(200);
+            getListOfArray().getY(-4);
+            getListOfArray().getY(5);
+        });
     }
 
     @Test
@@ -71,6 +88,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(array1.getY(0), 16, 0.000001);
         assertEquals(array2.getY(4), -20, 0.000001);
         assertEquals(array3.getY(3), 16, 0.00001);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            getListOfArray().setY(200, 1);
+            getListOfArray().setY(-4, 4);
+            getListOfArray().setY(5, 1);
+        });
     }
 
     @Test
@@ -112,6 +135,11 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction1().floorIndexOfX(-1.5), 0, 0.00001);
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(1.5), 4, 0.0001);
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(-2.5), 0, 0.0001);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            getListOfArray().floorIndexOfX(-3);
+            getListOfArray().floorIndexOfX(-4);
+        });
     }
 
     @Test

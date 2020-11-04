@@ -14,12 +14,21 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Length < 2");
+        }
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Length < 2");
+        }
+        if (xFrom >= xTo) {
+            throw new IllegalArgumentException("bounds left");
+        }
         this.count = count;
         xValues = new double[count];
         yValues = new double[count];
@@ -30,6 +39,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             xFrom = xFrom + step;
         }
     }
+    private void controlIndex(int index) {
+        if (index < 0 || index > count - 1) {
+            throw new IndexOutOfBoundsException("index left bounds");
+        }
+    }
 
     @Override
     public int getCount() {
@@ -38,16 +52,19 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
+        controlIndex(index);
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
+        controlIndex(index);
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
+        controlIndex(index);
         yValues[index] = value;
     }
 
