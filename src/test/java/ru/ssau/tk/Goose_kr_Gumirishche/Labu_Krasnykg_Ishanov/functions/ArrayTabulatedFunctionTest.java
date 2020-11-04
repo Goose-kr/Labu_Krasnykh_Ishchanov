@@ -109,7 +109,7 @@ public class ArrayTabulatedFunctionTest {
     public void testFloorIndexOfX() {
         assertEquals(arrayTabulatedFunction2().floorIndexOfX(-3.5), 0, 0.00001);
         assertEquals(arrayTabulatedFunction2().floorIndexOfX(-0.1421), 3, 0.00001);
-        assertEquals(arrayTabulatedFunction1().floorIndexOfX(-10), 0, 0.00001);
+        assertEquals(arrayTabulatedFunction1().floorIndexOfX(-1.5), 0, 0.00001);
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(1.5), 4, 0.0001);
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(-2.5), 0, 0.0001);
     }

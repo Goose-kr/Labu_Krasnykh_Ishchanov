@@ -85,7 +85,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected int floorIndexOfX(double x) {
         int i = 0;
         if (x < xValues[0]) {
-            return 0;
+            throw new IllegalArgumentException("X out left bound");
         }
         for (i = 0; i + 1 < count; i++) {
             if (x < xValues[i + 1]) {
