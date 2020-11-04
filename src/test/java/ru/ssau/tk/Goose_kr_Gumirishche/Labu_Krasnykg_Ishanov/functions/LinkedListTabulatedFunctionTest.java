@@ -150,14 +150,10 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testInterpolate() {
-        assertEquals(linkedListTabulatedFunction2().interpolate(16, 2), -50, 0.000001);
-        assertEquals(linkedListTabulatedFunction2().interpolate(20, 2), -62, 0.0001);
-        assertEquals(linkedListTabulatedFunction2().interpolate(20, 6), 94, 0.00001);
-        assertEquals(linkedListTabulatedFunction3().interpolate(15, 3), 60, 0.00001);
-        assertEquals(linkedListTabulatedFunction3().interpolate(-20, 5), -424, 0.00001);
+        assertEquals(linkedListTabulatedFunction2().interpolate(-1.5, 2), 2.5, 0.000001);
+        assertEquals(linkedListTabulatedFunction2().interpolate(-2.5, 1), 6.5, 0.0001);
+        assertEquals(linkedListTabulatedFunction2().interpolate(2.5, 6), 6.5, 0.00001);
 
-        assertThrows(IllegalArgumentException.class, () -> getListOfArray().interpolate(5, 3));
-        ;
     }
 
     @Test
