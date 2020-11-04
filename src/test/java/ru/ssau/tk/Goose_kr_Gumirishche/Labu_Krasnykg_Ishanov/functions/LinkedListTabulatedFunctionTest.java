@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
+import java.util.Iterator;
 
 import static org.testng.Assert.*;
 
@@ -33,6 +34,12 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     public LinkedListTabulatedFunction getListOfArray() {
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+        return new LinkedListTabulatedFunction(xValues1, yValues1);
+    }
+
+    public LinkedListTabulatedFunction listOfArray1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         return new LinkedListTabulatedFunction(xValues1, yValues1);
@@ -213,4 +220,25 @@ public class LinkedListTabulatedFunctionTest {
         });
     }
 
+    @Test
+    public void testIterator1() {
+        LinkedListTabulatedFunction listOfArray1 = getListOfArray();
+        Iterator<Point> iterator = listOfArray1.iterator();
+        int i=0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(listOfArray1().getX(i++), point.x, 0.00001);
+        }
+
+    }
+    @Test
+    public void testIterator2(){
+        LinkedListTabulatedFunction listOfArray1 = getListOfArray();
+        Iterator<Point> iterator = listOfArray1.iterator();
+        int i=0;
+        for(Point point: listOfArray1){
+            assertEquals(listOfArray1.getX(i++), point.x, 0.00001);
+        }
+    }
 }
+
