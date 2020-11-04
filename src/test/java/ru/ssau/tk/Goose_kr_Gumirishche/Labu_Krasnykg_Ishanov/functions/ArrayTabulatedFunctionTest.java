@@ -39,6 +39,7 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         return array4 = new ArrayTabulatedFunction(xValues1, yValues1);
     }
+
     public LinkedListTabulatedFunction getListOfArray() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};

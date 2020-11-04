@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
+
 import java.util.Iterator;
 
 import static org.testng.Assert.*;
@@ -224,19 +225,20 @@ public class LinkedListTabulatedFunctionTest {
     public void testIterator1() {
         LinkedListTabulatedFunction listOfArray1 = getListOfArray();
         Iterator<Point> iterator = listOfArray1.iterator();
-        int i=0;
+        int i = 0;
         while (iterator.hasNext()) {
             Point point = iterator.next();
             assertEquals(listOfArray1().getX(i++), point.x, 0.00001);
         }
 
     }
+
     @Test
-    public void testIterator2(){
+    public void testIterator2() {
         LinkedListTabulatedFunction listOfArray1 = getListOfArray();
         Iterator<Point> iterator = listOfArray1.iterator();
-        int i=0;
-        for(Point point: listOfArray1){
+        int i = 0;
+        for (Point point : listOfArray1) {
             assertEquals(listOfArray1.getX(i++), point.x, 0.00001);
         }
     }

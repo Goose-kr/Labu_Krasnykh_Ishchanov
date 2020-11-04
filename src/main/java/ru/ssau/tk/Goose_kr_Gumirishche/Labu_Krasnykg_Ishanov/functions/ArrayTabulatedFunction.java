@@ -39,6 +39,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             xFrom = xFrom + step;
         }
     }
+
     private void controlIndex(int index) {
         if (index < 0 || index > count - 1) {
             throw new IndexOutOfBoundsException("index left bounds");
