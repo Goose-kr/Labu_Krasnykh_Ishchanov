@@ -1,7 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.ArrayIsNotSortedException;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.DifferentLengthOfArraysException;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected abstract int floorIndexOfX(double x);
@@ -16,13 +16,13 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         return leftY + ((rightY - leftY) / (rightX - leftX)) * (x - leftX);
     }
 
-    static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+    protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
             throw new DifferentLengthOfArraysException("lengths of arrays are different");
         }
     }
 
-    static void checkSorted(double[] xValues) {
+    protected static void checkSorted(double[] xValues) {
         for (int i = 0; i < xValues.length - 1; i++) {
             if (xValues[i] > xValues[i + 1]) {
                 throw new ArrayIsNotSortedException("xValues array isn't sorted");

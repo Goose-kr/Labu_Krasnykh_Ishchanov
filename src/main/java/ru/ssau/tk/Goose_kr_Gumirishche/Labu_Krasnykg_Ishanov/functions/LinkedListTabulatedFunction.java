@@ -1,7 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.exceptions.InterpolationException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.InterpolationException;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -19,7 +19,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private void controlIndex(int index) {
         if (index < 0 || index > count - 1) {
-            throw new IndexOutOfBoundsException("index left bounds");
+            throw new IndexOutOfBoundsException("index out of bounds");
         }
     }
 
