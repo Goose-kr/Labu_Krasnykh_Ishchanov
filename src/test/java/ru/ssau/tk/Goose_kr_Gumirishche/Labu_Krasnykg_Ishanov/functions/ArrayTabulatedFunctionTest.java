@@ -40,12 +40,6 @@ public class ArrayTabulatedFunctionTest {
         return array4 = new ArrayTabulatedFunction(xValues1, yValues1);
     }
 
-    public LinkedListTabulatedFunction getListOfArray() {
-        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
-        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        return new LinkedListTabulatedFunction(xValues1, yValues1);
-    }
-
     @Test
     public void testCount() {
         assertEquals(arrayTabulatedFunction1().getCount(), 5, 0.00001);
@@ -60,10 +54,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction2().getX(4), 0, 0.000001);
         assertEquals(arrayTabulatedFunction3().getX(3), 0, 0.00001);
 
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            getListOfArray().getX(200);
-            getListOfArray().getX(5);
-            getListOfArray().getX(-2);
+            new ArrayTabulatedFunction(xValues1, yValues1).getX(200);
+            new ArrayTabulatedFunction(xValues1, yValues1).getX(5);
+            new ArrayTabulatedFunction(xValues1, yValues1).getX(-2);
         });
     }
 
@@ -74,10 +70,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction2().getY(4), 0, 0.000001);
         assertEquals(arrayTabulatedFunction3().getY(4), 4, 0.000001);
 
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            getListOfArray().getY(200);
-            getListOfArray().getY(-4);
-            getListOfArray().getY(5);
+            new ArrayTabulatedFunction(xValues1, yValues1).getY(200);
+            new ArrayTabulatedFunction(xValues1, yValues1).getY(-4);
+            new ArrayTabulatedFunction(xValues1, yValues1).getY(5);
         });
     }
 
@@ -90,10 +88,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(array2.getY(4), -20, 0.000001);
         assertEquals(array3.getY(3), 16, 0.00001);
 
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            getListOfArray().setY(200, 1);
-            getListOfArray().setY(-4, 4);
-            getListOfArray().setY(5, 1);
+            new ArrayTabulatedFunction(xValues1, yValues1).setY(200, 1);
+            new ArrayTabulatedFunction(xValues1, yValues1).setY(-4, 4);
+            new ArrayTabulatedFunction(xValues1, yValues1).setY(5, 1);
         });
     }
 
@@ -137,9 +137,11 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(1.5), 4, 0.0001);
         assertEquals(arrayTabulatedFunction3().floorIndexOfX(-2.5), 0, 0.0001);
 
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IllegalArgumentException.class, () -> {
-            getListOfArray().floorIndexOfX(-3);
-            getListOfArray().floorIndexOfX(-4);
+            new ArrayTabulatedFunction(xValues1, yValues1).floorIndexOfX(-3);
+            new ArrayTabulatedFunction(xValues1, yValues1).floorIndexOfX(-4);
         });
     }
 
