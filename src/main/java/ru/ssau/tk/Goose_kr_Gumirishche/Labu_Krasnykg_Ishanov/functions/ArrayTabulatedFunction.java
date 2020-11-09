@@ -40,11 +40,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         }
     }
 
-    private void controlIndex(int index) {
-        if (index < 0 || index > count - 1) {
-            throw new IndexOutOfBoundsException("index left bounds");
-        }
-    }
 
     @Override
     public int getCount() {
@@ -53,19 +48,16 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        controlIndex(index);
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
-        controlIndex(index);
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
-        controlIndex(index);
         yValues[index] = value;
     }
 
@@ -155,6 +147,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
             @Override
             public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 Point point = new Point(xValues[i], yValues[i]);
                 i++;
                 return point;
