@@ -155,9 +155,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
             @Override
             public Point next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
                 Point point = new Point(xValues[i], yValues[i]);
                 i++;
                 return point;
