@@ -237,6 +237,7 @@ public class ArrayTabulatedFunctionTest {
             Point point = iterator.next();
             assertEquals(point.x, arrayTabulatedFunction4().getX(i++));
         }
+        assertEquals(i, arrayTabulatedFunction4().count);
         assertThrows(NoSuchElementException.class, () -> {
             Point point = iterator.next();
         });
@@ -244,5 +245,6 @@ public class ArrayTabulatedFunctionTest {
         for (Point point : arrayTabulatedFunction4()) {
             assertEquals(point.x, arrayTabulatedFunction4().getX(i++));
         }
+        assertEquals(i, arrayTabulatedFunction4().count);
     }
 }

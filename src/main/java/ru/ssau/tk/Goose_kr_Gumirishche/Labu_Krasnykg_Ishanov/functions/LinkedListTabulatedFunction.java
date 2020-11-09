@@ -214,12 +214,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        Iterator<Point> it = new Iterator<>() {
+        return new Iterator<>() {
             Node node = head;
 
             @Override
             public boolean hasNext() {
-                return node != head.prev && node != null;
+                return node != null;
             }
 
             @Override
@@ -242,6 +242,5 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 throw new UnsupportedOperationException();
             }
         };
-        return it;
     }
 }

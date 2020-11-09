@@ -250,6 +250,7 @@ public class LinkedListTabulatedFunctionTest {
             Point point = iterator.next();
             assertEquals(listOfArray1().getX(i++), point.x, 0.00001);
         }
+        assertEquals(i,listOfArray1.getCount());
 
     }
 
@@ -269,6 +270,7 @@ public class LinkedListTabulatedFunctionTest {
         for (Point point : listOfArray1) {
             assertEquals(listOfArray1.getX(i++), point.x, 0.00001);
         }
+        assertEquals(i,listOfArray1.getCount());
     }
 }
 
