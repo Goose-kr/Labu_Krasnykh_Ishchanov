@@ -11,33 +11,28 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.Interpol
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
-    AbstractTabulatedFunction array1;
-    AbstractTabulatedFunction array2;
-    AbstractTabulatedFunction array3;
-    ArrayTabulatedFunction array4;
-
 
     public AbstractTabulatedFunction arrayTabulatedFunction1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        return array1 = new ArrayTabulatedFunction(xValues1, yValues1);
+        return new ArrayTabulatedFunction(xValues1, yValues1);
     }
 
     public AbstractTabulatedFunction arrayTabulatedFunction2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
-        return array2 = new ArrayTabulatedFunction(xValues2, yValues2);
+        return new ArrayTabulatedFunction(xValues2, yValues2);
     }
 
     public AbstractTabulatedFunction arrayTabulatedFunction3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
-        return array3 = new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
+        return new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
     }
 
     public ArrayTabulatedFunction arrayTabulatedFunction4() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        return array4 = new ArrayTabulatedFunction(xValues1, yValues1);
+        return new ArrayTabulatedFunction(xValues1, yValues1);
     }
 
     @Test
@@ -89,15 +84,23 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        arrayTabulatedFunction1().setY(0, 16);
-        arrayTabulatedFunction2().setY(4, -20);
-        arrayTabulatedFunction3().setY(3, 16);
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+        AbstractTabulatedFunction array1 = new ArrayTabulatedFunction(xValues1, yValues1);
+        final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
+        final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
+        AbstractTabulatedFunction array2 = new ArrayTabulatedFunction(xValues2, yValues2);
+        final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
+        new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
+        AbstractTabulatedFunction array3 = new ArrayTabulatedFunction(compositeFunction, -3, 3, 7);
+        array1.setY(0, 16);
+        array2.setY(4, -20);
+        array3.setY(3, 16);
         assertEquals(array1.getY(0), 16, 0.000001);
         assertEquals(array2.getY(4), -20, 0.000001);
         assertEquals(array3.getY(3), 16, 0.00001);
 
-        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
-        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).setY(200, 1);
         });
@@ -253,7 +256,10 @@ public class ArrayTabulatedFunctionTest {
             new ArrayTabulatedFunction(new double[]{1}, new double[]{2});
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new ArrayTabulatedFunction(new SqrFunction(), 1, 1, 1);
+            new ArrayTabulatedFunction(new SqrFunction(), 1, 2, 1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ArrayTabulatedFunction(new SqrFunction(), 3, 1, 3);
         });
     }
 

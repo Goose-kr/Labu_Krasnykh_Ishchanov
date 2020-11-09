@@ -6,32 +6,29 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.Differen
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.InterpolationException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
-    AbstractTabulatedFunction link1;
-    AbstractTabulatedFunction link2;
-    AbstractTabulatedFunction link3;
-    AbstractTabulatedFunction link4;
 
     public AbstractTabulatedFunction linkedListTabulatedFunction1() {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-        return link1 = new LinkedListTabulatedFunction(xValues1, yValues1);
+        return new LinkedListTabulatedFunction(xValues1, yValues1);
     }
 
     public AbstractTabulatedFunction linkedListTabulatedFunction2() {
         final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
         final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
         new LinkedListTabulatedFunction(xValues2, yValues2);
-        return link2 = new LinkedListTabulatedFunction(xValues2, yValues2);
+        return new LinkedListTabulatedFunction(xValues2, yValues2);
     }
 
     public AbstractTabulatedFunction linkedListTabulatedFunction3() {
         final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
         new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
-        return link3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
+        return new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
     }
 
     public LinkedListTabulatedFunction getListOfArray() {
@@ -63,11 +60,11 @@ public class LinkedListTabulatedFunctionTest {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
-                    new LinkedListTabulatedFunction(xValues1, yValues1).getX(200);
-                });
-            assertThrows(IndexOutOfBoundsException.class, () -> {
+            new LinkedListTabulatedFunction(xValues1, yValues1).getX(200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getX(5);
-            });
+        });
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getX(-2);
         });
@@ -95,15 +92,24 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        linkedListTabulatedFunction1().setY(0, 16);
-        linkedListTabulatedFunction2().setY(4, -20);
-        linkedListTabulatedFunction3().setY(3, 16);
+        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+        AbstractTabulatedFunction link1 = new LinkedListTabulatedFunction(xValues1, yValues1);
+        final double[] xValues2 = new double[]{-4, -3, -2, -1, 0, 1, 2, 3, 4};
+        final double[] yValues2 = new double[]{16, 9, 4, 1, 0, 1, 4, 9, 16};
+        AbstractTabulatedFunction link2 = new LinkedListTabulatedFunction(xValues2, yValues2);
+        final CompositeFunction compositeFunction = new CompositeFunction(new SumFunction(), new SqrFunction());
+        new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
+        AbstractTabulatedFunction link3 = new LinkedListTabulatedFunction(compositeFunction, -3, 3, 7);
+
+        link1.setY(0, 16);
+        link2.setY(4, -20);
+        link3.setY(3, 16);
         assertEquals(link1.getY(0), 16, 0.000001);
         assertEquals(link2.getY(4), -20, 0.000001);
         assertEquals(link3.getY(3), 16, 0.00001);
 
-        final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
-        final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).setY(200, 1);
         });
@@ -280,7 +286,10 @@ public class LinkedListTabulatedFunctionTest {
             Point point = iterator.next();
             assertEquals(listOfArray1().getX(i++), point.x, 0.00001);
         }
-        assertEquals(i,listOfArray1.getCount());
+        assertEquals(i, listOfArray1.getCount());
+        assertThrows(NoSuchElementException.class, () -> {
+            Point point = iterator.next();
+        });
 
     }
 
@@ -290,19 +299,21 @@ public class LinkedListTabulatedFunctionTest {
             new LinkedListTabulatedFunction(new double[]{1}, new double[]{2});
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            new LinkedListTabulatedFunction(new SqrFunction(), 1, 1, 1);
+            new LinkedListTabulatedFunction(new SqrFunction(), 1, 2, 1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new LinkedListTabulatedFunction(new SqrFunction(), 3, 1, 3);
         });
     }
 
     @Test
     public void testIterator2() {
         LinkedListTabulatedFunction listOfArray1 = getListOfArray();
-        Iterator<Point> iterator = listOfArray1.iterator();
         int i = 0;
         for (Point point : listOfArray1) {
             assertEquals(listOfArray1.getX(i++), point.x, 0.00001);
         }
-        assertEquals(i,listOfArray1.getCount());
+        assertEquals(i, listOfArray1.getCount());
     }
 }
 
