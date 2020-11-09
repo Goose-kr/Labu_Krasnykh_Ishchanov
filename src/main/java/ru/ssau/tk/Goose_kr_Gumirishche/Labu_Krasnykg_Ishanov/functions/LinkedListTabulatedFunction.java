@@ -164,23 +164,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double extrapolateLeft(double x) {
-        if (head.x == head.prev.x) {
-            return head.y;
-        }
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
     protected double extrapolateRight(double x) {
-        if (head.x == head.prev.x) {
-            return head.y;
-        }
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
     protected double interpolate(double x, int floorIndex) {
-        if (head.x == head.prev.x) {
-            return head.y;
-        }
         if (x < getNode(floorIndex).x || x > getNode(floorIndex + 1).x) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }

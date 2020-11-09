@@ -195,6 +195,11 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testCheckLengthIsTheSame() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{1, 4, 9, 16, 25};
+        ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
+        assertEquals(arrayTabulatedFunction.getX(0), 1, 0.001);
+
         assertThrows(DifferentLengthOfArraysException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
             new ArrayTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
@@ -204,10 +209,23 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testCheckSorted() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{1, 4, 9, 16, 25};
+        ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
+        assertEquals(arrayTabulatedFunction.getX(0), 1, 0.001);
+
         assertThrows(ArrayIsNotSortedException.class, () -> {
             new ArrayTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
             new ArrayTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
             new ArrayTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
+        });
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new ArrayTabulatedFunction(new double[]{1}, new double[]{2});
+            new ArrayTabulatedFunction(new SqrFunction(), 1, 1, 1);
         });
     }
 

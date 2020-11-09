@@ -115,24 +115,15 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double extrapolateLeft(double x) {
-        if (count == 1) {
-            return x;
-        }
         return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     protected double extrapolateRight(double x) {
-        if (count == 1) {
-            return x;
-        }
         return interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1) {
-            return x;
-        }
         if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }

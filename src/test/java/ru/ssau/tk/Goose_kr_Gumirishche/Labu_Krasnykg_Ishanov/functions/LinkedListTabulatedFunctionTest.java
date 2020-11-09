@@ -202,6 +202,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testCheckLengthIsTheSame() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{1, 4, 9, 16, 25};
+        LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
+        assertEquals(linkedListTabulatedFunction.getX(0), 1, 0.001);
+
         assertThrows(DifferentLengthOfArraysException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
             new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
@@ -211,6 +216,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testCheckSorted() {
+        double[] xValues = new double[]{1, 2, 3, 4, 5};
+        double[] yValues = new double[]{1, 4, 9, 16, 25};
+        LinkedListTabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(xValues, yValues);
+        assertEquals(linkedListTabulatedFunction.getX(0), 1, 0.001);
+
         assertThrows(ArrayIsNotSortedException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
             new LinkedListTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
@@ -241,6 +251,14 @@ public class LinkedListTabulatedFunctionTest {
             assertEquals(listOfArray1().getX(i++), point.x, 0.00001);
         }
 
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new LinkedListTabulatedFunction(new double[]{1}, new double[]{2});
+            new LinkedListTabulatedFunction(new SqrFunction(), 1, 1, 1);
+        });
     }
 
     @Test
