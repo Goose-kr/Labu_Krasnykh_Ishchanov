@@ -58,7 +58,11 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getX(200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getX(5);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getX(-2);
         });
     }
@@ -74,7 +78,11 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getY(200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getY(-4);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).getY(5);
         });
     }
@@ -92,7 +100,11 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).setY(200, 1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).setY(-4, 4);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).setY(5, 1);
         });
     }
@@ -141,6 +153,8 @@ public class ArrayTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IllegalArgumentException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).floorIndexOfX(-3);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
             new ArrayTabulatedFunction(xValues1, yValues1).floorIndexOfX(-4);
         });
     }
@@ -188,7 +202,11 @@ public class ArrayTabulatedFunctionTest {
     public void testInterpolationException() {
         assertThrows(InterpolationException.class, () -> {
             arrayTabulatedFunction1().interpolate(-2, 1);
+        });
+        assertThrows(InterpolationException.class, () -> {
             arrayTabulatedFunction2().interpolate(-1, 5);
+        });
+        assertThrows(InterpolationException.class, () -> {
             arrayTabulatedFunction2().interpolate(-2, 3);
         });
     }
@@ -202,7 +220,11 @@ public class ArrayTabulatedFunctionTest {
 
         assertThrows(DifferentLengthOfArraysException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
+        });
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
+        });
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1}, new double[]{});
         });
     }
@@ -216,7 +238,11 @@ public class ArrayTabulatedFunctionTest {
 
         assertThrows(ArrayIsNotSortedException.class, () -> {
             new ArrayTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
+        });
+        assertThrows(ArrayIsNotSortedException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
+        });
+        assertThrows(ArrayIsNotSortedException.class, () -> {
             new ArrayTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
         });
     }
@@ -225,6 +251,8 @@ public class ArrayTabulatedFunctionTest {
     public void testIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
             new ArrayTabulatedFunction(new double[]{1}, new double[]{2});
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
             new ArrayTabulatedFunction(new SqrFunction(), 1, 1, 1);
         });
     }

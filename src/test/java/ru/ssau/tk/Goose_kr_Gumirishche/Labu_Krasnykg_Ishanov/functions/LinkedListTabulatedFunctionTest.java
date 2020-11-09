@@ -63,8 +63,12 @@ public class LinkedListTabulatedFunctionTest {
         final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            new LinkedListTabulatedFunction(xValues1, yValues1).getX(200);
+                    new LinkedListTabulatedFunction(xValues1, yValues1).getX(200);
+                });
+            assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getX(5);
+            });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getX(-2);
         });
     }
@@ -80,7 +84,11 @@ public class LinkedListTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getY(200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getY(-4);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getY(5);
         });
     }
@@ -98,7 +106,11 @@ public class LinkedListTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).setY(200, 1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).setY(-4, 4);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).setY(5, 1);
         });
     }
@@ -148,6 +160,8 @@ public class LinkedListTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IllegalArgumentException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).floorIndexOfX(-3);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).floorIndexOfX(-4);
         });
     }
@@ -195,7 +209,11 @@ public class LinkedListTabulatedFunctionTest {
     public void testInterpolationException() {
         assertThrows(InterpolationException.class, () -> {
             linkedListTabulatedFunction1().interpolate(-2, 1);
+        });
+        assertThrows(InterpolationException.class, () -> {
             linkedListTabulatedFunction2().interpolate(-1, 5);
+        });
+        assertThrows(InterpolationException.class, () -> {
             linkedListTabulatedFunction2().interpolate(-2, 3);
         });
     }
@@ -209,7 +227,11 @@ public class LinkedListTabulatedFunctionTest {
 
         assertThrows(DifferentLengthOfArraysException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4, 5}, new double[]{1, 2, 3, 4});
+        });
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4, 5});
+        });
+        assertThrows(DifferentLengthOfArraysException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1}, new double[]{});
         });
     }
@@ -223,7 +245,11 @@ public class LinkedListTabulatedFunctionTest {
 
         assertThrows(ArrayIsNotSortedException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{5, 2, 3, 4, 5}, new double[]{1, 2, 3, 4, 5});
+        });
+        assertThrows(ArrayIsNotSortedException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1, 5, 3, 4}, new double[]{1, 2, 3, 4});
+        });
+        assertThrows(ArrayIsNotSortedException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{3, 2}, new double[]{1, 2});
         });
     }
@@ -236,7 +262,11 @@ public class LinkedListTabulatedFunctionTest {
         final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
         assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getNode(200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getNode(-4);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             new LinkedListTabulatedFunction(xValues1, yValues1).getNode(5);
         });
     }
@@ -258,6 +288,8 @@ public class LinkedListTabulatedFunctionTest {
     public void testIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> {
             new LinkedListTabulatedFunction(new double[]{1}, new double[]{2});
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
             new LinkedListTabulatedFunction(new SqrFunction(), 1, 1, 1);
         });
     }
