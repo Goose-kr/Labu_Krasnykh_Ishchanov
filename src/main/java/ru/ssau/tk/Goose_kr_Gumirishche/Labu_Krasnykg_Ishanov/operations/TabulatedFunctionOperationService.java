@@ -5,8 +5,11 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.Interpol
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.Point;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedFunctionOperationService {
+
     private TabulatedFunctionFactory factory;
 
     TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
@@ -62,6 +65,6 @@ public class TabulatedFunctionOperationService {
             xValues[i] = firstPoints[i].x;
             yValues[i] = operation.apply(firstPoints[i].y, secondPoints[i].y);
         }
-        return factory. (xValues, yValues);
+        return factory.create(xValues, yValues);
     }
 }
