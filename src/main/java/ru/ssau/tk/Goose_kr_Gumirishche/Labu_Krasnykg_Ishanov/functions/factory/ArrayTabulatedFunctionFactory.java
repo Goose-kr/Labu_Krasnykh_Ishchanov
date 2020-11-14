@@ -5,9 +5,8 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.Tabulated
 
 public class ArrayTabulatedFunctionFactory implements TabulatedFunctionFactory{
 
-TabulatedFunction create(double[]xValues, double[]yValues){
-           ArrayTabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(xValues,yValues);
-            return arrayTabuletedFunction;
+ public TabulatedFunction create(double[]xValues, double[]yValues){
+            return new ArrayTabulatedFunction(xValues,yValues);
             }
 
             }
