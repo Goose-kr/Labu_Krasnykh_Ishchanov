@@ -290,7 +290,7 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(NoSuchElementException.class, () -> {
             Point point = iterator.next();
         });
-
+        assertEquals(listOfArray1().getCount(),i);
     }
 
     @Test
