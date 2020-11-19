@@ -2,7 +2,7 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.MathFunction;
 
-public class SteppingDifferentialOperator implements DifferentialOperator<MathFunction> {
+public abstract class SteppingDifferentialOperator implements DifferentialOperator<MathFunction> {
     protected double step;
 
     SteppingDifferentialOperator(double step) {
@@ -27,7 +27,7 @@ public class SteppingDifferentialOperator implements DifferentialOperator<MathFu
 
     @Override
     public double apply(double x) {
-        return 0;
+        return x;
     }
 
 }
