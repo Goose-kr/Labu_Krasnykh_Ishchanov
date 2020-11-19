@@ -50,6 +50,14 @@ public class TabulatedFunctionOperationService {
         return doOperation(a, b, (u, v) -> u - v);
     }
 
+    public TabulatedFunction multiply(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u * v);
+    }
+
+    public TabulatedFunction division(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u / v);
+    }
+
     private TabulatedFunction doOperation(TabulatedFunction first, TabulatedFunction second, BiOperation operation) {
         if (first.getCount() != second.getCount()) {
             throw new InconsistentFunctionsException("Counts are various");
