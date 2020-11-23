@@ -13,9 +13,9 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.L
 import static org.testng.Assert.*;
 
 public class TabulatedFunctionOperationServiceTest {
-    final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
-    final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
-    final double[] yValues2 = new double[]{9, 1, 0, 1, 4};
+    private final double[] xValues1 = new double[]{-2, -1, 0, 1, 2};
+    private final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
+    private final double[] yValues2 = new double[]{9, 1, 0, 1, 4};
 
     private ArrayTabulatedFunction arrayTabulatedFunction1() {
         return new ArrayTabulatedFunction(xValues1, yValues1);
@@ -33,7 +33,9 @@ public class TabulatedFunctionOperationServiceTest {
         return new LinkedListTabulatedFunction(xValues1, yValues2);
     }
 
-    TabulatedFunctionOperationService tabulatedFunctionOperationService = new TabulatedFunctionOperationService();
+    private ArrayTabulatedFunction arrayError() {
+        return new ArrayTabulatedFunction(new double[]{1, 2, 3, 4, 5}, yValues1);
+    }
 
     @Test
     public void testAsPoints() {
@@ -54,12 +56,14 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     public void testGetFactory() {
+        TabulatedFunctionOperationService tabulatedFunctionOperationService = new TabulatedFunctionOperationService();
         assertTrue(tabulatedFunctionOperationService.getFactory() instanceof ArrayTabulatedFunctionFactory);
         assertTrue(new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
     public void testSetFactory() {
+        TabulatedFunctionOperationService tabulatedFunctionOperationService = new TabulatedFunctionOperationService();
         tabulatedFunctionOperationService.setFactory(new LinkedListTabulatedFunctionFactory());
         assertTrue(tabulatedFunctionOperationService.getFactory() instanceof LinkedListTabulatedFunctionFactory);
         tabulatedFunctionOperationService.setFactory(new ArrayTabulatedFunctionFactory());
@@ -94,6 +98,7 @@ public class TabulatedFunctionOperationServiceTest {
                 new TabulatedFunctionOperationService().sum(errorArray, linkedListTabulatedFunction2())
         );
         assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
     }
 
     @Test
@@ -125,6 +130,7 @@ public class TabulatedFunctionOperationServiceTest {
         );
         assertThrows(InconsistentFunctionsException.class, () ->
                 new TabulatedFunctionOperationService().subtract(arrayTabulatedFunction1(), errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
     }
 
     @Test
@@ -155,6 +161,7 @@ public class TabulatedFunctionOperationServiceTest {
                 new TabulatedFunctionOperationService().multiply(errorArray, linkedListTabulatedFunction2())
         );
         assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().multiply(arrayTabulatedFunction1(), errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
     }
 
     @Test
@@ -185,6 +192,7 @@ public class TabulatedFunctionOperationServiceTest {
                 new TabulatedFunctionOperationService().division(errorArray, linkedListTabulatedFunction2())
         );
         assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().division(arrayTabulatedFunction1(), errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
     }
 
 }

@@ -5,7 +5,7 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.MathFunct
 public abstract class SteppingDifferentialOperator implements DifferentialOperator<MathFunction> {
     protected double step;
 
-    SteppingDifferentialOperator(double step) {
+    public SteppingDifferentialOperator(double step) {
         if (Double.isNaN(step) || Double.isInfinite(step) || step <= 0) {
             throw new IllegalArgumentException("Invalid step");
         }

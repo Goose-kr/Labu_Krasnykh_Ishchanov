@@ -33,8 +33,8 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         this.factory = factory;
     }
 
-    public Class getFactory() {
-        return factory.getClass();
+    public TabulatedFunctionFactory getFactory() {
+        return factory;
     }
 
 

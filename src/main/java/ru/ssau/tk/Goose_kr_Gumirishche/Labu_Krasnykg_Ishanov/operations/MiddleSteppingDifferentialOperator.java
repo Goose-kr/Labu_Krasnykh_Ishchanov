@@ -3,7 +3,7 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.MathFunction;
 
 public class MiddleSteppingDifferentialOperator extends SteppingDifferentialOperator {
-    MiddleSteppingDifferentialOperator(double step) {
+    public MiddleSteppingDifferentialOperator(double step) {
         super(step);
     }
 

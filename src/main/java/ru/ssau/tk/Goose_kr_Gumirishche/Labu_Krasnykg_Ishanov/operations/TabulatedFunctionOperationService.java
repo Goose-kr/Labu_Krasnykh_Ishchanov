@@ -12,11 +12,11 @@ public class TabulatedFunctionOperationService {
 
     private TabulatedFunctionFactory factory;
 
-    TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
+    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
 
-    TabulatedFunctionOperationService() {
+    public TabulatedFunctionOperationService() {
         this.factory = new ArrayTabulatedFunctionFactory();
     }
 
