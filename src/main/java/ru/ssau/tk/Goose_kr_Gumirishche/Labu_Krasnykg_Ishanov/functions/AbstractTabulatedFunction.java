@@ -2,8 +2,10 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations.TabulatedFunctionOperationService;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+public abstract class AbstractTabulatedFunction extends Object implements TabulatedFunction {
+
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);
@@ -40,6 +42,25 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         } else {
             return interpolate(x, floorIndexOfX(x));
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(this.getClass().getSimpleName());
+        stringBuilder.append("; size = ");
+        stringBuilder.append(getCount());
+        for (Point currentPoint : TabulatedFunctionOperationService.asPoints(this)) {
+            stringBuilder.append("\n");
+            stringBuilder.append('[');
+            stringBuilder.append(currentPoint.x);
+            stringBuilder.append(',');
+            stringBuilder.append(' ');
+            stringBuilder.append(currentPoint.y);
+            stringBuilder.append(']');
+
+        }
+        return (stringBuilder.toString());
+
     }
 
 }

@@ -25,7 +25,7 @@ public abstract class SteppingDifferentialOperator implements DifferentialOperat
         return function;
     }
 
-    @Override
+
     public double apply(double x) {
         return x;
     }

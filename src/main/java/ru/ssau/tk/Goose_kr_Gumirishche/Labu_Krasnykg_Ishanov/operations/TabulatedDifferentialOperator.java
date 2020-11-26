@@ -24,7 +24,7 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         return factory.create(xValues, yValues);
     }
 
-    @Override
+
     public double apply(double x) {
         return x;
     }
