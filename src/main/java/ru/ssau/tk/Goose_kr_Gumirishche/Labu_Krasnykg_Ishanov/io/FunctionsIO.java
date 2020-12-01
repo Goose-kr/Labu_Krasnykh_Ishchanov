@@ -22,7 +22,7 @@ public final class FunctionsIO {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
         for (Point point : TabulatedFunctionOperationService.asPoints(function)) {
-            printWriter.printf("%f %f/n", point.x, point.y);
+            printWriter.printf("%f %f/n ", point.x, point.y);
         }
         printWriter.flush();
     }
