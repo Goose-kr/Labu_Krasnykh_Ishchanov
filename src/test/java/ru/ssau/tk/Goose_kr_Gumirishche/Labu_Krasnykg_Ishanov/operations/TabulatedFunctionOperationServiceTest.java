@@ -17,41 +17,35 @@ public class TabulatedFunctionOperationServiceTest {
     private final double[] yValues1 = new double[]{4, 1, 0, 1, 4};
     private final double[] yValues2 = new double[]{9, 1, 0, 1, 4};
 
-    private ArrayTabulatedFunction arrayTabulatedFunction1() {
-        return new ArrayTabulatedFunction(xValues1, yValues1);
+    private final TabulatedFunction arrayTabulatedFunction1 = new ArrayTabulatedFunctionFactory().create(xValues1, yValues1);
+    private final TabulatedFunction arrayTabulatedFunction2 = new ArrayTabulatedFunctionFactory().create(xValues1, yValues2);
+    private final TabulatedFunction linkedListTabulatedFunction1 = new LinkedListTabulatedFunctionFactory().create(xValues1, yValues1);
+    private final TabulatedFunction linkedListTabulatedFunction2 = new LinkedListTabulatedFunctionFactory().create(xValues1, yValues2);
+    private final TabulatedFunction arrayError = new ArrayTabulatedFunctionFactory().create(new double[]{1, 2, 3, 4, 5}, yValues1);
+
+    private TabulatedFunctionOperationService service1() {
+        return new TabulatedFunctionOperationService();
     }
 
-    private LinkedListTabulatedFunction linkedListTabulatedFunction1() {
-        return new LinkedListTabulatedFunction(xValues1, yValues1);
-    }
-
-    private ArrayTabulatedFunction arrayTabulatedFunction2() {
-        return new ArrayTabulatedFunction(xValues1, yValues2);
-    }
-
-    private LinkedListTabulatedFunction linkedListTabulatedFunction2() {
-        return new LinkedListTabulatedFunction(xValues1, yValues2);
-    }
-
-    private ArrayTabulatedFunction arrayError() {
-        return new ArrayTabulatedFunction(new double[]{1, 2, 3, 4, 5}, yValues1);
+    private TabulatedFunctionOperationService service2() {
+        return new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
     }
 
     @Test
     public void testAsPoints() {
-        Point[] points = TabulatedFunctionOperationService.asPoints(arrayTabulatedFunction1());
+        Point[] points = TabulatedFunctionOperationService.asPoints(arrayTabulatedFunction1);
         int i = 0;
         for (Point point : points) {
-            assertEquals(point.x, arrayTabulatedFunction1().getX(i), 0.000001);
-            assertEquals(point.y, arrayTabulatedFunction1().getY(i++), 0.000001);
+            assertEquals(point.x, arrayTabulatedFunction1.getX(i), 0.000001);
+            assertEquals(point.y, arrayTabulatedFunction1.getY(i++), 0.000001);
         }
-        assertEquals(i, arrayTabulatedFunction1().getCount());
+        assertEquals(i, arrayTabulatedFunction1.getCount());
         i = 0;
         for (Point point : points) {
-            assertEquals(point.x, linkedListTabulatedFunction1().getX(i), 0.000001);
-            assertEquals(point.y, linkedListTabulatedFunction1().getY(i++), 0.000001);
+            assertEquals(point.x, linkedListTabulatedFunction1.getX(i), 0.000001);
+            assertEquals(point.y, linkedListTabulatedFunction1.getY(i++), 0.000001);
         }
-        assertEquals(i, linkedListTabulatedFunction1().getCount());
+        assertEquals(i, linkedListTabulatedFunction1.getCount());
     }
 
     @Test
@@ -72,127 +66,140 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     public void testSum() {
-        TabulatedFunction testSumArrayAndList = new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testSumArrayAndList = service1().sum(arrayTabulatedFunction1, linkedListTabulatedFunction2);
         int i = 0;
         for (Point point : testSumArrayAndList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] + yValues2[i++]);
         }
-        TabulatedFunction testSumArray = new TabulatedFunctionOperationService().sum(arrayTabulatedFunction2(), arrayTabulatedFunction1());
+        TabulatedFunction testSumArray = service1().sum(arrayTabulatedFunction2, arrayTabulatedFunction1);
         i = 0;
         for (Point point : testSumArray) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues2[i] + yValues1[i++]);
         }
-        TabulatedFunction testSumList = new TabulatedFunctionOperationService().sum(linkedListTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testSumList = service2().sum(linkedListTabulatedFunction1, linkedListTabulatedFunction2);
         i = 0;
         for (Point point : testSumList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] + yValues2[i++]);
         }
 
+        assertTrue(testSumArray instanceof ArrayTabulatedFunction);
+        assertTrue(testSumArrayAndList instanceof ArrayTabulatedFunction);
+        assertTrue(testSumList instanceof LinkedListTabulatedFunction);
+
         final double[] xError = new double[]{1, 2, 3};
         final double[] yError = new double[]{1, 2, 3};
         ArrayTabulatedFunction errorArray = new ArrayTabulatedFunction(xError, yError);
         assertThrows(InconsistentFunctionsException.class, () ->
-                new TabulatedFunctionOperationService().sum(errorArray, linkedListTabulatedFunction2())
+                service1().sum(errorArray, linkedListTabulatedFunction2)
         );
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), errorArray));
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
+        assertThrows(InconsistentFunctionsException.class, () -> service1().sum(arrayTabulatedFunction1, errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> service1().sum(arrayTabulatedFunction1, arrayError));
     }
 
     @Test
     public void testSubtract() {
-        TabulatedFunction testSubtractArrayAndList = new TabulatedFunctionOperationService().subtract(arrayTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testSubtractArrayAndList = service1().subtract(arrayTabulatedFunction1, linkedListTabulatedFunction2);
         int i = 0;
         for (Point point : testSubtractArrayAndList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] - yValues2[i++]);
         }
-        TabulatedFunction testSubtractArray = new TabulatedFunctionOperationService().subtract(arrayTabulatedFunction2(), arrayTabulatedFunction1());
+        TabulatedFunction testSubtractArray = service1().subtract(arrayTabulatedFunction2, arrayTabulatedFunction1);
         i = 0;
         for (Point point : testSubtractArray) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues2[i] - yValues1[i++]);
         }
-        TabulatedFunction testSubtractList = new TabulatedFunctionOperationService().subtract(linkedListTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testSubtractList = service2().subtract(linkedListTabulatedFunction1, linkedListTabulatedFunction2);
         i = 0;
         for (Point point : testSubtractList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] - yValues2[i++]);
         }
+        assertTrue(testSubtractArray instanceof ArrayTabulatedFunction);
+        assertTrue(testSubtractArrayAndList instanceof ArrayTabulatedFunction);
+        assertTrue(testSubtractList instanceof LinkedListTabulatedFunction);
 
         final double[] xError = new double[]{1, 2, 3};
         final double[] yError = new double[]{1, 2, 3};
         ArrayTabulatedFunction errorArray = new ArrayTabulatedFunction(xError, yError);
         assertThrows(InconsistentFunctionsException.class, () ->
-                new TabulatedFunctionOperationService().subtract(errorArray, linkedListTabulatedFunction2())
+                service1().subtract(errorArray, linkedListTabulatedFunction2)
         );
         assertThrows(InconsistentFunctionsException.class, () ->
-                new TabulatedFunctionOperationService().subtract(arrayTabulatedFunction1(), errorArray));
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
+                service1().subtract(arrayTabulatedFunction1, errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> service2().sum(arrayTabulatedFunction1, arrayError));
     }
 
     @Test
     public void testMultiply() {
-        TabulatedFunction testMultiplyArrayAndList = new TabulatedFunctionOperationService().multiply(arrayTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testMultiplyArrayAndList = service1().multiply(arrayTabulatedFunction1, linkedListTabulatedFunction2);
         int i = 0;
         for (Point point : testMultiplyArrayAndList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] * yValues2[i++]);
         }
-        TabulatedFunction testMultiplyArray = new TabulatedFunctionOperationService().multiply(arrayTabulatedFunction2(), arrayTabulatedFunction1());
+        TabulatedFunction testMultiplyArray = service1().multiply(arrayTabulatedFunction2, arrayTabulatedFunction1);
         i = 0;
         for (Point point : testMultiplyArray) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues2[i] * yValues1[i++]);
         }
-        TabulatedFunction testMultiplyList = new TabulatedFunctionOperationService().multiply(linkedListTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testMultiplyList = service2().multiply(linkedListTabulatedFunction1, linkedListTabulatedFunction2);
         i = 0;
         for (Point point : testMultiplyList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] * yValues2[i++]);
         }
+        assertTrue(testMultiplyArray instanceof ArrayTabulatedFunction);
+        assertTrue(testMultiplyArrayAndList instanceof ArrayTabulatedFunction);
+        assertTrue(testMultiplyList instanceof LinkedListTabulatedFunction);
 
         final double[] xError = new double[]{1, 2, 3};
         final double[] yError = new double[]{1, 2, 3};
         ArrayTabulatedFunction errorArray = new ArrayTabulatedFunction(xError, yError);
         assertThrows(InconsistentFunctionsException.class, () ->
-                new TabulatedFunctionOperationService().multiply(errorArray, linkedListTabulatedFunction2())
+                service1().multiply(errorArray, linkedListTabulatedFunction2)
         );
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().multiply(arrayTabulatedFunction1(), errorArray));
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
+        assertThrows(InconsistentFunctionsException.class, () -> service1().multiply(arrayTabulatedFunction1, errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> service1().sum(arrayTabulatedFunction1, arrayError));
     }
 
     @Test
     public void testDivision() {
-        TabulatedFunction testDivisionArrayAndList = new TabulatedFunctionOperationService().division(arrayTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testDivisionArrayAndList = service1().division(arrayTabulatedFunction1, linkedListTabulatedFunction2);
         int i = 0;
         for (Point point : testDivisionArrayAndList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] / yValues2[i++]);
         }
-        TabulatedFunction testDivisionArray = new TabulatedFunctionOperationService().division(arrayTabulatedFunction2(), arrayTabulatedFunction1());
+        TabulatedFunction testDivisionArray = service1().division(arrayTabulatedFunction2, arrayTabulatedFunction1);
         i = 0;
         for (Point point : testDivisionArray) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues2[i] / yValues1[i++]);
         }
-        TabulatedFunction testDivisionList = new TabulatedFunctionOperationService().division(linkedListTabulatedFunction1(), linkedListTabulatedFunction2());
+        TabulatedFunction testDivisionList = service2().division(linkedListTabulatedFunction1, linkedListTabulatedFunction2);
         i = 0;
         for (Point point : testDivisionList) {
             assertEquals(point.x, xValues1[i]);
             assertEquals(point.y, yValues1[i] / yValues2[i++]);
         }
+        assertTrue(testDivisionArray instanceof ArrayTabulatedFunction);
+        assertTrue(testDivisionArrayAndList instanceof ArrayTabulatedFunction);
+        assertTrue(testDivisionList instanceof LinkedListTabulatedFunction);
 
         final double[] xError = new double[]{1, 2, 3};
         final double[] yError = new double[]{1, 2, 3};
         ArrayTabulatedFunction errorArray = new ArrayTabulatedFunction(xError, yError);
         assertThrows(InconsistentFunctionsException.class, () ->
-                new TabulatedFunctionOperationService().division(errorArray, linkedListTabulatedFunction2())
+                service1().division(errorArray, linkedListTabulatedFunction2)
         );
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().division(arrayTabulatedFunction1(), errorArray));
-        assertThrows(InconsistentFunctionsException.class, () -> new TabulatedFunctionOperationService().sum(arrayTabulatedFunction1(), arrayError()));
+        assertThrows(InconsistentFunctionsException.class, () -> service2().division(arrayTabulatedFunction1, errorArray));
+        assertThrows(InconsistentFunctionsException.class, () -> service1().sum(arrayTabulatedFunction1, arrayError));
     }
 
 }
