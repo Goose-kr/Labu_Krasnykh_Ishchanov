@@ -11,18 +11,18 @@ public class ReadWriteTaskExecutor {
     public static void main(String[] args) {
         TabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(new ZeroFunction(), 1, 10, 10);
         List<Thread> threadList = new ArrayList<>();
-        for (int i = 1; i<=20;i++){
+        for (int i = 0; i <= 20; i++) {
             Thread newTread = new Thread(new ReadWriteTask(tabulatedFunction));
             threadList.add(newTread);
         }
-        for (Thread currentTread: threadList){
+        for (Thread currentTread : threadList) {
             currentTread.start();
         }
         try {
             Thread.sleep(3000);
-        }
-        catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(tabulatedFunction);
     }
 }
