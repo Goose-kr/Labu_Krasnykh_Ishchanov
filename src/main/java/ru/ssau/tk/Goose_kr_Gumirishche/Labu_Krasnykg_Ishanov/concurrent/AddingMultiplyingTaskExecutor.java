@@ -6,15 +6,14 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.Tabulated
 
 public class AddingMultiplyingTaskExecutor {
     public static void main(String[] args) throws InterruptedException {
-        TabulatedFunction function = new LinkedListTabulatedFunction(new ConstantFunction(2), 1, 100, 99);
-        MultiplyingTask multiplyingTask1 = new MultiplyingTask(function);
-        MultiplyingTask multiplyingTask2 = new MultiplyingTask(function);
-        AddingTask addingTask = new AddingTask(function);
-        new Thread(multiplyingTask1).start();
-        Thread.sleep(20);
-        new Thread(multiplyingTask2).start();
-        Thread.sleep(20);
-        new Thread(addingTask).start();
+        TabulatedFunction function = new LinkedListTabulatedFunction(new ConstantFunction(2), 1, 100, 100);
+        Thread multiplyingTask1 = new Thread(new MultiplyingTask(function));
+        Thread multiplyingTask2 = new Thread(new MultiplyingTask(function));
+        Thread addingTask = new Thread(new AddingTask(function));
+        multiplyingTask1.start();
+        multiplyingTask2.start();
+        addingTask.start();
+        multiplyingTask1.sleep(2000);
         System.out.println(function);
     }
 }

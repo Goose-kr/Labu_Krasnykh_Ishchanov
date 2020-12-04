@@ -10,14 +10,18 @@ public class AddingTask implements Runnable {
     }
 
     public void run() {
+        double x,y;
         int size = function.getCount();
         for (int i = 0; i < size; i++) {
-            double x = function.getX(i);
-            double y = function.getY(i);
-            System.out.printf("%s, i = %d, x = %f, old y = %f", "Old", i, x, y);
-            function.setY(i, y + 3);
-            y = function.getY(i);
+            x = function.getX(i);
+            synchronized (function) {
+                y = function.getY(i);
+                System.out.printf("%s, i = %d, x = %f, old y = %f", "Old", i, x, y);
+                function.setY(i, y + 3);
+                y = function.getY(i);
+            }
             System.out.printf("%s, i = %d, x = %f, new y = %f", "New", i, x, y);
+            System.out.println();
         }
     }
 }
