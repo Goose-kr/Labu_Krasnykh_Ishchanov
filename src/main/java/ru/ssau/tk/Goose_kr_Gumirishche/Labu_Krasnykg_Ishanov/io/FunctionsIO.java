@@ -45,6 +45,18 @@ public final class FunctionsIO {
         return factory.create(xValues, yValues);
     }
 
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException{
+        DataInputStream dataInputStream = new DataInputStream(inputStream);
+        int count = dataInputStream.readInt();
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int i = 0; i < xValues.length; i++) {
+            xValues[i] = dataInputStream.readDouble();
+            yValues[i] = dataInputStream.readDouble();
+        }
+        return factory.create(xValues, yValues);
+    }
+
     public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
         ObjectOutputStream outputStream = new ObjectOutputStream(stream);
         outputStream.writeObject(function);
