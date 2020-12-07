@@ -16,14 +16,13 @@ public class TabulatedFunctionFileInputStream {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try {  переделать try-with
+        try {
             System.out.println("Введите размер и значения функции");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             TabulatedFunction function = FunctionsIO.readTabulatedFunction(bufferedReader, new LinkedListTabulatedFunctionFactory());
             System.out.println(new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory()).derive(function).toString());
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }
