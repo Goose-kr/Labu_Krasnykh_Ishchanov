@@ -35,6 +35,14 @@ public class SynchronizedTabulatedFunctionTest {
     }
 
     @Test
+    public void testDoSynchronously() {
+        assertEquals((int) synchronizedTabulatedFunction1().doSynchronously(synchronizedTabulatedFunction -> synchronizedTabulatedFunction1().getCount()), 5);
+        assertEquals((double) synchronizedTabulatedFunction1().doSynchronously(synchronizedTabulatedFunction -> synchronizedTabulatedFunction1().getX(2)), 0, 0.00001);
+        assertEquals((double) synchronizedTabulatedFunction1().doSynchronously(synchronizedTabulatedFunction -> synchronizedTabulatedFunction1().getY(3)), 1, 0.0001);
+        assertEquals((int) synchronizedTabulatedFunction1().doSynchronously(synchronizedTabulatedFunction -> synchronizedTabulatedFunction1().indexOfX(2)), 4);
+    }
+
+    @Test
     public void testGetX() {
         assertEquals(synchronizedTabulatedFunction1().getX(0), -2, 0.000001);
         assertEquals(synchronizedTabulatedFunction1().getX(4), 2, 0.0001);

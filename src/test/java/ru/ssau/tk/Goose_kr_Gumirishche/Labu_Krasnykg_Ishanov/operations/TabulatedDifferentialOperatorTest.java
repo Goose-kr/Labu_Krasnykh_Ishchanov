@@ -51,6 +51,18 @@ public class TabulatedDifferentialOperatorTest {
     }
 
     @Test
+    public void testDeriveSynchronously() {
+        TabulatedFunction derivedArrayFunction = operator1.deriveSynchronously(function2);
+        TabulatedFunction derivedLinkedListFunction = operator3.deriveSynchronously(function1);
+        assertTrue(derivedArrayFunction instanceof ArrayTabulatedFunction);
+        assertTrue(derivedLinkedListFunction instanceof LinkedListTabulatedFunction);
+        for (int i = 0; i < derivedArrayFunction.getCount(); i++) {
+            assertEquals(derivedArrayFunction.getY(i), derivedYValues[i], 0.01);
+            assertEquals(derivedLinkedListFunction.getY(i), derivedYValues[i], 0.01);
+        }
+    }
+
+    @Test
     public void testDerive() {
         TabulatedFunction derivedArrayFunction = operator1.derive(function2);
         TabulatedFunction derivedLinkedListFunction = operator3.derive(function1);
