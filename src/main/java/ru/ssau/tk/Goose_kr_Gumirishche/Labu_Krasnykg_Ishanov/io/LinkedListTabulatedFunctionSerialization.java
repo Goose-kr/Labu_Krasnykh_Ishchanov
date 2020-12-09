@@ -9,18 +9,17 @@ import java.io.*;
 
 public class LinkedListTabulatedFunctionSerialization {
     public static void main(String[] args) {
-        try {
+        try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("output/serialized linked list functions.bin"));
+             BufferedInputStream input = new BufferedInputStream(new FileInputStream("output/serialized array functions.bin"))) {
             double[] xValues = new double[]{1, 2, 3};
             double[] yValues = new double[]{1, 4, 9};
             LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xValues, yValues);
             TabulatedFunction first = new TabulatedDifferentialOperator().derive(list);
             TabulatedFunction second = new TabulatedDifferentialOperator().derive(first);
-            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream("output/serialized linked list functions.bin"));
             FunctionsIO.serialize(outputStream, list);
             FunctionsIO.serialize(outputStream, first);
             FunctionsIO.serialize(outputStream, second);
 
-            BufferedInputStream input = new BufferedInputStream(new FileInputStream("output/serialized array functions.bin"));
             TabulatedFunction origFunction = FunctionsIO.deserialize(input);
             System.out.println(origFunction.toString());
             TabulatedFunction firstFunction = FunctionsIO.deserialize(input);

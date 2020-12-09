@@ -10,9 +10,8 @@ import java.io.IOException;
 
 public class TabulatedFunctionFileReader {
     public static void main(String[] args) {
-        try {
-            BufferedReader arrayReader = new BufferedReader(new FileReader("input/function.txt"));
-            BufferedReader listReader = new BufferedReader(new FileReader("input/function.txt"));
+        try (BufferedReader arrayReader = new BufferedReader(new FileReader("input/function.txt"));
+             BufferedReader listReader = new BufferedReader(new FileReader("input/function.txt"))) {
             TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(arrayReader, new ArrayTabulatedFunctionFactory());
             TabulatedFunction listFunction = FunctionsIO.readTabulatedFunction(listReader, new LinkedListTabulatedFunctionFactory());
             System.out.println(arrayFunction.toString());

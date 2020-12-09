@@ -15,9 +15,8 @@ public class TabulatedFunctionFileWriter {
         double[] yValues = new double[]{2, 4, 9};
         TabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValues, yValues);
         TabulatedFunction listFunction = new LinkedListTabulatedFunction(xValues, yValues);
-        try {
-            BufferedWriter arrayBuffer = new BufferedWriter(new FileWriter("output/array function.txt"));
-            BufferedWriter listBuffer = new BufferedWriter(new FileWriter("output/linked list function.txt"));
+        try (BufferedWriter arrayBuffer = new BufferedWriter(new FileWriter("output/array function.txt"));
+             BufferedWriter listBuffer = new BufferedWriter(new FileWriter("output/linked list function.txt"))) {
             FunctionsIO.writeTabulatedFunction(arrayBuffer, arrayFunction);
             FunctionsIO.writeTabulatedFunction(listBuffer, listFunction);
         } catch (IOException error) {
