@@ -34,11 +34,6 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         }
     }
 
-
-    public double apply(double x) {
-        return x;
-    }
-
     public void setFactory(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
