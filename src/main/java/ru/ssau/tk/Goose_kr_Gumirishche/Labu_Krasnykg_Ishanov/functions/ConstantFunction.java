@@ -9,6 +9,6 @@ public class ConstantFunction implements MathFunction {
 
     @Override
     public double apply(double x) {
-        return constant1 * x;
+        return constant1;
     }
 }
