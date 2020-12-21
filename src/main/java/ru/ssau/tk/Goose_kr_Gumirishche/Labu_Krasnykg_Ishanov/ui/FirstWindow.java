@@ -5,18 +5,23 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class FirstWindow extends JFrame {
-    private JButton button=new JButton("enter");
-    private JTextField input=new JTextField("This is text field");
-    private JLabel label=new JLabel("Input size:");
 
     public FirstWindow(){
         super("Hey hey");
         this.setBounds(200,200,500,200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
+        setLayout(new FlowLayout());
         Container container=this.getContentPane();
-        container.add(button);
-        container.add(input);
+        JLabel label = new JLabel("Input size:");
         container.add(label);
+        JTextField input = new JTextField("This is text field");
+        container.add(input);
+        JButton button = new JButton("enter");
+        container.add(button);
+    }
+    public static void main(String[] args) {
+        JFrame firstWindow=new FirstWindow();
+        firstWindow.setVisible(true);
     }
 }
