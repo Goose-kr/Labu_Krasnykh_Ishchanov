@@ -8,9 +8,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame {
-    ArrayList<String> stringsX = new ArrayList<>();
-    ArrayList<String> stringsY = new ArrayList<>();
-    AbstractTableModel tableModel = new MyTableModel(stringsX, stringsY);
+    ArrayList<String> strings = new ArrayList<>();
+    AbstractTableModel tableModel = new MyTableModel(strings);
     JTable table = new JTable(tableModel);
     JButton addRowButton = new JButton("Add row");
     JButton removeRowButton = new JButton("Remove row");
@@ -27,7 +26,7 @@ public class MyFrame extends JFrame {
         addRowButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stringsX.add("");
+                strings.add("");
                 tableModel.fireTableDataChanged();
             }
         });
@@ -36,7 +35,7 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int selectRow=table.getSelectedRow();
                 if(selectRow!=-1){
-                    stringsX.remove(selectRow);
+                    strings.remove(selectRow);
                     tableModel.fireTableDataChanged();
                 }
             }
@@ -46,6 +45,10 @@ public class MyFrame extends JFrame {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPane =new JScrollPane(table);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(addRowButton).addComponent(removeRowButton)).addComponent(tableScrollPane));
+
+        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(addRowButton).addComponent(removeRowButton)).addComponent(tableScrollPane));
+        setLocationRelativeTo(null);
     }
 
 

@@ -10,30 +10,38 @@ public class FirstWindow extends JFrame {
 
     public FirstWindow() {
         JFrame jFrame = new JFrame("Hey hey");
-        this.setBounds(200, 200, 500, 200);
+        this.setBounds(200, 200, 400, 100);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new FlowLayout());
         Container container = this.getContentPane();
-        JLabel label = new JLabel("Input size:");
+        JLabel label = new JLabel("Число точек:");
         container.add(label);
-        JTextField input = new JTextField(" ");
+        JTextField input = new JTextField();
         container.add(input);
         JButton button = new JButton("enter");
         container.add(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(jFrame, "Салам пополам");
+                Integer size;
+                size = Integer.valueOf(input.getText());
+                JDialog table = new Table(size);
+                table.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+                table.setVisible(true);
             }
         });
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(label).addComponent(input)).addComponent(button));
 
-
+        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(label).addComponent(input)).addComponent(button));
 
     }
 
-            public static void main (String[]args){
-                JFrame firstWindow = new FirstWindow();
-                firstWindow.setVisible(true);
-            }
-        }
+    public static void main(String[] args) {
+        JFrame firstWindow = new FirstWindow();
+        firstWindow.setVisible(true);
+    }
+}

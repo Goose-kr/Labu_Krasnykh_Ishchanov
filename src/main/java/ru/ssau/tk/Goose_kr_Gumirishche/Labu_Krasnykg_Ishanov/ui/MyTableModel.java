@@ -6,20 +6,17 @@ import java.util.ArrayList;
 public class MyTableModel extends AbstractTableModel {
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int VALUE_X_COLUMN_NUMBER = 1;
-    private static final int VALUE_Y_COLUMN_NUMBER = 2;
     private static final long serialVersionUID = 5759471071820281777L;
-    private final ArrayList<String> stringsY;
-    private final ArrayList<String> stringsX;
+    private final ArrayList<String> strings;
 
-    public MyTableModel(ArrayList<String> stringsX, ArrayList<String> stringsY) {
-        this.stringsX = stringsX;
-        this.stringsY = stringsY;
+    public MyTableModel(ArrayList<String> strings) {
+        this.strings = strings;
     }
 
     @Override
     public int getRowCount() {
 
-        return stringsX.size();
+        return strings.size();
     }
 
     @Override
@@ -33,19 +30,17 @@ public class MyTableModel extends AbstractTableModel {
             case INDEX_COLUMN_NUMBER:
                 return rowIndex;
             case VALUE_X_COLUMN_NUMBER:
-                return stringsX.get(rowIndex);
-            case VALUE_Y_COLUMN_NUMBER:
-                return stringsY.get(rowIndex);
+                return strings.get(rowIndex);
         }
         throw new UnsupportedOperationException();
     }
 
-    public void setValueAt(Object aValueX, Object aValueY, int rowIndex, int columnIndex) {
+    @Override
+    public void setValueAt(Object aValueX, int rowIndex, int columnIndex) {
         if (columnIndex != VALUE_X_COLUMN_NUMBER) {
             return;
         }
-        stringsX.set(rowIndex, String.valueOf(aValueX));
-        stringsY.set(rowIndex, String.valueOf(aValueY));
+       strings.set(rowIndex,String.valueOf(aValueX));
     }
 
     @Override
@@ -53,7 +48,7 @@ public class MyTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case INDEX_COLUMN_NUMBER:
                 return false;
-            case VALUE_X_COLUMN_NUMBER | VALUE_Y_COLUMN_NUMBER:
+            case VALUE_X_COLUMN_NUMBER:
                 return true;
         }
         return false;
@@ -66,8 +61,6 @@ public class MyTableModel extends AbstractTableModel {
                 return "Index";
             case VALUE_X_COLUMN_NUMBER:
                 return "ValueX";
-            case VALUE_Y_COLUMN_NUMBER:
-                return "ValueY";
         }
         return super.getColumnName(column);
     }
