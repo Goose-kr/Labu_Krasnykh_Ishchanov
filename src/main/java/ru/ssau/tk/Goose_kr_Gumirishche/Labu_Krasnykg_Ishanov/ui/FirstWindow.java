@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
-public class FirstWindow extends JDialog {
+public class FirstWindow extends JFrame {
 
     public FirstWindow() {
         JFrame jFrame = new JFrame("Hey hey");
         this.setBounds(200, 200, 400, 100);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         Container container = this.getContentPane();
         JLabel label = new JLabel("Число точек:");
@@ -37,5 +38,10 @@ public class FirstWindow extends JDialog {
 
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(label).addComponent(input)).addComponent(button));
 
+    }
+
+    public static void main(String[] args) {
+        JFrame frame=new FirstWindow();
+        frame.setVisible(true);
     }
 }

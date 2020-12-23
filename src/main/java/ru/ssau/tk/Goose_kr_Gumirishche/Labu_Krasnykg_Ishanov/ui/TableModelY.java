@@ -1,16 +1,14 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
-public class TableModel extends AbstractTableModel {
-    private static final int VALUE_X_COLUMN_NUMBER = 0;
+public class TableModelY extends AbstractTableModel {
+    private static final int VALUE_Y_COLUMN_NUMBER = 0;
+    private static final long serialVersionUID = -6887617559066875121L;
     private final ArrayList<String> strings;
 
-    public TableModel(ArrayList<String> strings) {
+    public TableModelY(ArrayList<String> strings) {
         this.strings = strings;
     }
 
@@ -27,7 +25,7 @@ public class TableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case VALUE_X_COLUMN_NUMBER:
+            case VALUE_Y_COLUMN_NUMBER:
                 return "XValues";
         }
         return "";
@@ -36,7 +34,7 @@ public class TableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case VALUE_X_COLUMN_NUMBER:
+            case VALUE_Y_COLUMN_NUMBER:
                 return strings.get(rowIndex);
         }
         throw new UnsupportedOperationException();
@@ -44,7 +42,7 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object o, int rowIndex, int columnIndex) {
-        if (columnIndex == VALUE_X_COLUMN_NUMBER) {
+        if (columnIndex == VALUE_Y_COLUMN_NUMBER) {
             strings.set(rowIndex, String.valueOf(o));
         }
         else {
@@ -55,7 +53,7 @@ public class TableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case VALUE_X_COLUMN_NUMBER:
+            case VALUE_Y_COLUMN_NUMBER:
                 return true;
         }
         return false;
