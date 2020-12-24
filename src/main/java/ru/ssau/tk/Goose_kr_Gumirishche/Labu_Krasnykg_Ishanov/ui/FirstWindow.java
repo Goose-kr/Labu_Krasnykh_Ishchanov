@@ -41,7 +41,7 @@ public class FirstWindow extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame=new FirstWindow();
+        JFrame frame = new FirstWindow();
         frame.setVisible(true);
     }
 }

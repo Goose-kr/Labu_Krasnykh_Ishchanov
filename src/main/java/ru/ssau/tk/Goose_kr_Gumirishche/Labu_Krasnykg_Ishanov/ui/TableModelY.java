@@ -4,7 +4,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class TableModelY extends AbstractTableModel {
-    private static final int VALUE_Y_COLUMN_NUMBER = 0;
+    private static final int INDEX_COLUMN_NUMBER = 0;
+    private static final int VALUE_Y_COLUMN_NUMBER = 1;
     private static final long serialVersionUID = -6887617559066875121L;
     private final ArrayList<String> strings;
 
@@ -19,14 +20,16 @@ public class TableModelY extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return "Index";
             case VALUE_Y_COLUMN_NUMBER:
-                return "XValues";
+                return "YValues";
         }
         return "";
     }
@@ -34,6 +37,8 @@ public class TableModelY extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return rowIndex;
             case VALUE_Y_COLUMN_NUMBER:
                 return strings.get(rowIndex);
         }
@@ -44,8 +49,7 @@ public class TableModelY extends AbstractTableModel {
     public void setValueAt(Object o, int rowIndex, int columnIndex) {
         if (columnIndex == VALUE_Y_COLUMN_NUMBER) {
             strings.set(rowIndex, String.valueOf(o));
-        }
-        else {
+        } else {
             return;
         }
     }
@@ -53,6 +57,8 @@ public class TableModelY extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return false;
             case VALUE_Y_COLUMN_NUMBER:
                 return true;
         }

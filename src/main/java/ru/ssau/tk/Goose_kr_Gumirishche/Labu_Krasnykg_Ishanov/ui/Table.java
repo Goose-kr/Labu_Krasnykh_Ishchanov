@@ -21,33 +21,33 @@ public class Table extends JDialog {
 
     public Table(int size) {
         super();
-        stringsY=new ArrayList<>(size);
-        stringsX= new ArrayList<>(size);
-        for(int i=0;i<size;i++){
+        stringsY = new ArrayList<>(size);
+        stringsX = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
             stringsX.add("");
             stringsY.add("");
         }
         tableModelX = new TableModelX(stringsX);
-        tableModelY=new TableModelY(stringsY);
-        tableY=new JTable(tableModelX);
+        tableModelY = new TableModelY(stringsY);
         tableX = new JTable(tableModelY);
+        tableY = new JTable(tableModelX);
         setSize(new Dimension(500, 500));
-        tableY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableX.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JButton create=new JButton("Создать");
+        tableY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JButton create = new JButton("Создать");
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TabulatedFunctionFactory factory=new ArrayTabulatedFunctionFactory();
-                double[] xValues=new double[size];
-                double[] yValues=new double[size];
-                for(int i=0;i<size;i++){
-                    xValues[i]=Double.parseDouble(stringsX.get(i));
-                    yValues[i]=Double.parseDouble(stringsY.get(i));
+                TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
+                double[] xValues = new double[size];
+                double[] yValues = new double[size];
+                for (int i = 0; i < size; i++) {
+                    xValues[i] = Double.parseDouble(stringsX.get(i));
+                    yValues[i] = Double.parseDouble(stringsY.get(i));
                     System.out.println(xValues[i]);
                     System.out.println(yValues[i]);
                 }
-                factory.create(xValues,yValues);
+                factory.create(xValues, yValues);
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -55,7 +55,7 @@ public class Table extends JDialog {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPaneX = new JScrollPane(tableX);
-        JScrollPane tableScrollPaneY=new JScrollPane(tableY);
+        JScrollPane tableScrollPaneY = new JScrollPane(tableY);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createSequentialGroup().addComponent(create)));
 
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
