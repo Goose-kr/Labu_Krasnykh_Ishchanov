@@ -6,11 +6,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class TableModel extends AbstractTableModel {
-    private static final int VALUE_X_COLUMN_NUMBER = 0;
+public class TableModelX extends AbstractTableModel {
+    private static final int INDEX_COLUMN_NUMBER = 0;
+    private static final int VALUE_X_COLUMN_NUMBER = 1;
+    private static final long serialVersionUID = -2085652328948175353L;
     private final ArrayList<String> strings;
 
-    public TableModel(ArrayList<String> strings) {
+    public TableModelX(ArrayList<String> strings) {
         this.strings = strings;
     }
 
@@ -21,12 +23,14 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return "Index";
             case VALUE_X_COLUMN_NUMBER:
                 return "XValues";
         }
@@ -36,6 +40,8 @@ public class TableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return rowIndex;
             case VALUE_X_COLUMN_NUMBER:
                 return strings.get(rowIndex);
         }
@@ -54,6 +60,8 @@ public class TableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
+            case INDEX_COLUMN_NUMBER:
+                return false;
             case VALUE_X_COLUMN_NUMBER:
                 return true;
         }

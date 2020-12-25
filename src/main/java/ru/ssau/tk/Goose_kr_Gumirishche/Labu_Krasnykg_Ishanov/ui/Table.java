@@ -1,60 +1,83 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.ArrayTabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.LinkedListTabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class Table extends JDialog {
-    private final ArrayList<String> strings;
-    private final ArrayList<String> strings2;
-    private final AbstractTableModel tableModel;
-    private final JTable table1;
-    private final JTable table2;
+    private final ArrayList<String> stringsX;
+    private final ArrayList<String> stringsY;
+    private final AbstractTableModel tableModelX;
+    private final AbstractTableModel tableModelY;
+    private final JTable tableX;
+    private final JTable tableY;
+    private TabulatedFunction function;
+    private static final int ARRAY_FUNCTION=0;
+    private static final int LINKED_LIST_FUNCTION=1;
 
-    public Table(int size) {
+    public Table(int size, int number) {
         super();
-        strings2=new ArrayList<>(size);
-        strings = new ArrayList<>(size);
-        tableModel = new TableModel(strings);
-        table2=new JTable(tableModel);
-        table1 = new JTable(tableModel);
+        stringsY = new ArrayList<>(size);
+        stringsX = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            stringsX.add("");
+            stringsY.add("");
+        }
+        tableModelX = new TableModelX(stringsX);
+        tableModelY = new TableModelY(stringsY);
+        WindowEvent event = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        tableX = new JTable(tableModelY);
+        tableY = new JTable(tableModelX);
         setSize(new Dimension(500, 500));
-        JTextField textField=new JTextField();
-        table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JButton addRowButton = new JButton("Add row");
-        addRowButton.addActionListener(new ActionListener() {
+        tableX.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JButton create = new JButton("Создать");
+        create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                strings.add("");
-                tableModel.fireTableDataChanged();
-            }
-        });
-        JButton removeRowButton = new JButton("Remove row");
-        removeRowButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow2=table2.getSelectedRow();
-                int selectedRow1 = table1.getSelectedRow();
-                if (selectedRow1 != -1||selectedRow2!=-1) {
-                    strings.remove(selectedRow1);
-                    strings2.remove(selectedRow2);
-                    tableModel.fireTableDataChanged();
+                TabulatedFunctionFactory factoryArray = new ArrayTabulatedFunctionFactory();
+                TabulatedFunctionFactory factoryList = new LinkedListTabulatedFunctionFactory();
+                double[] xValues = new double[size];
+                double[] yValues = new double[size];
+                for (int i = 0; i < size; i++) {
+                    xValues[i] = Double.parseDouble(stringsX.get(i));
+                    yValues[i] = Double.parseDouble(stringsY.get(i));
+                    System.out.println(xValues[i]);
+                    System.out.println(yValues[i]);
                 }
+                switch (number) {
+                    case ARRAY_FUNCTION:
+                        function = factoryArray.create(xValues, yValues);
+                    case LINKED_LIST_FUNCTION:
+                        function = factoryList.create(xValues, yValues);
+                }
+                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-        JScrollPane tableScrollPane1 = new JScrollPane(table1);
-        JScrollPane tableScrollPane2=new JScrollPane(table2);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(textField).addComponent(addRowButton).addComponent(removeRowButton)).addGroup(layout.createSequentialGroup().addComponent(tableScrollPane1).addComponent(tableScrollPane2)));
+        JScrollPane tableScrollPaneX = new JScrollPane(tableX);
+        JScrollPane tableScrollPaneY = new JScrollPane(tableY);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneY).addComponent(tableScrollPaneX)).addGroup(layout.createSequentialGroup().addComponent(create)));
 
-        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(textField).addComponent(addRowButton).addComponent(removeRowButton)).addGroup(layout.createParallelGroup().addComponent(tableScrollPane1).addComponent(tableScrollPane2)));
+        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
         setLocationRelativeTo(null);
+    }
+
+    public TabulatedFunction getFunction() {
+        return function;
     }
 }
