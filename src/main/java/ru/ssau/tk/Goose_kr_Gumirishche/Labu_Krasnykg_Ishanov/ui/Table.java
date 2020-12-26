@@ -23,11 +23,12 @@ public class Table extends JDialog {
     private final JTable tableX;
     private final JTable tableY;
     private TabulatedFunction function;
-    private static final int ARRAY_FUNCTION=0;
-    private static final int LINKED_LIST_FUNCTION=1;
+    private TabulatedFunctionFactory factory;
 
-    public Table(int size, int number) {
+    public Table(int size, TabulatedFunctionFactory factory) {
         super();
+        setModal(true);
+        this.factory=factory;
         stringsY = new ArrayList<>(size);
         stringsX = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
@@ -36,9 +37,8 @@ public class Table extends JDialog {
         }
         tableModelX = new TableModelX(stringsX);
         tableModelY = new TableModelY(stringsY);
-        WindowEvent event = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        tableX = new JTable(tableModelY);
-        tableY = new JTable(tableModelX);
+        tableX = new JTable(tableModelX);
+        tableY = new JTable(tableModelY);
         setSize(new Dimension(500, 500));
         tableX.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -46,8 +46,6 @@ public class Table extends JDialog {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TabulatedFunctionFactory factoryArray = new ArrayTabulatedFunctionFactory();
-                TabulatedFunctionFactory factoryList = new LinkedListTabulatedFunctionFactory();
                 double[] xValues = new double[size];
                 double[] yValues = new double[size];
                 for (int i = 0; i < size; i++) {
@@ -56,12 +54,9 @@ public class Table extends JDialog {
                     System.out.println(xValues[i]);
                     System.out.println(yValues[i]);
                 }
-                switch (number) {
-                    case ARRAY_FUNCTION:
-                        function = factoryArray.create(xValues, yValues);
-                    case LINKED_LIST_FUNCTION:
-                        function = factoryList.create(xValues, yValues);
-                }
+                function=factory.create(xValues,yValues);
+                System.out.println(function instanceof ArrayTabulatedFunction);
+                System.out.println(function instanceof LinkedListTabulatedFunction);
                 dispose();
             }
         });
@@ -71,7 +66,7 @@ public class Table extends JDialog {
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPaneX = new JScrollPane(tableX);
         JScrollPane tableScrollPaneY = new JScrollPane(tableY);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneY).addComponent(tableScrollPaneX)).addGroup(layout.createSequentialGroup().addComponent(create)));
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createSequentialGroup().addComponent(create)));
 
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
         setLocationRelativeTo(null);
