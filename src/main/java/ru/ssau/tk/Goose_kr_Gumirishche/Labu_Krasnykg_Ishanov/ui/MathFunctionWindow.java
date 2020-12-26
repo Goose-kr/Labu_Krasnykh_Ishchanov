@@ -85,8 +85,15 @@ public class MathFunctionWindow extends JDialog {
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(labelHelperConst)).addGroup(layout.createSequentialGroup().addComponent(labelConst).addComponent(fieldConst).addComponent(buttonConst)).addGroup(layout.createParallelGroup().addComponent(labelCompositeHelper).addComponent(compositeButton)).addGroup(layout.createSequentialGroup().addComponent(box).addComponent(create)));
-        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createSequentialGroup().addComponent(labelHelperConst)).addGroup(layout.createParallelGroup().addComponent(labelConst).addComponent(fieldConst).addComponent(buttonConst)).addGroup(layout.createSequentialGroup().addComponent(labelCompositeHelper).addComponent(compositeButton)).addGroup(layout.createSequentialGroup().addComponent(box).addComponent(create)));
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup().addComponent(labelHelperConst))
+                .addGroup(layout.createSequentialGroup().addComponent(labelConst).addComponent(fieldConst).addComponent(buttonConst))
+                .addGroup(layout.createParallelGroup().addComponent(labelCompositeHelper).addComponent(compositeButton))
+                .addGroup(layout.createSequentialGroup().addComponent(box).addComponent(create)));
+        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createSequentialGroup().addComponent(labelHelperConst))
+                .addGroup(layout.createParallelGroup().addComponent(labelConst).addComponent(fieldConst).addComponent(buttonConst))
+                .addGroup(layout.createSequentialGroup().addComponent(labelCompositeHelper).addComponent(compositeButton))
+                .addGroup(layout.createSequentialGroup().addComponent(box).addComponent(create)));
 
     }
 }

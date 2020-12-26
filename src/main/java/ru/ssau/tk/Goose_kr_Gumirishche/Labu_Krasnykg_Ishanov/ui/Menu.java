@@ -40,9 +40,7 @@ public class Menu extends JFrame {
         calculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowSize windowSize=new WindowSize();
-                windowSize.setVisible(true);
-                Calculator calculator=new Calculator(factory,windowSize.getSizeOf());
+                Calculator calculator=new Calculator(factory);
                 calculator.setVisible(true);
             }
         });

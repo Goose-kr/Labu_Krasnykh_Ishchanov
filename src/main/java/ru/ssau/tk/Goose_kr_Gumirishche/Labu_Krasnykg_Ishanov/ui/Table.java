@@ -18,10 +18,8 @@ import java.util.ArrayList;
 public class Table extends JDialog {
     private final ArrayList<String> stringsX;
     private final ArrayList<String> stringsY;
-    private final AbstractTableModel tableModelX;
-    private final AbstractTableModel tableModelY;
-    private final JTable tableX;
-    private final JTable tableY;
+    private final AbstractTableModel tableModel;
+    private final JTable table;
     private TabulatedFunction function;
     private TabulatedFunctionFactory factory;
     private double[] xValues;
@@ -37,13 +35,10 @@ public class Table extends JDialog {
             stringsX.add("");
             stringsY.add("");
         }
-        tableModelX = new TableModelX(stringsX);
-        tableModelY = new TableModelY(stringsY);
-        tableX = new JTable(tableModelX);
-        tableY = new JTable(tableModelY);
+        tableModel= new TableModel(stringsX,stringsY);
+        table = new JTable(tableModel);
         setSize(new Dimension(500, 500));
-        tableX.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JButton create = new JButton("Создать");
         create.addActionListener(new ActionListener() {
             @Override
@@ -70,11 +65,10 @@ public class Table extends JDialog {
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-        JScrollPane tableScrollPaneX = new JScrollPane(tableX);
-        JScrollPane tableScrollPaneY = new JScrollPane(tableY);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createSequentialGroup().addComponent(create)));
+        JScrollPane tableScrollPaneX = new JScrollPane(table);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneX)).addGroup(layout.createSequentialGroup().addComponent(create)));
 
-        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX).addComponent(tableScrollPaneY)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
+        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
         setLocationRelativeTo(null);
     }
 

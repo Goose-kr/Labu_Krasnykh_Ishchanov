@@ -40,8 +40,8 @@ public class WindowOfTabulated extends JDialog {
                     Table table = new Table(size, factory);
                     table.setVisible(true);
                     tabulatedFunction = table.getFunction();
-                    stringsX=table.getStringsX();
-                    stringsY=table.getStringsY();
+                    stringsX = table.getStringsX();
+                    stringsY = table.getStringsY();
                     dispose();
                 }
             }
