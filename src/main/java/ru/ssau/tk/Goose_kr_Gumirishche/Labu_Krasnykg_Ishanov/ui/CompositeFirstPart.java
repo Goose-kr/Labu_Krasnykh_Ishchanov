@@ -23,6 +23,7 @@ public class CompositeFirstPart extends JDialog {
 
     public CompositeFirstPart(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
+        setLocationRelativeTo(null);
         this.factory = factory;
         setModal(true);
         setSize(new Dimension(400, 300));

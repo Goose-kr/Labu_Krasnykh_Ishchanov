@@ -35,6 +35,17 @@ public class Menu extends JFrame {
         setJMenuBar(menuBar);
         setSize(500, 400);
         JButton calculate = new JButton("Калькулятор");
+        add(calculate);
+        setLayout(new FlowLayout());
+        calculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WindowSize windowSize=new WindowSize();
+                windowSize.setVisible(true);
+                Calculator calculator=new Calculator(factory,windowSize.getSizeOf());
+                calculator.setVisible(true);
+            }
+        });
     }
 
     private JMenu settings() {
