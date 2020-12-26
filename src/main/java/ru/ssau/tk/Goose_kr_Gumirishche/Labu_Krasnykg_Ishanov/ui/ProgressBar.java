@@ -10,13 +10,14 @@ import java.awt.event.WindowEvent;
 
 public class ProgressBar extends JDialog {
     public int count;
+
     public ProgressBar() {
         super();
         JProgressBar progressBar = new JProgressBar();
         setModal(true);
-        WindowEvent event=new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+        WindowEvent event = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         progressBar.setStringPainted(true);
-        setSize(new Dimension(400,200));
+        setSize(new Dimension(400, 200));
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
         Timer timer = new Timer(1000, new ActionListener() {
@@ -24,7 +25,7 @@ public class ProgressBar extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 count = progressBar.getValue();
                 if (count < 100) {
-                    count+=Math.random()*100;
+                    count += Math.random() * 100;
                     progressBar.setValue(count);
                 }
             }

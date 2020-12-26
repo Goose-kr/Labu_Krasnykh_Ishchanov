@@ -16,7 +16,7 @@ public class WindowOfTabulated extends JDialog {
     public TabulatedFunction tabulatedFunction;
 
     public WindowOfTabulated(TabulatedFunctionFactory factory) {
-        super();
+        JDialog dialog = new JDialog();
         setModal(true);
         this.setBounds(200, 200, 400, 100);
         setLocationRelativeTo(null);
@@ -26,14 +26,18 @@ public class WindowOfTabulated extends JDialog {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog progressBar = new ProgressBar();
-                progressBar.setVisible(true);
-                Integer size;
-                size = Integer.valueOf(input.getText());
-                Table table = new Table(size, factory);
-                table.setVisible(true);
-                tabulatedFunction = table.getFunction();
-                dispose();
+                if (input.getText() == null || Integer.parseInt(input.getText()) < 2) {
+                    JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
+                } else {
+                    JDialog progressBar = new ProgressBar();
+                    progressBar.setVisible(true);
+                    Integer size;
+                    size = Integer.valueOf(input.getText());
+                    Table table = new Table(size, factory);
+                    table.setVisible(true);
+                    tabulatedFunction = table.getFunction();
+                    dispose();
+                }
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());

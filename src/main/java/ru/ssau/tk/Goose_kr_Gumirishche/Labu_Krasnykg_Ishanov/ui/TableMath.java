@@ -25,7 +25,7 @@ public class TableMath extends JDialog {
     Map<String, Integer> map = new HashMap<>();
 
     public TableMath(TabulatedFunctionFactory factory, MathFunction function, int size) {
-        super();
+        JDialog dialog = new JDialog();
         this.function = function;
         stringsX = new ArrayList<>(size);
         stringsY = new ArrayList<>(size);
@@ -42,18 +42,22 @@ public class TableMath extends JDialog {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double[] xValues = new double[size];
-                double[] yValues = new double[size];
-                for (int i = 0; i < size; i++) {
-                    xValues[i] = Double.parseDouble(stringsX.get(i));
-                    yValues[i]=function.apply(xValues[i]);
-                    System.out.println(xValues[i]);
-                    System.out.println(yValues[i]);
+                if (stringsX.contains("")) {
+                    JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
+                } else {
+                    double[] xValues = new double[size];
+                    double[] yValues = new double[size];
+                    for (int i = 0; i < size; i++) {
+                        xValues[i] = Double.parseDouble(stringsX.get(i));
+                        System.out.println(xValues[i]);
+                        yValues[i] = function.apply(xValues[i]);
+                        System.out.println(yValues[i]);
+                    }
+                    functionTab = factory.create(xValues, yValues);
+                    System.out.println(functionTab instanceof ArrayTabulatedFunction);
+                    System.out.println(functionTab instanceof LinkedListTabulatedFunction);
+                    dispose();
                 }
-                functionTab=factory.create(xValues,yValues);
-                System.out.println(functionTab instanceof ArrayTabulatedFunction);
-                System.out.println(functionTab instanceof LinkedListTabulatedFunction);
-                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());

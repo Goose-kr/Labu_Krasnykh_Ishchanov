@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Settings extends JDialog {
-    private TabulatedFunctionFactory factory=new ArrayTabulatedFunctionFactory();
+    private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     JRadioButton massif;
     JRadioButton list;
 
@@ -28,15 +28,16 @@ public class Settings extends JDialog {
         massif.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource()==massif){
-                factory=new ArrayTabulatedFunctionFactory();}
+                if (e.getSource() == massif) {
+                    factory = new ArrayTabulatedFunctionFactory();
+                }
             }
         });
         list.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource()==list){
-                factory=new LinkedListTabulatedFunctionFactory();
+                if (e.getSource() == list) {
+                    factory = new LinkedListTabulatedFunctionFactory();
                 }
             }
         });

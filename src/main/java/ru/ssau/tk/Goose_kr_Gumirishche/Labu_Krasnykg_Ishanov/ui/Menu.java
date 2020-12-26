@@ -16,7 +16,7 @@ import java.awt.event.ItemListener;
 
 public class Menu extends JFrame {
     private int size;
-    private TabulatedFunctionFactory factory=new ArrayTabulatedFunctionFactory();
+    private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     JMenu menuSettings = new JMenu("Настройки");
     JMenuBar menuBar = new JMenuBar();
     JMenu menuTab = new JMenu("Табулированная функция");
@@ -34,6 +34,7 @@ public class Menu extends JFrame {
         menuSettings.add(settings());
         setJMenuBar(menuBar);
         setSize(500, 400);
+        JButton calculate = new JButton("Калькулятор");
     }
 
     private JMenu settings() {
@@ -55,25 +56,25 @@ public class Menu extends JFrame {
         JMenu tab = new JMenu("Табулированная функция");
         JMenuItem itemCreate = new JMenuItem("Создать");
         tab.add(itemCreate);
-            itemCreate.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    WindowOfTabulated tabulatedFunction = new WindowOfTabulated(factory);
-                    tabulatedFunction.setVisible(true);
-                }
-            });
+        itemCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WindowOfTabulated tabulatedFunction = new WindowOfTabulated(factory);
+                tabulatedFunction.setVisible(true);
+            }
+        });
 
         return tab;
     }
 
     private JMenu createMathFunction() {
         JMenu menuMath = new JMenu("Математичекские функции");
-        JMenuItem math=new JMenuItem("Открыть");
+        JMenuItem math = new JMenuItem("Открыть");
         menuMath.add(math);
         math.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MathFunctionWindow math=new MathFunctionWindow(factory);
+                MathFunctionWindow math = new MathFunctionWindow(factory);
                 math.setVisible(true);
             }
         });

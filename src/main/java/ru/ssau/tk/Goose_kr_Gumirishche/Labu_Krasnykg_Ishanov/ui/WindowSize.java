@@ -9,7 +9,7 @@ public class WindowSize extends JDialog {
     private int size;
 
     public WindowSize() {
-        super();
+        JDialog dialog = new JDialog();
         this.setBounds(200, 200, 400, 100);
         setLocationRelativeTo(null);
         setModal(true);
@@ -19,8 +19,12 @@ public class WindowSize extends JDialog {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                size = Integer.parseInt(input.getText());
-                dispose();
+                if (input.getText() == null || Integer.parseInt(input.getText()) < 2) {
+                    JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
+                } else {
+                    size = Integer.parseInt(input.getText());
+                    dispose();
+                }
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());
