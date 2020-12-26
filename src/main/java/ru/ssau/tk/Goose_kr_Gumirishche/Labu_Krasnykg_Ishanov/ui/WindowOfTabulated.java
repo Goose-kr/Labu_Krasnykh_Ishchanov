@@ -14,6 +14,10 @@ import javax.swing.table.AbstractTableModel;
 public class WindowOfTabulated extends JDialog {
 
     public TabulatedFunction tabulatedFunction;
+    double[] xValues;
+    double[] yValues;
+    private ArrayList<String> stringsX;
+    private ArrayList<String> stringsY;
 
     public WindowOfTabulated(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
@@ -36,6 +40,8 @@ public class WindowOfTabulated extends JDialog {
                     Table table = new Table(size, factory);
                     table.setVisible(true);
                     tabulatedFunction = table.getFunction();
+                    stringsX=table.getStringsX();
+                    stringsY=table.getStringsY();
                     dispose();
                 }
             }
@@ -55,5 +61,13 @@ public class WindowOfTabulated extends JDialog {
 
     public TabulatedFunction getTabulatedFunction() {
         return tabulatedFunction;
+    }
+
+    public ArrayList<String> getStringsY() {
+        return stringsY;
+    }
+
+    public ArrayList<String> getStringsX() {
+        return stringsX;
     }
 }

@@ -24,6 +24,8 @@ public class Table extends JDialog {
     private final JTable tableY;
     private TabulatedFunction function;
     private TabulatedFunctionFactory factory;
+    private double[] xValues;
+    private double[] yValues;
 
     public Table(int size, TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
@@ -49,8 +51,8 @@ public class Table extends JDialog {
                 if (stringsX.contains("") || stringsY.contains("")) {
                     JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
                 } else {
-                    double[] xValues = new double[size];
-                    double[] yValues = new double[size];
+                     xValues = new double[size];
+                     yValues = new double[size];
                     for (int i = 0; i < size; i++) {
                         xValues[i] = Double.parseDouble(stringsX.get(i));
                         yValues[i] = Double.parseDouble(stringsY.get(i));
@@ -78,5 +80,21 @@ public class Table extends JDialog {
 
     public TabulatedFunction getFunction() {
         return function;
+    }
+
+    public double[] getXValues() {
+        return xValues;
+    }
+
+    public double[] getYValues() {
+        return yValues;
+    }
+
+    public ArrayList<String> getStringsX() {
+        return stringsX;
+    }
+
+    public ArrayList<String> getStringsY() {
+        return stringsY;
     }
 }

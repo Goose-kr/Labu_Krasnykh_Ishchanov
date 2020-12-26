@@ -4,9 +4,9 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class TableModelY extends AbstractTableModel {
+    private static final long serialVersionUID = -6887617559066875121L;
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int VALUE_Y_COLUMN_NUMBER = 1;
-    private static final long serialVersionUID = -6887617559066875121L;
     private final ArrayList<String> strings;
 
     public TableModelY(ArrayList<String> strings) {

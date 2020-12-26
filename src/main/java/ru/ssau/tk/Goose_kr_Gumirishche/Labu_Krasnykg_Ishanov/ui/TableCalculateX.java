@@ -1,18 +1,14 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
-public class TableModelX extends AbstractTableModel {
-    private static final long serialVersionUID = -2085652328948175353L;
+public class TableCalculateX extends AbstractTableModel {
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int VALUE_X_COLUMN_NUMBER = 1;
     private final ArrayList<String> strings;
 
-    public TableModelX(ArrayList<String> strings) {
+    public TableCalculateX(ArrayList<String> strings) {
         this.strings = strings;
     }
 
@@ -59,14 +55,6 @@ public class TableModelX extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        switch (columnIndex) {
-            case INDEX_COLUMN_NUMBER:
-                return false;
-            case VALUE_X_COLUMN_NUMBER:
-                return true;
-        }
         return false;
     }
-
-
 }
