@@ -26,7 +26,7 @@ public class OperatorFun extends JDialog {
     public OperatorFun(int size, TabulatedFunctionFactory factory, TabulatedFunction function1, TabulatedFunction function2) {
         JDialog dialog = new JDialog();
         setModal(true);
-        setSize(new Dimension(400, 200));
+        setSize(new Dimension(400, 100));
         setLocationRelativeTo(null);
         service = new TabulatedFunctionOperationService(factory);
         stringsY3 = new ArrayList<>();

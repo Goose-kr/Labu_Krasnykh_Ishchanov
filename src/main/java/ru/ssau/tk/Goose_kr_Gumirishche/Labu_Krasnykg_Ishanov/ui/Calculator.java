@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Calculator extends JFrame {
+public class Calculator extends JDialog {
     JMenu menuSettings = new JMenu("Выбор фабрики");
     JMenuBar menuBar = new JMenuBar();
 
@@ -43,8 +43,8 @@ public class Calculator extends JFrame {
     int ex = 1;
 
     public Calculator() {
-        JFrame calculator = new JFrame("Калькулятор");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JDialog calculator = new JDialog();
+        setModal(true);
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
@@ -79,9 +79,9 @@ public class Calculator extends JFrame {
         stringsX2 = new ArrayList<>();
         stringsY3 = new ArrayList<>();
         stringsX3 = new ArrayList<>();
-        tableModel1 = new TableModel(stringsX1, stringsY1);
-        tableModel2 = new TableModel(stringsX2, stringsY2);
-        tableModel3 = new TableModel(stringsX3, stringsY3);
+        tableModel1 = new TableModelCalculator(stringsX1, stringsY1);
+        tableModel2 = new TableModelCalculator(stringsX2, stringsY2);
+        tableModel3 = new TableModelResult(stringsX3, stringsY3);
         table1 = new JTable(tableModel1);
         table2 = new JTable(tableModel2);
         table3 = new JTable(tableModel3);
@@ -277,7 +277,7 @@ public class Calculator extends JFrame {
                 stringsX3.clear();
                 stringsY3.clear();
                 for (int i = 0; i < size - 1; i++) {
-                    if (stringsX1.get(i) != stringsX2.get(i)) {
+                    if (!stringsX1.get(i).equals(stringsX2.get(i))) {
                         JOptionPane.showMessageDialog(calculator, "Х не равны");
                         ex = 0;
                     }
