@@ -289,7 +289,7 @@ public class Calculator extends JDialog {
                 stringsX3.clear();
                 stringsY3.clear();
                 for (int i = 0; i < size - 1; i++) {
-                    if (!stringsX1.get(i).equals(stringsX2.get(i))) {
+                    if (Double.parseDouble(stringsX1.get(i))!=Double.parseDouble(stringsX2.get(i))) {
                         JOptionPane.showMessageDialog(calculator, "Х не равны");
                         ex = 0;
                     }
