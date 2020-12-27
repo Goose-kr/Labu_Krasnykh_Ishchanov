@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Calculator extends JFrame {
+    JMenu menuSettings = new JMenu("Выбор фабрики");
+    JMenuBar menuBar = new JMenuBar();
+
     private ArrayList<String> stringsX1;
     private ArrayList<String> stringsY1;
     private ArrayList<String> stringsX2;
@@ -42,6 +45,9 @@ public class Calculator extends JFrame {
         JFrame calculator = new JFrame("Калькулятор");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.factory = factory;
+        menuBar.add(menuSettings);
+        menuSettings.add(settings());
+        setJMenuBar(menuBar);
         JFileChooser fileOpen1=new JFileChooser();
         fileOpen1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen1.setDialogTitle("Загрузка функции");
@@ -124,13 +130,21 @@ public class Calculator extends JFrame {
                 File file=fileOpen1.getSelectedFile();
                 if (file != null) {
                     try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, new ArrayTabulatedFunctionFactory());
+                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
                         for (int i = 0; i < function.getCount(); i++) {
                             stringsX1.add(i, String.valueOf(function.getX(i)));
                             stringsY1.add(i, String.valueOf(function.getY(i)));
                             tableModel1.fireTableDataChanged();
                         }
+                        double[] xValues = new double[function.getCount()];
+                        double[] yValues = new double[function.getCount()];
+                        for (int i = 0; i < table1.getRowCount(); i++) {
+                            xValues[i] = Double.parseDouble(stringsX1.get(i));
+                            yValues[i] = Double.parseDouble(stringsY1.get(i));
+                        }
+                        size=function.getCount();
                         System.out.println(function.toString());
+                        function1=factory.create(xValues,yValues);
                     } catch (IOException err) {
                         err.printStackTrace();
                     }
@@ -187,13 +201,21 @@ public class Calculator extends JFrame {
                 File file=fileOpen2.getSelectedFile();
                 if (file != null) {
                     try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, new ArrayTabulatedFunctionFactory());
+                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
                         for (int i = 0; i < function.getCount(); i++) {
                             stringsX2.add(i, String.valueOf(function.getX(i)));
                             stringsY2.add(i, String.valueOf(function.getY(i)));
                             tableModel2.fireTableDataChanged();
                         }
+                        double[] xValues = new double[function.getCount()];
+                        double[] yValues = new double[function.getCount()];
+                        for (int i = 0; i < table2.getRowCount(); i++) {
+                            xValues[i] = Double.parseDouble(stringsX2.get(i));
+                            yValues[i] = Double.parseDouble(stringsY2.get(i));
+                        }
+                        size=function.getCount();
                         System.out.println(function.toString());
+                        function2=factory.create(xValues,yValues);
                     } catch (IOException err) {
                         err.printStackTrace();
                     }
@@ -237,9 +259,7 @@ public class Calculator extends JFrame {
                         xValues[i] = Double.parseDouble(table3.getValueAt(i, 0).toString());
                         yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
                     }
-
                     function3 = factory.create(xValues, yValues);
-
                     try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
                         FunctionsIO.writeTabulatedFunction(out, function3);
                     } catch (IOException error) {
@@ -252,13 +272,22 @@ public class Calculator extends JFrame {
         operate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                stringsX3.clear();
+                stringsY3.clear();
                 OperatorFun operatorFun = new OperatorFun(size, function1, function2);
                 operatorFun.setVisible(true);
                 for (int i = 0; i < size; i++) {
-                    stringsX3.add(i, String.valueOf(operatorFun.function3.getX(i)));
-                    stringsY3.add(i, String.valueOf(operatorFun.function3.getY(i)));
-                    System.out.println(function3);
+                    stringsX3.add(operatorFun.getStringsX3().get(i));
+                    stringsY3.add(operatorFun.getStringsY3().get(i));
                 }
+                double[] xValues = new double[size];
+                double[] yValues = new double[size];
+                for (int i = 0; i < size; i++) {
+                    xValues[i] = Double.parseDouble(stringsX3.get(i));
+                    yValues[i] = Double.parseDouble(stringsY3.get(i));
+                }
+                function3=factory.create(xValues,yValues);
+                System.out.println(function3.toString());
                 tableModel3.fireTableDataChanged();
             }
         });
@@ -289,6 +318,20 @@ public class Calculator extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    private JMenu settings() {
+        JMenu set = new JMenu("Выбор фабрики");
+        JMenuItem item = new JMenuItem("Открыть");
+        set.add(item);
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Settings settings = new Settings();
+                settings.setVisible(true);
+                factory = settings.getFactory();
+            }
+        });
+        return set;
+    }
 
 }
 

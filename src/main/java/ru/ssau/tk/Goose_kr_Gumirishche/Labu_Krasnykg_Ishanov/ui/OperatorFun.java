@@ -15,43 +15,51 @@ import java.util.Map;
 
 public class OperatorFun extends JDialog {
     Map<String, TabulatedFunction> map = new HashMap<>();
-    TabulatedFunctionOperationService service=new TabulatedFunctionOperationService();
-    TabulatedFunction function1;
-    TabulatedFunction function2;
+    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    private TabulatedFunction function1;
+    private TabulatedFunction function2;
     TabulatedFunction function3;
-    private ArrayList<String> stringsX3;
-    private ArrayList<String> stringsY3;
-    public OperatorFun(int size,TabulatedFunction function1,TabulatedFunction function2){
-        JDialog dialog=new JDialog();
-        setSize(new Dimension(400,200));
+    private TabulatedFunction function;
+    private final ArrayList<String> stringsX3;
+    private final ArrayList<String> stringsY3;
+
+    public OperatorFun(int size, TabulatedFunction function1, TabulatedFunction function2) {
+        JDialog dialog = new JDialog();
+        setSize(new Dimension(400, 200));
         setLocationRelativeTo(null);
         stringsY3 = new ArrayList<>();
         stringsX3 = new ArrayList<>();
-        this.function1=function1;
-        this.function2=function2;
-        JComboBox<String> box = new JComboBox<>(new String[]{"","Сумма", "Разность", "Произведение", "Частное"
+        for (int i = 0; i < size; i++) {
+            stringsX3.add("");
+            stringsY3.add("");
+        }
+        this.function1 = function1;
+        this.function2 = function2;
+        JComboBox<String> box = new JComboBox<>(new String[]{"", "Сумма", "Разность", "Произведение", "Частное"
         });
-        map.put("Сумма", service.sum(function1,function2));
-        map.put("Разность", service.subtract(function1,function2));
-        map.put("Произведение", service.multiply(function1,function2));
-        map.put("Частное", service.division(function1,function2));
+        map.put("Сумма", service.sum(function1, function2));
+        map.put("Разность", service.subtract(function1, function2));
+        map.put("Произведение", service.multiply(function1, function2));
+        map.put("Частное", service.division(function1, function2));
         box.setEditable(true);
         box.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    function3 = map.get(e.getItem().toString());
+                    function = map.get(e.getItem().toString());
                 }
             }
         });
-        JButton result=new JButton("Выполнить");
+        JButton result = new JButton("Выполнить");
         result.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<size;i++){
-                    System.out.println(function3.getX(i));
-                    System.out.println(function3.getY(i));
+                for (int i = 0; i < size; i++) {
+                    function3 = function;
+                    stringsX3.add(String.valueOf(function3.getX(i)));
+                    stringsY3.add(String.valueOf(function3.getY(i)));
                 }
+                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -61,6 +69,10 @@ public class OperatorFun extends JDialog {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup().addComponent(box).addComponent(result)));
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(box).addComponent(result)));
+    }
+
+    public TabulatedFunction getFunction3() {
+        return function3;
     }
 
     public ArrayList<String> getStringsX3() {
