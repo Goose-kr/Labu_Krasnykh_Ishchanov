@@ -50,17 +50,15 @@ public class TableModel extends AbstractTableModel {
     public void setValueAt(Object o, int rowIndex, int columnIndex) {
         if (columnIndex == VALUE_X_COLUMN_NUMBER) {
             stringsX.set(rowIndex, String.valueOf(o));
-        }
-        else if (columnIndex==VALUE_Y_COLUMN_NUMBER){
-            stringsY.set(rowIndex,String.valueOf(o));
-        }
-        else {
+        } else if (columnIndex == VALUE_Y_COLUMN_NUMBER) {
+            stringsY.set(rowIndex, String.valueOf(o));
+        } else {
             return;
         }
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return true;
+        return true;
     }
 }

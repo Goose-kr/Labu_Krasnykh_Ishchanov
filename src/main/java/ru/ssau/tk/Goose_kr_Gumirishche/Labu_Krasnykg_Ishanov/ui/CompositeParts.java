@@ -48,7 +48,7 @@ public class CompositeParts extends JDialog {
             }
         });
         JLabel label = new JLabel("Выберите 1 ф-ю");
-        JComboBox<String> box1 = new JComboBox<>(new String[]{"","Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Константная ф-я", "Нулевая ф-я", "Тождественная ф-я"
+        JComboBox<String> box1 = new JComboBox<>(new String[]{"", "Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Константная ф-я", "Нулевая ф-я", "Тождественная ф-я"
         });
         box1.setEditable(true);
         box1.addItemListener(new ItemListener() {
@@ -61,7 +61,7 @@ public class CompositeParts extends JDialog {
             }
         });
         JLabel label2 = new JLabel("Выберите 2 ф-ю");
-        JComboBox<String> box2 = new JComboBox<>(new String[]{"","Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Константная ф-я", "Нулевая ф-я", "Тождественная ф-я"
+        JComboBox<String> box2 = new JComboBox<>(new String[]{"", "Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Константная ф-я", "Нулевая ф-я", "Тождественная ф-я"
         });
         box2.setEditable(true);
         box2.addItemListener(new ItemListener() {

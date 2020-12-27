@@ -1,6 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations.TabulatedFunctionOperationService;
 
 import javax.swing.*;
@@ -15,18 +16,19 @@ import java.util.Map;
 
 public class OperatorFun extends JDialog {
     Map<String, TabulatedFunction> map = new HashMap<>();
-    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    TabulatedFunctionOperationService service;
     private TabulatedFunction function1;
     private TabulatedFunction function2;
     TabulatedFunction function3;
     private final ArrayList<String> stringsX3;
     private final ArrayList<String> stringsY3;
 
-    public OperatorFun(int size, TabulatedFunction function1, TabulatedFunction function2) {
+    public OperatorFun(int size, TabulatedFunctionFactory factory, TabulatedFunction function1, TabulatedFunction function2) {
         JDialog dialog = new JDialog();
         setModal(true);
         setSize(new Dimension(400, 200));
         setLocationRelativeTo(null);
+        service = new TabulatedFunctionOperationService(factory);
         stringsY3 = new ArrayList<>();
         stringsX3 = new ArrayList<>();
         for (int i = 0; i < size; i++) {

@@ -40,7 +40,7 @@ public class Menu extends JFrame {
         calculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Calculator calculator=new Calculator(factory);
+                Calculator calculator = new Calculator();
                 calculator.setVisible(true);
             }
         });

@@ -1,5 +1,6 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.ArrayTabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
@@ -24,6 +25,7 @@ public class Table extends JDialog {
     private TabulatedFunctionFactory factory;
     private double[] xValues;
     private double[] yValues;
+    int ex = 1;
 
     public Table(int size, TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
@@ -35,7 +37,7 @@ public class Table extends JDialog {
             stringsX.add("");
             stringsY.add("");
         }
-        tableModel= new TableModel(stringsX,stringsY);
+        tableModel = new TableModel(stringsX, stringsY);
         table = new JTable(tableModel);
         setSize(new Dimension(500, 500));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -43,20 +45,24 @@ public class Table extends JDialog {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < size - 1; i++) {
+                    if (Double.parseDouble(stringsX.get(i)) > Double.parseDouble(stringsX.get(i + 1))) {
+                        JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
+                        ex = 0;
+                    }
+                }
                 if (stringsX.contains("") || stringsY.contains("")) {
                     JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
+                } else if (ex == 0) {
                 } else {
-                     xValues = new double[size];
-                     yValues = new double[size];
+                    xValues = new double[size];
+                    yValues = new double[size];
                     for (int i = 0; i < size; i++) {
                         xValues[i] = Double.parseDouble(stringsX.get(i));
                         yValues[i] = Double.parseDouble(stringsY.get(i));
-                        System.out.println(xValues[i]);
-                        System.out.println(yValues[i]);
                     }
                     function = factory.create(xValues, yValues);
-                    System.out.println(function instanceof ArrayTabulatedFunction);
-                    System.out.println(function instanceof LinkedListTabulatedFunction);
+                    System.out.println(function.toString());
                     dispose();
                 }
             }

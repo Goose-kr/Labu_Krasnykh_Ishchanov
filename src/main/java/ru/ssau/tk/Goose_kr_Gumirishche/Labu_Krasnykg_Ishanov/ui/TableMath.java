@@ -23,6 +23,7 @@ public class TableMath extends JDialog {
     TabulatedFunction functionTab;
     int choice;
     Map<String, Integer> map = new HashMap<>();
+    int ex = 1;
 
     public TableMath(TabulatedFunctionFactory factory, MathFunction function, int size) {
         JDialog dialog = new JDialog();
@@ -42,8 +43,15 @@ public class TableMath extends JDialog {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < size - 1; i++) {
+                    if (Double.parseDouble(stringsX.get(i)) > Double.parseDouble(stringsX.get(i + 1))) {
+                        JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
+                        ex = 0;
+                    }
+                }
                 if (stringsX.contains("")) {
                     JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
+                } else if (ex == 0) {
                 } else {
                     double[] xValues = new double[size];
                     double[] yValues = new double[size];

@@ -38,37 +38,37 @@ public class Calculator extends JFrame {
     private TabulatedFunction function1;
     private TabulatedFunction function2;
     private TabulatedFunction function3;
-    private TabulatedFunctionFactory factory;
+    private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     int size;
+    int ex = 1;
 
-    public Calculator(TabulatedFunctionFactory factory) {
+    public Calculator() {
         JFrame calculator = new JFrame("Калькулятор");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.factory = factory;
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
-        JFileChooser fileOpen1=new JFileChooser();
+        JFileChooser fileOpen1 = new JFileChooser();
         fileOpen1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen1.setDialogTitle("Загрузка функции");
         fileOpen1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
         fileOpen1.setAcceptAllFileFilterUsed(false);
-        JFileChooser fileOpen2=new JFileChooser();
+        JFileChooser fileOpen2 = new JFileChooser();
         fileOpen2.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen2.setDialogTitle("Загрузка функции");
         fileOpen2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
         fileOpen2.setAcceptAllFileFilterUsed(false);
-        JFileChooser fileSave1=new JFileChooser();
+        JFileChooser fileSave1 = new JFileChooser();
         fileSave1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave1.setDialogTitle("Сохранение функции");
         fileSave1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
         fileSave1.setAcceptAllFileFilterUsed(false);
-        JFileChooser fileSave2=new JFileChooser();
+        JFileChooser fileSave2 = new JFileChooser();
         fileSave2.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave2.setDialogTitle("Сохранение функции");
         fileSave2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
         fileSave2.setAcceptAllFileFilterUsed(false);
-        JFileChooser fileSave3=new JFileChooser();
+        JFileChooser fileSave3 = new JFileChooser();
         fileSave3.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave3.setDialogTitle("Сохранение функции");
         fileSave3.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
@@ -85,7 +85,7 @@ public class Calculator extends JFrame {
         table1 = new JTable(tableModel1);
         table2 = new JTable(tableModel2);
         table3 = new JTable(tableModel3);
-        setSize(new Dimension(1000, 800));
+        setSize(new Dimension(1000, 600));
 
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -120,14 +120,14 @@ public class Calculator extends JFrame {
                 function1 = table1.getFunction();
             }
         });
-        JButton load1=new JButton("Загрузить 1 ф-ю");
+        JButton load1 = new JButton("Загрузить 1 ф-ю");
         load1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 stringsX1.clear();
                 stringsY1.clear();
                 fileOpen1.showOpenDialog(calculator);
-                File file=fileOpen1.getSelectedFile();
+                File file = fileOpen1.getSelectedFile();
                 if (file != null) {
                     try (BufferedReader in = new BufferedReader(new FileReader(file))) {
                         TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
@@ -142,16 +142,16 @@ public class Calculator extends JFrame {
                             xValues[i] = Double.parseDouble(stringsX1.get(i));
                             yValues[i] = Double.parseDouble(stringsY1.get(i));
                         }
-                        size=function.getCount();
+                        size = function.getCount();
                         System.out.println(function.toString());
-                        function1=factory.create(xValues,yValues);
+                        function1 = factory.create(xValues, yValues);
                     } catch (IOException err) {
                         err.printStackTrace();
                     }
                 }
             }
         });
-        JButton save1=new JButton("Сохранить 1 ф-ю");
+        JButton save1 = new JButton("Сохранить 1 ф-ю");
         save1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,12 +193,14 @@ public class Calculator extends JFrame {
                 function2 = table2.getFunction();
             }
         });
-        JButton load2=new JButton("Загрузить 2 ф-ю");
+        JButton load2 = new JButton("Загрузить 2 ф-ю");
         load2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                stringsX2.clear();
+                stringsY2.clear();
                 fileOpen2.showOpenDialog(calculator);
-                File file=fileOpen2.getSelectedFile();
+                File file = fileOpen2.getSelectedFile();
                 if (file != null) {
                     try (BufferedReader in = new BufferedReader(new FileReader(file))) {
                         TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
@@ -213,16 +215,16 @@ public class Calculator extends JFrame {
                             xValues[i] = Double.parseDouble(stringsX2.get(i));
                             yValues[i] = Double.parseDouble(stringsY2.get(i));
                         }
-                        size=function.getCount();
+                        size = function.getCount();
                         System.out.println(function.toString());
-                        function2=factory.create(xValues,yValues);
+                        function2 = factory.create(xValues, yValues);
                     } catch (IOException err) {
                         err.printStackTrace();
                     }
                 }
             }
         });
-        JButton save2=new JButton("Сохранить 2 ф-ю");
+        JButton save2 = new JButton("Сохранить 2 ф-ю");
         save2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -246,7 +248,7 @@ public class Calculator extends JFrame {
                 }
             }
         });
-        JButton save3=new JButton("Сохранить 3 ф-ю");
+        JButton save3 = new JButton("Сохранить 3 ф-ю");
         save3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -274,17 +276,31 @@ public class Calculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 stringsX3.clear();
                 stringsY3.clear();
-                OperatorFun operatorFun = new OperatorFun(size, function1, function2);
-                operatorFun.setVisible(true);
-                for (int i = 0; i < size; i++) {
-                    stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
-                    stringsY3.add(String.valueOf(operatorFun.function3.getY(i)));
+                for (int i = 0; i < size - 1; i++) {
+                    if (stringsX1.get(i) != stringsX2.get(i)) {
+                        JOptionPane.showMessageDialog(calculator, "Х не равны");
+                        ex = 0;
+                    }
                 }
-                System.out.println(operatorFun.function3.toString());
-                function3=operatorFun.function3;
-                tableModel3.fireTableDataChanged();
+                if (table1.getRowCount() != table2.getRowCount()) {
+                    JOptionPane.showMessageDialog(calculator, "У функций разные размеры");
+                } else if (ex == 0) {
+                } else {
+                    OperatorFun operatorFun = new OperatorFun(size, factory, function1, function2);
+                    operatorFun.setVisible(true);
+                    for (int i = 0; i < size; i++) {
+                        stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
+                        stringsY3.add(String.valueOf(operatorFun.function3.getY(i)));
+                    }
+                    System.out.println(operatorFun.function3.toString());
+                    function3 = operatorFun.function3;
+                    tableModel3.fireTableDataChanged();
+                }
             }
         });
+        JLabel nullTriple = new JLabel("                                                              ");
+        JLabel nullDouble1 = new JLabel("                                                        ");
+        JLabel nullDouble2 = new JLabel("                                                                                                  ");
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
@@ -294,21 +310,21 @@ public class Calculator extends JFrame {
         JScrollPane tableScrollPane3 = new JScrollPane(table3);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup().addComponent(count).addComponent(countField).addComponent(countButton))
-                .addGroup(layout.createSequentialGroup().addComponent(create1).addComponent(create2).addComponent(operate))
-                .addGroup(layout.createSequentialGroup().addComponent(load1).addComponent(load2))
-                .addGroup(layout.createSequentialGroup().addComponent(save1).addComponent(save2).addComponent(save3))
+                .addGroup(layout.createSequentialGroup().addComponent(create1).addComponent(nullTriple).addComponent(create2).addComponent(nullTriple).addComponent(operate))
+                .addGroup(layout.createSequentialGroup().addComponent(load1).addComponent(nullDouble1).addComponent(load2).addComponent(nullDouble2))
+                .addGroup(layout.createSequentialGroup().addComponent(save1).addComponent(nullTriple).addComponent(save2).addComponent(nullTriple).addComponent(save3))
                 .addGroup(layout.createSequentialGroup().addComponent(label1).addComponent(label2).addComponent(label3))
                 .addGroup(layout.createSequentialGroup().addComponent(tableScrollPane1).addComponent(tableScrollPane2).addComponent(tableScrollPane3))
-                .addGroup(layout.createSequentialGroup()));
+                .addGroup(layout.createParallelGroup()));
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(count).addComponent(countField).addComponent(countButton))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(create1).addComponent(create2).addComponent(operate))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(load1).addComponent(load2))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(save1).addComponent(save2).addComponent(save3))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(create1).addComponent(nullTriple).addComponent(create2).addComponent(nullTriple).addComponent(operate))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(load1).addComponent(nullDouble1).addComponent(load2).addComponent(nullDouble2))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(save1).addComponent(nullTriple).addComponent(save2).addComponent(nullTriple).addComponent(save3))
                 .addGroup(layout.createParallelGroup().addComponent(label1).addComponent(label2).addComponent(label3))
                 .addGroup(layout.createParallelGroup().addComponent(tableScrollPane1).addComponent(tableScrollPane2).addComponent(tableScrollPane3))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)));
+                .addGroup(layout.createSequentialGroup()));
         setLocationRelativeTo(null);
     }
 
