@@ -155,22 +155,26 @@ public class Calculator extends JDialog {
         save1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fileSave1.showSaveDialog(calculator);
-                File file = fileSave1.getSelectedFile();
-                if (file != null) {
-                    double[] xValues = new double[table1.getRowCount()];
-                    double[] yValues = new double[table1.getRowCount()];
-                    for (int i = 0; i < table1.getRowCount(); i++) {
-                        xValues[i] = Double.parseDouble(table1.getValueAt(i, 0).toString());
-                        yValues[i] = Double.parseDouble(table1.getValueAt(i, 1).toString());
-                    }
+                if (table1.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(calculator, "Создайте 1 функцию");
+                } else {
+                    fileSave1.showSaveDialog(calculator);
+                    File file = fileSave1.getSelectedFile();
+                    if (file != null) {
+                        double[] xValues = new double[table1.getRowCount()];
+                        double[] yValues = new double[table1.getRowCount()];
+                        for (int i = 0; i < table1.getRowCount(); i++) {
+                            xValues[i] = Double.parseDouble(table1.getValueAt(i, 0).toString());
+                            yValues[i] = Double.parseDouble(table1.getValueAt(i, 1).toString());
+                        }
 
-                    function1 = factory.create(xValues, yValues);
+                        function1 = factory.create(xValues, yValues);
 
-                    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                        FunctionsIO.writeTabulatedFunction(out, function1);
-                    } catch (IOException error) {
-                        error.printStackTrace();
+                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+                            FunctionsIO.writeTabulatedFunction(out, function1);
+                        } catch (IOException error) {
+                            error.printStackTrace();
+                        }
                     }
                 }
             }
@@ -228,22 +232,26 @@ public class Calculator extends JDialog {
         save2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fileSave2.showSaveDialog(calculator);
-                File file = fileSave2.getSelectedFile();
-                if (file != null) {
-                    double[] xValues = new double[table2.getRowCount()];
-                    double[] yValues = new double[table2.getRowCount()];
-                    for (int i = 0; i < table2.getRowCount(); i++) {
-                        xValues[i] = Double.parseDouble(table2.getValueAt(i, 0).toString());
-                        yValues[i] = Double.parseDouble(table2.getValueAt(i, 1).toString());
-                    }
+                if (table1.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(calculator, "Создайте 2 функцию");
+                } else {
+                    fileSave2.showSaveDialog(calculator);
+                    File file = fileSave2.getSelectedFile();
+                    if (file != null) {
+                        double[] xValues = new double[table2.getRowCount()];
+                        double[] yValues = new double[table2.getRowCount()];
+                        for (int i = 0; i < table2.getRowCount(); i++) {
+                            xValues[i] = Double.parseDouble(table2.getValueAt(i, 0).toString());
+                            yValues[i] = Double.parseDouble(table2.getValueAt(i, 1).toString());
+                        }
 
-                    function2 = factory.create(xValues, yValues);
+                        function2 = factory.create(xValues, yValues);
 
-                    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                        FunctionsIO.writeTabulatedFunction(out, function2);
-                    } catch (IOException error) {
-                        error.printStackTrace();
+                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+                            FunctionsIO.writeTabulatedFunction(out, function2);
+                        } catch (IOException error) {
+                            error.printStackTrace();
+                        }
                     }
                 }
             }
@@ -252,20 +260,24 @@ public class Calculator extends JDialog {
         save3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fileSave3.showSaveDialog(calculator);
-                File file = fileSave3.getSelectedFile();
-                if (file != null) {
-                    double[] xValues = new double[table3.getRowCount()];
-                    double[] yValues = new double[table3.getRowCount()];
-                    for (int i = 0; i < table3.getRowCount(); i++) {
-                        xValues[i] = Double.parseDouble(table3.getValueAt(i, 0).toString());
-                        yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
-                    }
-                    function3 = factory.create(xValues, yValues);
-                    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                        FunctionsIO.writeTabulatedFunction(out, function3);
-                    } catch (IOException error) {
-                        error.printStackTrace();
+                if (table1.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(calculator, "Получите 3 функцию");
+                } else {
+                    fileSave3.showSaveDialog(calculator);
+                    File file = fileSave3.getSelectedFile();
+                    if (file != null) {
+                        double[] xValues = new double[table3.getRowCount()];
+                        double[] yValues = new double[table3.getRowCount()];
+                        for (int i = 0; i < table3.getRowCount(); i++) {
+                            xValues[i] = Double.parseDouble(table3.getValueAt(i, 0).toString());
+                            yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
+                        }
+                        function3 = factory.create(xValues, yValues);
+                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+                            FunctionsIO.writeTabulatedFunction(out, function3);
+                        } catch (IOException error) {
+                            error.printStackTrace();
+                        }
                     }
                 }
             }
