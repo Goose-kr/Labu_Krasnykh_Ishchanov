@@ -12,7 +12,7 @@ import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CompositeFirstPart extends JDialog {
+public class CompositeParts extends JDialog {
     String functionStr1;
     String functionStr2;
     Map<String, MathFunction> map = new HashMap<>();
@@ -21,7 +21,7 @@ public class CompositeFirstPart extends JDialog {
     MathFunction part2;
     TabulatedFunctionFactory factory;
 
-    public CompositeFirstPart(TabulatedFunctionFactory factory) {
+    public CompositeParts(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
         setLocationRelativeTo(null);
         this.factory = factory;

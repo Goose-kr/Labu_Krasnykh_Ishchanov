@@ -15,7 +15,6 @@ public class ProgressBar extends JDialog {
         super();
         JProgressBar progressBar = new JProgressBar();
         setModal(true);
-        WindowEvent event = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         progressBar.setStringPainted(true);
         setSize(new Dimension(400, 200));
         progressBar.setMinimum(0);

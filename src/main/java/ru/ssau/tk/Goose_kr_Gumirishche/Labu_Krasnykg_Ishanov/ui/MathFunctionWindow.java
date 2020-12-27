@@ -47,7 +47,7 @@ public class MathFunctionWindow extends JDialog {
         compositeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CompositeFirstPart composite = new CompositeFirstPart(factory);
+                CompositeParts composite = new CompositeParts(factory);
                 dispose();
                 composite.setVisible(true);
             }
