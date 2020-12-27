@@ -22,7 +22,7 @@ public class MathFunctionWindow extends JDialog {
         JDialog dialog = new JDialog();
         this.factory = factory;
         setModal(true);
-        setSize(new Dimension(400, 250));
+        setSize(new Dimension(400, 220));
         setLocationRelativeTo(null);
         JLabel labelHelperConst = new JLabel("Если вы хотите создать константную ф-ю, введите константу!");
         JLabel labelConst = new JLabel("Константа:");

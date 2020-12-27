@@ -23,10 +23,10 @@ public class CompositeParts extends JDialog {
 
     public CompositeParts(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
-        setLocationRelativeTo(null);
         this.factory = factory;
         setModal(true);
-        setSize(new Dimension(400, 300));
+        setSize(new Dimension(400, 200));
+        setLocationRelativeTo(null);
         map.put("Двойная ф-я", new SumFunction());
         map.put("Единичная ф-я", new UnitFunction());
         map.put("Квадратная ф-я", new SqrFunction());

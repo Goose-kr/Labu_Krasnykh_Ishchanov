@@ -24,7 +24,6 @@ public class Menu extends JFrame {
 
     public Menu() {
         super("Подручный");
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuTab.add(createTabulatedFunction());
         menuMath.add(createMathFunction());
@@ -33,7 +32,8 @@ public class Menu extends JFrame {
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
-        setSize(500, 400);
+        setSize(425, 100);
+        setLocationRelativeTo(null);
         JButton calculate = new JButton("Калькулятор");
         add(calculate);
         setLayout(new FlowLayout());

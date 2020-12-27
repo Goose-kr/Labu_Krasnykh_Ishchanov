@@ -277,17 +277,11 @@ public class Calculator extends JFrame {
                 OperatorFun operatorFun = new OperatorFun(size, function1, function2);
                 operatorFun.setVisible(true);
                 for (int i = 0; i < size; i++) {
-                    stringsX3.add(operatorFun.getStringsX3().get(i));
-                    stringsY3.add(operatorFun.getStringsY3().get(i));
+                    stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
+                    stringsY3.add(String.valueOf(operatorFun.function3.getY(i)));
                 }
-                double[] xValues = new double[size];
-                double[] yValues = new double[size];
-                for (int i = 0; i < size; i++) {
-                    xValues[i] = Double.parseDouble(stringsX3.get(i));
-                    yValues[i] = Double.parseDouble(stringsY3.get(i));
-                }
-                function3=factory.create(xValues,yValues);
-                System.out.println(function3.toString());
+                System.out.println(operatorFun.function3.toString());
+                function3=operatorFun.function3;
                 tableModel3.fireTableDataChanged();
             }
         });

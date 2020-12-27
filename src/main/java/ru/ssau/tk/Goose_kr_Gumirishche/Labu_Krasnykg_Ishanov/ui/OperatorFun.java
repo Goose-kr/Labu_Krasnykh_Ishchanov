@@ -19,12 +19,12 @@ public class OperatorFun extends JDialog {
     private TabulatedFunction function1;
     private TabulatedFunction function2;
     TabulatedFunction function3;
-    private TabulatedFunction function;
     private final ArrayList<String> stringsX3;
     private final ArrayList<String> stringsY3;
 
     public OperatorFun(int size, TabulatedFunction function1, TabulatedFunction function2) {
         JDialog dialog = new JDialog();
+        setModal(true);
         setSize(new Dimension(400, 200));
         setLocationRelativeTo(null);
         stringsY3 = new ArrayList<>();
@@ -46,7 +46,7 @@ public class OperatorFun extends JDialog {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    function = map.get(e.getItem().toString());
+                    function3 = map.get(e.getItem().toString());
                 }
             }
         });
@@ -54,11 +54,7 @@ public class OperatorFun extends JDialog {
         result.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < size; i++) {
-                    function3 = function;
-                    stringsX3.add(String.valueOf(function3.getX(i)));
-                    stringsY3.add(String.valueOf(function3.getY(i)));
-                }
+                System.out.println(function3);
                 dispose();
             }
         });
