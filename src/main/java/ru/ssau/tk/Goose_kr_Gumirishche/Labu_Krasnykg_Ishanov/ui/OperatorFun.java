@@ -29,7 +29,7 @@ public class OperatorFun extends JDialog {
         stringsX3 = new ArrayList<>();
         this.function1=function1;
         this.function2=function2;
-        JComboBox<String> box = new JComboBox<>(new String[]{"Сумма", "Разность", "Произведение", "Частное"
+        JComboBox<String> box = new JComboBox<>(new String[]{"","Сумма", "Разность", "Произведение", "Частное"
         });
         map.put("Сумма", service.sum(function1,function2));
         map.put("Разность", service.subtract(function1,function2));

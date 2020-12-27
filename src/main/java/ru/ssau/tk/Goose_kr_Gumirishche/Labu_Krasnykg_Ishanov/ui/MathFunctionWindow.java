@@ -57,7 +57,7 @@ public class MathFunctionWindow extends JDialog {
         map.put("Квадратная ф-я", new SqrFunction());
         map.put("Нулевая ф-я", new ZeroFunction());
         map.put("Тождественная ф-я", new IdentityFunction());
-        JComboBox<String> box = new JComboBox<>(new String[]{"Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Нулевая ф-я", "Тождественная ф-я"
+        JComboBox<String> box = new JComboBox<>(new String[]{"","Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Нулевая ф-я", "Тождественная ф-я"
         });
         box.setEditable(true);
         box.addItemListener(new ItemListener() {
