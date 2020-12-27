@@ -14,8 +14,6 @@ import javax.swing.table.AbstractTableModel;
 public class WindowOfTabulated extends JDialog {
 
     public TabulatedFunction tabulatedFunction;
-    double[] xValues;
-    double[] yValues;
     private ArrayList<String> stringsX;
     private ArrayList<String> stringsY;
 
@@ -63,13 +61,5 @@ public class WindowOfTabulated extends JDialog {
 
     public TabulatedFunction getTabulatedFunction() {
         return tabulatedFunction;
-    }
-
-    public ArrayList<String> getStringsY() {
-        return stringsY;
-    }
-
-    public ArrayList<String> getStringsX() {
-        return stringsX;
     }
 }

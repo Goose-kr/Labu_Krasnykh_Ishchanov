@@ -17,8 +17,6 @@ import java.util.Map;
 public class OperatorFun extends JDialog {
     Map<String, TabulatedFunction> map = new HashMap<>();
     TabulatedFunctionOperationService service;
-    private TabulatedFunction function1;
-    private TabulatedFunction function2;
     TabulatedFunction function3;
     private final ArrayList<String> stringsX3;
     private final ArrayList<String> stringsY3;
@@ -35,8 +33,6 @@ public class OperatorFun extends JDialog {
             stringsX3.add("");
             stringsY3.add("");
         }
-        this.function1 = function1;
-        this.function2 = function2;
         JComboBox<String> box = new JComboBox<>(new String[]{"", "Сумма", "Разность", "Произведение", "Частное"
         });
         map.put("Сумма", service.sum(function1, function2));
