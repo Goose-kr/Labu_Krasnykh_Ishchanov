@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperatorFun extends JDialog {
-    Map<String, TabulatedFunction> map = new HashMap<>();
-    TabulatedFunctionOperationService service;
+    private Map<String, TabulatedFunction> map = new HashMap<>();
+    private final TabulatedFunctionOperationService service;
     TabulatedFunction function3;
     private final ArrayList<String> stringsX3;
     private final ArrayList<String> stringsY3;

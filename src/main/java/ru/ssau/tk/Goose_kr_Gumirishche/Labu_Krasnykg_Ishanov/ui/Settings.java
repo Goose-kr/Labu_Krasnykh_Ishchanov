@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class Settings extends JDialog {
     private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
-    JRadioButton massif;
-    JRadioButton list;
+    private final JRadioButton massif;
+    private final JRadioButton list;
 
     public Settings() {
         super();

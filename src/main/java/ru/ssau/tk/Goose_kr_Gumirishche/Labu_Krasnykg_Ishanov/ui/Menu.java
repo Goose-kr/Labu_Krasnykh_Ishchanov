@@ -1,26 +1,20 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.ArrayTabulatedFunction;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class Menu extends JFrame {
     private int size;
     private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
-    JMenu menuSettings = new JMenu("Настройки");
-    JMenuBar menuBar = new JMenuBar();
-    JMenu menuTab = new JMenu("Табулированная функция");
-    JMenu menuMath = new JMenu("Математичекские функции");
+    private final JMenu menuSettings = new JMenu("Настройки");
+    private final JMenuBar menuBar = new JMenuBar();
+    private final JMenu menuTab = new JMenu("Табулированная функция");
+    private final JMenu menuMath = new JMenu("Математичекские функции");
 
     public Menu() {
         super("Подручный");

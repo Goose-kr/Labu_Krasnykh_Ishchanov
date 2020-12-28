@@ -17,13 +17,12 @@ public class TableMath extends JDialog {
     private final ArrayList<String> stringsY;
     private final AbstractTableModel tableModelX;
     private final JTable tableX;
-    String functionStr;
-    TabulatedFunctionFactory factory;
-    MathFunction function;
-    TabulatedFunction functionTab;
-    int choice;
-    Map<String, Integer> map = new HashMap<>();
-    int ex = 1;
+    private String functionStr;
+    private TabulatedFunctionFactory factory;
+    private MathFunction function;
+    private TabulatedFunction functionTab;
+    private Map<String, Integer> map = new HashMap<>();
+    private int ex = 1;
 
     public TableMath(TabulatedFunctionFactory factory, MathFunction function, int size) {
         JDialog dialog = new JDialog();

@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MathFunctionWindow extends JDialog {
-    String functionStr;
-    TabulatedFunctionFactory factory;
-    Map<String, MathFunction> map = new HashMap<>();
-    MathFunction function;
+    private String functionStr;
+    private final TabulatedFunctionFactory factory;
+    private Map<String, MathFunction> map = new HashMap<>();
+    private MathFunction function;
 
     public MathFunctionWindow(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();

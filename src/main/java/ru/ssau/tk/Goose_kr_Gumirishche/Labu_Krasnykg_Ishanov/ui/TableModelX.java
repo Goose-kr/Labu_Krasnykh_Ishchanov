@@ -1,10 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class TableModelX extends AbstractTableModel {
     private static final long serialVersionUID = -2085652328948175353L;

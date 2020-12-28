@@ -13,13 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CompositeParts extends JDialog {
-    String functionStr1;
-    String functionStr2;
-    Map<String, MathFunction> map = new HashMap<>();
-    double constant;
-    MathFunction part1;
-    MathFunction part2;
-    TabulatedFunctionFactory factory;
+    private String functionStr1;
+    private String functionStr2;
+    private Map<String, MathFunction> map = new HashMap<>();
+    private double constant;
+    private MathFunction part1;
+    private MathFunction part2;
+    private TabulatedFunctionFactory factory;
 
     public CompositeParts(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
