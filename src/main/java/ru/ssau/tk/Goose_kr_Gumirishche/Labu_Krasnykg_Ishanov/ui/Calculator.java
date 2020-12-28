@@ -202,8 +202,8 @@ public class Calculator extends JDialog {
                 fileOpen2.showOpenDialog(calculator);
                 File file = fileOpen2.getSelectedFile();
                 if (file != null) {
-                    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
+                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                        TabulatedFunction function = FunctionsIO.deserialize(in);
                         for (int i = 0; i < function.getCount(); i++) {
                             stringsX2.add(i, String.valueOf(function.getX(i)));
                             stringsY2.add(i, String.valueOf(function.getY(i)));
@@ -218,7 +218,7 @@ public class Calculator extends JDialog {
                         size = function.getCount();
                         System.out.println(function.toString());
                         function2 = factory.create(xValues, yValues);
-                    } catch (IOException err) {
+                    } catch (IOException | ClassNotFoundException err) {
                         err.printStackTrace();
                     }
                 }
@@ -243,8 +243,8 @@ public class Calculator extends JDialog {
 
                         function2 = factory.create(xValues, yValues);
 
-                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                            FunctionsIO.writeTabulatedFunction(out, function2);
+                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                            FunctionsIO.serialize(out, function2);
                         } catch (IOException error) {
                             error.printStackTrace();
                         }
@@ -269,8 +269,8 @@ public class Calculator extends JDialog {
                             yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
                         }
                         function3 = factory.create(xValues, yValues);
-                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                            FunctionsIO.writeTabulatedFunction(out, function3);
+                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                            FunctionsIO.serialize(out, function3);
                         } catch (IOException error) {
                             error.printStackTrace();
                         }
