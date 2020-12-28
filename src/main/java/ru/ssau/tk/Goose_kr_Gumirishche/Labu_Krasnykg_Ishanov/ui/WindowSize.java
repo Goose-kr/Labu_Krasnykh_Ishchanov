@@ -18,7 +18,7 @@ public class WindowSize extends JDialog {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (input.getText() == null || Integer.parseInt(input.getText()) < 2) {
+                if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
                     JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
                 } else {
                     size = Integer.parseInt(input.getText());

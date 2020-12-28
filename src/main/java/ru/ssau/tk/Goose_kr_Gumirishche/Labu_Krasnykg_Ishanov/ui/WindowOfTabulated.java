@@ -24,7 +24,7 @@ public class WindowOfTabulated extends JDialog {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (input.getText() == null || Integer.parseInt(input.getText()) < 2) {
+                if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
                     JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
                 } else {
                     JDialog progressBar = new ProgressBar();
