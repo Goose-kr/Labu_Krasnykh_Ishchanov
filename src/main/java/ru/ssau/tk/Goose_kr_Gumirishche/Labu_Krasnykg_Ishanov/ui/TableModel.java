@@ -2,6 +2,7 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TableModel extends AbstractTableModel {
     private static final int VALUE_X_COLUMN_NUMBER = 0;
@@ -9,10 +10,12 @@ public class TableModel extends AbstractTableModel {
     private final ArrayList<String> stringsX;
     private final ArrayList<String> stringsY;
 
+
     public TableModel(ArrayList<String> stringsX, ArrayList<String> stringsY) {
         this.stringsX = stringsX;
         this.stringsY = stringsY;
     }
+
 
     @Override
     public int getRowCount() {
