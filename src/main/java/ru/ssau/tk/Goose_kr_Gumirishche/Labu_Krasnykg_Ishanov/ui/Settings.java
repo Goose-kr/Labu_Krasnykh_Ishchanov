@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Settings extends JDialog {
-    protected static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
+    private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     private final JRadioButton massif;
     private final JRadioButton list;
 

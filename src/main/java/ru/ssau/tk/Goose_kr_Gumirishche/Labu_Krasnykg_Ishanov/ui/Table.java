@@ -19,7 +19,7 @@ public class Table extends JDialog {
     private TabulatedFunctionFactory factory;
     private double[] xValues;
     private double[] yValues;
-    private int ex = 1;
+    int ex = 1;
 
     public Table(int size, TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
@@ -67,7 +67,6 @@ public class Table extends JDialog {
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPaneX = new JScrollPane(table);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addGroup(layout.createSequentialGroup().addComponent(tableScrollPaneX)).addGroup(layout.createSequentialGroup().addComponent(create)));
-
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(tableScrollPaneX)).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(create)));
         setLocationRelativeTo(null);
     }

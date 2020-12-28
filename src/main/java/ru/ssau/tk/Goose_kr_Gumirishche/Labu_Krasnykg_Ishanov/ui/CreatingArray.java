@@ -1,6 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -24,7 +25,7 @@ public class CreatingArray extends JDialog {
     public TabulatedFunction function;
     protected static JCheckBox checkBoxSave = new JCheckBox("Сохранить функцию");
 
-    protected CreatingArray(Consumer<? super TabulatedFunction> callback) {
+    protected CreatingArray(TabulatedFunctionFactory factory,Consumer<? super TabulatedFunction> callback) {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -38,7 +39,7 @@ public class CreatingArray extends JDialog {
         getContentPane().add(checkBoxSave);
 
         compose();
-        addButtonListeners();
+        addButtonListeners(factory);
 
         tableXY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setVisible(true);
@@ -47,7 +48,7 @@ public class CreatingArray extends JDialog {
         dispose();
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(TabulatedFunctionFactory factory) {
         buttonCreateTable.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
@@ -66,7 +67,7 @@ public class CreatingArray extends JDialog {
             double[] arrayX = convert(xValues);
             double[] arrayY = convert(yValues);
 
-            function = Menu.factory.create(arrayX, arrayY);
+            function = factory.create(arrayX, arrayY);
 
             tableXY.setCellSelectionEnabled(true);
             dispose();

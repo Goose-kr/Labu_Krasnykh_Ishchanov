@@ -1,6 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.*;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,7 @@ public class CreatingFunction extends JDialog {
     Map<String, MathFunction> functionMap = new HashMap<>();
     JComboBox<String> comboBoxFunctions = showComboBox();
 
-    protected CreatingFunction(Consumer<? super TabulatedFunction> callback) {
+    protected CreatingFunction(TabulatedFunctionFactory factory,Consumer<? super TabulatedFunction> callback) {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -48,14 +49,14 @@ public class CreatingFunction extends JDialog {
         getContentPane().add(comboBoxFunctions);
 
         compose();
-        addButtonListeners();
+        addButtonListeners(factory);
         setVisible(true);
 
         callback.accept(function);
         dispose();
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(TabulatedFunctionFactory factory) {
         buttonCreateFunction.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
@@ -65,11 +66,11 @@ public class CreatingFunction extends JDialog {
                     if (str.equals("Константная функция")) {
                         String result = JOptionPane.showInputDialog("Введите значение константы");
                         double constant = Double.parseDouble(result);
-                        function = Menu.factory.create(new ConstantFunction(constant), from, to, count);
+                        function = factory.create(new ConstantFunction(constant), from, to, count);
                     } else {
                         MathFunction mathFunction = functionMap.get(str);
 
-                        function = Menu.factory.create(mathFunction, from, to, count);
+                        function = factory.create(mathFunction, from, to, count);
                     }
                     dispose();
                     System.out.println(function.toString());

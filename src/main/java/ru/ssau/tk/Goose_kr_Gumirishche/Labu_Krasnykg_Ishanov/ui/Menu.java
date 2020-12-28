@@ -2,7 +2,6 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations.TabulatedDifferentialOperator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +10,11 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
     private int size;
-    protected static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
+    TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     private final JMenu menuSettings = new JMenu("Настройки");
     private final JMenuBar menuBar = new JMenuBar();
     private final JMenu menuTab = new JMenu("Табулированная функция");
     private final JMenu menuMath = new JMenu("Математичекские функции");
-    private final JButton buttonDifferentialOperator = new JButton("Дифференцирование функции");
 
     public Menu() {
         super("Подручный");
@@ -35,17 +33,17 @@ public class Menu extends JFrame {
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
+        JButton diff = new JButton("Дифференцировать");
+        add(diff);
         setSize(425, 380);
         setLocationRelativeTo(null);
         JButton calculate = new JButton("Калькулятор");
-        JButton diff = new JButton("Дифференцировать");
         add(calculate);
-        add(diff);
         setLayout(new FlowLayout());
         calculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Calculator calculator = new Calculator(factory);
+                Calculator calculator = new Calculator();
                 calculator.setVisible(true);
             }
         });
@@ -56,7 +54,6 @@ public class Menu extends JFrame {
                 differentialOperator.setVisible(true);
             }
         });
-
     }
 
     private JMenu settings() {
@@ -110,6 +107,10 @@ public class Menu extends JFrame {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public TabulatedFunctionFactory getFactory() {
+        return factory;
     }
 
     public static void main(String[] args) {

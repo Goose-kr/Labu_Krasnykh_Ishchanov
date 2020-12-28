@@ -76,4 +76,3 @@ public class TableMath extends JDialog {
         setLocationRelativeTo(null);
     }
 }
-
