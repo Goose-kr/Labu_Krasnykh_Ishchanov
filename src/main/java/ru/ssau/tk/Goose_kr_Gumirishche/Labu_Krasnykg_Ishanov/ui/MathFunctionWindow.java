@@ -28,29 +28,23 @@ public class MathFunctionWindow extends JDialog {
         JLabel labelConst = new JLabel("Константа:");
         JTextField fieldConst = new JTextField();
         JButton buttonConst = new JButton("Добавить константу");
-        buttonConst.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (fieldConst.getText().equals("")) {
-                    JOptionPane.showMessageDialog(dialog, "Введите корректно константу");
-                } else {
-                    WindowSize windowSize = new WindowSize();
-                    windowSize.setVisible(true);
-                    TableMath tableMath = new TableMath(factory, new ConstantFunction(Double.parseDouble(fieldConst.getText())), windowSize.getSizeOf());
-                    tableMath.setVisible(true);
-                    dispose();
-                }
+        buttonConst.addActionListener(e -> {
+            if (fieldConst.getText().equals("")) {
+                JOptionPane.showMessageDialog(dialog, "Введите корректно константу");
+            } else {
+                WindowSize windowSize = new WindowSize();
+                windowSize.setVisible(true);
+                TableMath tableMath = new TableMath(factory, new ConstantFunction(Double.parseDouble(fieldConst.getText())), windowSize.getSizeOf());
+                tableMath.setVisible(true);
+                dispose();
             }
         });
         JLabel labelCompositeHelper = new JLabel("Для создания сложной ф-ии нажмите на кнопку (Части)");
         JButton compositeButton = new JButton("Части");
-        compositeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CompositeParts composite = new CompositeParts(factory);
-                dispose();
-                composite.setVisible(true);
-            }
+        compositeButton.addActionListener(e -> {
+            CompositeParts composite = new CompositeParts(factory);
+            dispose();
+            composite.setVisible(true);
         });
         map.put("Двойная ф-я", new SumFunction());
         map.put("Единичная ф-я", new UnitFunction());
@@ -71,15 +65,12 @@ public class MathFunctionWindow extends JDialog {
             }
         });
         JButton create = new JButton("Создать");
-        create.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                WindowSize windowSize = new WindowSize();
-                windowSize.setVisible(true);
-                TableMath tableMath = new TableMath(factory, function, windowSize.getSizeOf());
-                tableMath.setVisible(true);
-                dispose();
-            }
+        create.addActionListener(e -> {
+            WindowSize windowSize = new WindowSize();
+            windowSize.setVisible(true);
+            TableMath tableMath = new TableMath(factory, function, windowSize.getSizeOf());
+            tableMath.setVisible(true);
+            dispose();
         });
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

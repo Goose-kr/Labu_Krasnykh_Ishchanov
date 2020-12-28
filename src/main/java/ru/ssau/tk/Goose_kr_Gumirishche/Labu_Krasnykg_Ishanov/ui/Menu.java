@@ -40,19 +40,13 @@ public class Menu extends JFrame {
         JButton calculate = new JButton("Калькулятор");
         add(calculate);
         setLayout(new FlowLayout());
-        calculate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Calculator calculator = new Calculator(factory);
-                calculator.setVisible(true);
-            }
+        calculate.addActionListener(e -> {
+            Calculator calculator = new Calculator(factory);
+            calculator.setVisible(true);
         });
-        diff.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DifferentialOperator differentialOperator = new DifferentialOperator();
-                differentialOperator.setVisible(true);
-            }
+        diff.addActionListener(e -> {
+            DifferentialOperator differentialOperator = new DifferentialOperator();
+            differentialOperator.setVisible(true);
         });
     }
 
@@ -60,13 +54,10 @@ public class Menu extends JFrame {
         JMenu set = new JMenu("Настройки");
         JMenuItem item = new JMenuItem("Открыть");
         set.add(item);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings settings = new Settings();
-                settings.setVisible(true);
-                factory = settings.getFactory();
-            }
+        item.addActionListener(e -> {
+            Settings settings = new Settings();
+            settings.setVisible(true);
+            factory = settings.getFactory();
         });
         return set;
     }
@@ -75,12 +66,9 @@ public class Menu extends JFrame {
         JMenu tab = new JMenu("Табулированная функция");
         JMenuItem itemCreate = new JMenuItem("Создать");
         tab.add(itemCreate);
-        itemCreate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                WindowOfTabulated tabulatedFunction = new WindowOfTabulated(factory);
-                tabulatedFunction.setVisible(true);
-            }
+        itemCreate.addActionListener(e -> {
+            WindowOfTabulated tabulatedFunction = new WindowOfTabulated(factory);
+            tabulatedFunction.setVisible(true);
         });
 
         return tab;
@@ -90,19 +78,12 @@ public class Menu extends JFrame {
         JMenu menuMath = new JMenu("Математичекские функции");
         JMenuItem math = new JMenuItem("Открыть");
         menuMath.add(math);
-        math.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MathFunctionWindow math = new MathFunctionWindow(factory);
-                math.setVisible(true);
-            }
+        math.addActionListener(e -> {
+            MathFunctionWindow math1 = new MathFunctionWindow(factory);
+            math1.setVisible(true);
         });
 
         return menuMath;
-    }
-
-    public int getSizeOfFunction() {
-        return size;
     }
 
     public void setSize(int size) {

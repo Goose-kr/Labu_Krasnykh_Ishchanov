@@ -92,218 +92,189 @@ public class Calculator extends JDialog {
         JLabel count = new JLabel("Введите размер");
         JTextField countField = new JTextField();
         JButton countButton = new JButton("Ввести");
-        countButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                size = Integer.parseInt(countField.getText());
-            }
-        });
+        countButton.addActionListener(e -> size = Integer.parseInt(countField.getText()));
         JButton create1 = new JButton("Создать 1 ф-ю");
-        create1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringsX1.clear();
-                stringsY1.clear();
-                JDialog progressBar = new ProgressBar();
-                progressBar.setVisible(true);
-                Table table1 = new Table(size, factory);
-                table1.setVisible(true);
-                for (int i = 0; i < size; i++) {
-                    stringsX1.add(table1.getStringsX().get(i));
-                    stringsY1.add(table1.getStringsY().get(i));
-                }
-                tableModel1.fireTableDataChanged();
-                function1 = table1.getFunction();
+        create1.addActionListener(e -> {
+            stringsX1.clear();
+            stringsY1.clear();
+            JDialog progressBar = new ProgressBar();
+            progressBar.setVisible(true);
+            Table table1 = new Table(size, factory);
+            table1.setVisible(true);
+            for (int i = 0; i < size; i++) {
+                stringsX1.add(table1.getStringsX().get(i));
+                stringsY1.add(table1.getStringsY().get(i));
             }
+            tableModel1.fireTableDataChanged();
+            function1 = table1.getFunction();
         });
         JButton load1 = new JButton("Загрузить 1 ф-ю");
-        load1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringsX1.clear();
-                stringsY1.clear();
-                fileOpen1.showOpenDialog(calculator);
-                File file = fileOpen1.getSelectedFile();
-                if (file != null) {
-                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
-                        TabulatedFunction function = FunctionsIO.deserialize(in);
-                        for (int i = 0; i < function.getCount(); i++) {
-                            stringsX1.add(i, String.valueOf(function.getX(i)));
-                            stringsY1.add(i, String.valueOf(function.getY(i)));
-                            tableModel1.fireTableDataChanged();
-                        }
-                        double[] xValues = new double[function.getCount()];
-                        double[] yValues = new double[function.getCount()];
-                        for (int i = 0; i < table1.getRowCount(); i++) {
-                            xValues[i] = Double.parseDouble(stringsX1.get(i));
-                            yValues[i] = Double.parseDouble(stringsY1.get(i));
-                        }
-                        size = function.getCount();
-                        System.out.println(function.toString());
-                        function1 = factory.create(xValues, yValues);
-                    } catch (IOException | ClassNotFoundException err) {
-                        err.printStackTrace();
+        load1.addActionListener(e -> {
+            stringsX1.clear();
+            stringsY1.clear();
+            fileOpen1.showOpenDialog(calculator);
+            File file = fileOpen1.getSelectedFile();
+            if (file != null) {
+                try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                    TabulatedFunction function = FunctionsIO.deserialize(in);
+                    for (int i = 0; i < function.getCount(); i++) {
+                        stringsX1.add(i, String.valueOf(function.getX(i)));
+                        stringsY1.add(i, String.valueOf(function.getY(i)));
+                        tableModel1.fireTableDataChanged();
                     }
+                    double[] xValues = new double[function.getCount()];
+                    double[] yValues = new double[function.getCount()];
+                    for (int i = 0; i < table1.getRowCount(); i++) {
+                        xValues[i] = Double.parseDouble(stringsX1.get(i));
+                        yValues[i] = Double.parseDouble(stringsY1.get(i));
+                    }
+                    size = function.getCount();
+                    System.out.println(function.toString());
+                    function1 = factory.create(xValues, yValues);
+                } catch (IOException | ClassNotFoundException err) {
+                    err.printStackTrace();
                 }
             }
         });
         JButton save1 = new JButton("Сохранить 1 ф-ю");
-        save1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (table1.getRowCount() == 0) {
-                    JOptionPane.showMessageDialog(calculator, "Создайте 1 функцию");
-                } else {
-                    fileSave1.showSaveDialog(calculator);
-                    File file = fileSave1.getSelectedFile();
-                    if (file != null) {
-                        double[] xValues = new double[table1.getRowCount()];
-                        double[] yValues = new double[table1.getRowCount()];
-                        for (int i = 0; i < table1.getRowCount(); i++) {
-                            xValues[i] = Double.parseDouble(table1.getValueAt(i, 0).toString());
-                            yValues[i] = Double.parseDouble(table1.getValueAt(i, 1).toString());
-                        }
+        save1.addActionListener(e -> {
+            if (table1.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(calculator, "Создайте 1 функцию");
+            } else {
+                fileSave1.showSaveDialog(calculator);
+                File file = fileSave1.getSelectedFile();
+                if (file != null) {
+                    double[] xValues = new double[table1.getRowCount()];
+                    double[] yValues = new double[table1.getRowCount()];
+                    for (int i = 0; i < table1.getRowCount(); i++) {
+                        xValues[i] = Double.parseDouble(table1.getValueAt(i, 0).toString());
+                        yValues[i] = Double.parseDouble(table1.getValueAt(i, 1).toString());
+                    }
 
-                        function1 = factory.create(xValues, yValues);
+                    function1 = factory.create(xValues, yValues);
 
-                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-                            FunctionsIO.serialize(out, function1);
-                        } catch (IOException error) {
-                            error.printStackTrace();
-                        }
+                    try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                        FunctionsIO.serialize(out, function1);
+                    } catch (IOException error) {
+                        error.printStackTrace();
                     }
                 }
             }
         });
         JButton create2 = new JButton("Создать 2 ф-ю");
-        create2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringsX2.clear();
-                stringsY2.clear();
-                JDialog progressBar = new ProgressBar();
-                progressBar.setVisible(true);
-                Table table2 = new Table(size, factory);
-                table2.setVisible(true);
-                for (int i = 0; i < size; i++) {
-                    stringsX2.add(table2.getStringsX().get(i));
-                    stringsY2.add(table2.getStringsY().get(i));
-                }
-                tableModel2.fireTableDataChanged();
-                function2 = table2.getFunction();
+        create2.addActionListener(e -> {
+            stringsX2.clear();
+            stringsY2.clear();
+            JDialog progressBar = new ProgressBar();
+            progressBar.setVisible(true);
+            Table table2 = new Table(size, factory);
+            table2.setVisible(true);
+            for (int i = 0; i < size; i++) {
+                stringsX2.add(table2.getStringsX().get(i));
+                stringsY2.add(table2.getStringsY().get(i));
             }
+            tableModel2.fireTableDataChanged();
+            function2 = table2.getFunction();
         });
         JButton load2 = new JButton("Загрузить 2 ф-ю");
-        load2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringsX2.clear();
-                stringsY2.clear();
-                fileOpen2.showOpenDialog(calculator);
-                File file = fileOpen2.getSelectedFile();
-                if (file != null) {
-                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
-                        TabulatedFunction function = FunctionsIO.deserialize(in);
-                        for (int i = 0; i < function.getCount(); i++) {
-                            stringsX2.add(i, String.valueOf(function.getX(i)));
-                            stringsY2.add(i, String.valueOf(function.getY(i)));
-                            tableModel2.fireTableDataChanged();
-                        }
-                        double[] xValues = new double[function.getCount()];
-                        double[] yValues = new double[function.getCount()];
-                        for (int i = 0; i < table2.getRowCount(); i++) {
-                            xValues[i] = Double.parseDouble(stringsX2.get(i));
-                            yValues[i] = Double.parseDouble(stringsY2.get(i));
-                        }
-                        size = function.getCount();
-                        System.out.println(function.toString());
-                        function2 = factory.create(xValues, yValues);
-                    } catch (IOException | ClassNotFoundException err) {
-                        err.printStackTrace();
+        load2.addActionListener(e -> {
+            stringsX2.clear();
+            stringsY2.clear();
+            fileOpen2.showOpenDialog(calculator);
+            File file = fileOpen2.getSelectedFile();
+            if (file != null) {
+                try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                    TabulatedFunction function = FunctionsIO.deserialize(in);
+                    for (int i = 0; i < function.getCount(); i++) {
+                        stringsX2.add(i, String.valueOf(function.getX(i)));
+                        stringsY2.add(i, String.valueOf(function.getY(i)));
+                        tableModel2.fireTableDataChanged();
                     }
+                    double[] xValues = new double[function.getCount()];
+                    double[] yValues = new double[function.getCount()];
+                    for (int i = 0; i < table2.getRowCount(); i++) {
+                        xValues[i] = Double.parseDouble(stringsX2.get(i));
+                        yValues[i] = Double.parseDouble(stringsY2.get(i));
+                    }
+                    size = function.getCount();
+                    System.out.println(function.toString());
+                    function2 = factory.create(xValues, yValues);
+                } catch (IOException | ClassNotFoundException err) {
+                    err.printStackTrace();
                 }
             }
         });
         JButton save2 = new JButton("Сохранить 2 ф-ю");
-        save2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (table1.getRowCount() == 0) {
-                    JOptionPane.showMessageDialog(calculator, "Создайте 2 функцию");
-                } else {
-                    fileSave2.showSaveDialog(calculator);
-                    File file = fileSave2.getSelectedFile();
-                    if (file != null) {
-                        double[] xValues = new double[table2.getRowCount()];
-                        double[] yValues = new double[table2.getRowCount()];
-                        for (int i = 0; i < table2.getRowCount(); i++) {
-                            xValues[i] = Double.parseDouble(table2.getValueAt(i, 0).toString());
-                            yValues[i] = Double.parseDouble(table2.getValueAt(i, 1).toString());
-                        }
+        save2.addActionListener(e -> {
+            if (table1.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(calculator, "Создайте 2 функцию");
+            } else {
+                fileSave2.showSaveDialog(calculator);
+                File file = fileSave2.getSelectedFile();
+                if (file != null) {
+                    double[] xValues = new double[table2.getRowCount()];
+                    double[] yValues = new double[table2.getRowCount()];
+                    for (int i = 0; i < table2.getRowCount(); i++) {
+                        xValues[i] = Double.parseDouble(table2.getValueAt(i, 0).toString());
+                        yValues[i] = Double.parseDouble(table2.getValueAt(i, 1).toString());
+                    }
 
-                        function2 = factory.create(xValues, yValues);
+                    function2 = factory.create(xValues, yValues);
 
-                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-                            FunctionsIO.serialize(out, function2);
-                        } catch (IOException error) {
-                            error.printStackTrace();
-                        }
+                    try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                        FunctionsIO.serialize(out, function2);
+                    } catch (IOException error) {
+                        error.printStackTrace();
                     }
                 }
             }
         });
         JButton save3 = new JButton("Сохранить 3 ф-ю");
-        save3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (table1.getRowCount() == 0) {
-                    JOptionPane.showMessageDialog(calculator, "Получите 3 функцию");
-                } else {
-                    fileSave3.showSaveDialog(calculator);
-                    File file = fileSave3.getSelectedFile();
-                    if (file != null) {
-                        double[] xValues = new double[table3.getRowCount()];
-                        double[] yValues = new double[table3.getRowCount()];
-                        for (int i = 0; i < table3.getRowCount(); i++) {
-                            xValues[i] = Double.parseDouble(table3.getValueAt(i, 0).toString());
-                            yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
-                        }
-                        function3 = factory.create(xValues, yValues);
-                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
-                            FunctionsIO.serialize(out, function3);
-                        } catch (IOException error) {
-                            error.printStackTrace();
-                        }
+        save3.addActionListener(e -> {
+            if (table1.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(calculator, "Получите 3 функцию");
+            } else {
+                fileSave3.showSaveDialog(calculator);
+                File file = fileSave3.getSelectedFile();
+                if (file != null) {
+                    double[] xValues = new double[table3.getRowCount()];
+                    double[] yValues = new double[table3.getRowCount()];
+                    for (int i = 0; i < table3.getRowCount(); i++) {
+                        xValues[i] = Double.parseDouble(table3.getValueAt(i, 0).toString());
+                        yValues[i] = Double.parseDouble(table3.getValueAt(i, 1).toString());
+                    }
+                    function3 = factory.create(xValues, yValues);
+                    try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                        FunctionsIO.serialize(out, function3);
+                    } catch (IOException error) {
+                        error.printStackTrace();
                     }
                 }
             }
         });
         JButton operate = new JButton("Операции");
-        operate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                stringsX3.clear();
-                stringsY3.clear();
-                for (int i = 0; i < size - 1; i++) {
-                    if (Double.parseDouble(stringsX1.get(i))!=Double.parseDouble(stringsX2.get(i))) {
-                        JOptionPane.showMessageDialog(calculator, "Х не равны");
-                        ex = 0;
-                    }
+        operate.addActionListener(e -> {
+            stringsX3.clear();
+            stringsY3.clear();
+            for (int i = 0; i < size - 1; i++) {
+                if (Double.parseDouble(stringsX1.get(i))!=Double.parseDouble(stringsX2.get(i))) {
+                    JOptionPane.showMessageDialog(calculator, "Х не равны");
+                    ex = 0;
                 }
-                if (table1.getRowCount() != table2.getRowCount()) {
-                    JOptionPane.showMessageDialog(calculator, "У функций разные размеры");
-                } else if (ex == 0) {
-                } else {
-                    OperatorFun operatorFun = new OperatorFun(size, factory, function1, function2);
-                    operatorFun.setVisible(true);
-                    for (int i = 0; i < size; i++) {
-                        stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
-                        stringsY3.add(String.valueOf(operatorFun.function3.getY(i)));
-                    }
-                    System.out.println(operatorFun.function3.toString());
-                    function3 = operatorFun.function3;
-                    tableModel3.fireTableDataChanged();
+            }
+            if (table1.getRowCount() != table2.getRowCount()) {
+                JOptionPane.showMessageDialog(calculator, "У функций разные размеры");
+            } else if (ex == 0) {
+            } else {
+                OperatorFun operatorFun = new OperatorFun(size, factory, function1, function2);
+                operatorFun.setVisible(true);
+                for (int i = 0; i < size; i++) {
+                    stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
+                    stringsY3.add(String.valueOf(operatorFun.function3.getY(i)));
                 }
+                System.out.println(operatorFun.function3.toString());
+                function3 = operatorFun.function3;
+                tableModel3.fireTableDataChanged();
             }
         });
         JLabel nullTriple = new JLabel("                                                              ");
@@ -340,13 +311,10 @@ public class Calculator extends JDialog {
         JMenu set = new JMenu("Выбор фабрики");
         JMenuItem item = new JMenuItem("Открыть");
         set.add(item);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings settings = new Settings();
-                settings.setVisible(true);
-                factory = settings.getFactory();
-            }
+        item.addActionListener(e -> {
+            Settings settings = new Settings();
+            settings.setVisible(true);
+            factory = settings.getFactory();
         });
         return set;
     }

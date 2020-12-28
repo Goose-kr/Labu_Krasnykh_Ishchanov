@@ -15,15 +15,12 @@ public class WindowSize extends JDialog {
         JLabel label = new JLabel("Число точек:");
         JTextField input = new JTextField();
         JButton button = new JButton("enter");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
-                    JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
-                } else {
-                    size = Integer.parseInt(input.getText());
-                    dispose();
-                }
+        button.addActionListener(e -> {
+            if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
+                JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
+            } else {
+                size = Integer.parseInt(input.getText());
+                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());

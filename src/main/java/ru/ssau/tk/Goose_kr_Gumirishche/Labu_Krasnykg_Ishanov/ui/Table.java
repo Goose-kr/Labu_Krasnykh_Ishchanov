@@ -36,29 +36,26 @@ public class Table extends JDialog {
         setSize(new Dimension(500, 500));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JButton create = new JButton("Создать");
-        create.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < size - 1; i++) {
-                    if (Double.parseDouble(stringsX.get(i)) >= Double.parseDouble(stringsX.get(i + 1))) {
-                        JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
-                        ex = 0;
-                    }
+        create.addActionListener(e -> {
+            for (int i = 0; i < size - 1; i++) {
+                if (Double.parseDouble(stringsX.get(i)) >= Double.parseDouble(stringsX.get(i + 1))) {
+                    JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
+                    ex = 0;
                 }
-                if (stringsX.contains("") || stringsY.contains("")) {
-                    JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
-                } else if (ex == 0) {
-                } else {
-                    xValues = new double[size];
-                    yValues = new double[size];
-                    for (int i = 0; i < size; i++) {
-                        xValues[i] = Double.parseDouble(stringsX.get(i));
-                        yValues[i] = Double.parseDouble(stringsY.get(i));
-                    }
-                    function = factory.create(xValues, yValues);
-                    System.out.println(function.toString());
-                    dispose();
+            }
+            if (stringsX.contains("") || stringsY.contains("")) {
+                JOptionPane.showMessageDialog(dialog, "Введите корректно значения точек");
+            } else if (ex == 0) {
+            } else {
+                xValues = new double[size];
+                yValues = new double[size];
+                for (int i = 0; i < size; i++) {
+                    xValues[i] = Double.parseDouble(stringsX.get(i));
+                    yValues[i] = Double.parseDouble(stringsY.get(i));
                 }
+                function = factory.create(xValues, yValues);
+                System.out.println(function.toString());
+                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());

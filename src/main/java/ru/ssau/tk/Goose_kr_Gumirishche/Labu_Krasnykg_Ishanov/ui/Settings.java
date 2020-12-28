@@ -25,20 +25,14 @@ public class Settings extends JDialog {
         ButtonGroup group = new ButtonGroup();
         group.add(massif);
         group.add(list);
-        massif.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == massif) {
-                    factory = new ArrayTabulatedFunctionFactory();
-                }
+        massif.addActionListener(e -> {
+            if (e.getSource() == massif) {
+                factory = new ArrayTabulatedFunctionFactory();
             }
         });
-        list.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == list) {
-                    factory = new LinkedListTabulatedFunctionFactory();
-                }
+        list.addActionListener(e -> {
+            if (e.getSource() == list) {
+                factory = new LinkedListTabulatedFunctionFactory();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());

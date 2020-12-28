@@ -18,23 +18,17 @@ public class ProgressBar extends JDialog {
         setSize(new Dimension(400, 200));
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                count = progressBar.getValue();
-                if (count < 100) {
-                    count += Math.random() * 100;
-                    progressBar.setValue(count);
-                }
+        Timer timer = new Timer(1000, e -> {
+            count = progressBar.getValue();
+            if (count < 100) {
+                count += Math.random() * 100;
+                progressBar.setValue(count);
             }
         });
-        progressBar.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (progressBar.getValue() == 100) {
-                    timer.stop();
-                    dispose();
-                }
+        progressBar.addChangeListener(e -> {
+            if (progressBar.getValue() == 100) {
+                timer.stop();
+                dispose();
             }
         });
         timer.start();

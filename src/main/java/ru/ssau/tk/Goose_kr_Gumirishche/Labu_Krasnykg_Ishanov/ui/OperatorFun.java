@@ -40,21 +40,15 @@ public class OperatorFun extends JDialog {
         map.put("Произведение", service.multiply(function1, function2));
         map.put("Частное", service.division(function1, function2));
         box.setEditable(true);
-        box.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    function3 = map.get(e.getItem().toString());
-                }
+        box.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                function3 = map.get(e.getItem().toString());
             }
         });
         JButton result = new JButton("Выполнить");
-        result.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(function3);
-                dispose();
-            }
+        result.addActionListener(e -> {
+            System.out.println(function3);
+            dispose();
         });
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

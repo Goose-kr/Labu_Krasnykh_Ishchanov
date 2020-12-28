@@ -21,23 +21,20 @@ public class WindowOfTabulated extends JDialog {
         JLabel label = new JLabel("Число точек:");
         JTextField input = new JTextField();
         JButton button = new JButton("enter");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
-                    JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
-                } else {
-                    JDialog progressBar = new ProgressBar();
-                    progressBar.setVisible(true);
-                    Integer size;
-                    size = Integer.valueOf(input.getText());
-                    Table table = new Table(size, factory);
-                    table.setVisible(true);
-                    tabulatedFunction = table.getFunction();
-                    stringsX = table.getStringsX();
-                    stringsY = table.getStringsY();
-                    dispose();
-                }
+        button.addActionListener(e -> {
+            if (input.getText().equals("") || Integer.parseInt(input.getText()) < 2) {
+                JOptionPane.showMessageDialog(dialog, "Введите корректно число точек");
+            } else {
+                JDialog progressBar = new ProgressBar();
+                progressBar.setVisible(true);
+                Integer size;
+                size = Integer.valueOf(input.getText());
+                Table table = new Table(size, factory);
+                table.setVisible(true);
+                tabulatedFunction = table.getFunction();
+                stringsX = table.getStringsX();
+                stringsY = table.getStringsY();
+                dispose();
             }
         });
         GroupLayout layout = new GroupLayout(getContentPane());
