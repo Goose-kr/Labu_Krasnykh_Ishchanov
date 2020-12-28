@@ -83,8 +83,6 @@ public class CompositeParts extends JDialog {
                 } else {
                     part2 = map.get(functionStr2);
                     part1 = map.get(functionStr1);
-                    System.out.println(part1 instanceof SqrFunction);
-                    System.out.println(part2 instanceof SumFunction);
                     WindowSize windowSize = new WindowSize();
                     windowSize.setVisible(true);
                     TableMath tableMath = new TableMath(factory, new CompositeFunction(part1, part2), windowSize.getSizeOf());
