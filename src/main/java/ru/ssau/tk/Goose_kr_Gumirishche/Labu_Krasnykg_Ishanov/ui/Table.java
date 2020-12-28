@@ -46,7 +46,7 @@ public class Table extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < size - 1; i++) {
-                    if (Double.parseDouble(stringsX.get(i)) > Double.parseDouble(stringsX.get(i + 1))) {
+                    if (Double.parseDouble(stringsX.get(i)) >= Double.parseDouble(stringsX.get(i + 1))) {
                         JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
                         ex = 0;
                     }

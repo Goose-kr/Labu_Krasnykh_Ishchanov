@@ -27,6 +27,7 @@ public class TableMath extends JDialog {
 
     public TableMath(TabulatedFunctionFactory factory, MathFunction function, int size) {
         JDialog dialog = new JDialog();
+        setModal(true);
         this.function = function;
         stringsX = new ArrayList<>(size);
         stringsY = new ArrayList<>(size);
@@ -44,7 +45,7 @@ public class TableMath extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < size - 1; i++) {
-                    if (Double.parseDouble(stringsX.get(i)) > Double.parseDouble(stringsX.get(i + 1))) {
+                    if (Double.parseDouble(stringsX.get(i)) >= Double.parseDouble(stringsX.get(i + 1))) {
                         JOptionPane.showMessageDialog(dialog, "Х неупорядочен");
                         ex = 0;
                     }
@@ -57,13 +58,10 @@ public class TableMath extends JDialog {
                     double[] yValues = new double[size];
                     for (int i = 0; i < size; i++) {
                         xValues[i] = Double.parseDouble(stringsX.get(i));
-                        System.out.println(xValues[i]);
                         yValues[i] = function.apply(xValues[i]);
-                        System.out.println(yValues[i]);
                     }
                     functionTab = factory.create(xValues, yValues);
-                    System.out.println(functionTab instanceof ArrayTabulatedFunction);
-                    System.out.println(functionTab instanceof LinkedListTabulatedFunction);
+                    System.out.println(functionTab.toString());
                     dispose();
                 }
             }
