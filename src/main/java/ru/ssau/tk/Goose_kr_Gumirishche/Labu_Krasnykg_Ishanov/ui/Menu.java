@@ -24,6 +24,13 @@ public class Menu extends JFrame {
 
     public Menu() {
         super("Подручный");
+        Image image = new ImageIcon("ФонДляПрограмки.png").getImage();
+        setContentPane(new JPanel(new BorderLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                g.drawImage(image, 0, 0, null);
+            }
+        });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuTab.add(createTabulatedFunction());
         menuMath.add(createMathFunction());
@@ -32,7 +39,7 @@ public class Menu extends JFrame {
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
-        setSize(425, 100);
+        setSize(425, 380);
         setLocationRelativeTo(null);
         JButton calculate = new JButton("Калькулятор");
         add(calculate);
