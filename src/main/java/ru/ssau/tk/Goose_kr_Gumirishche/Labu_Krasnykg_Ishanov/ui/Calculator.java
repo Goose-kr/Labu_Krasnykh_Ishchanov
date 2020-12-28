@@ -37,9 +37,10 @@ public class Calculator extends JDialog {
     int size;
     int ex = 1;
 
-    public Calculator() {
+    public Calculator(TabulatedFunctionFactory factory) {
         JDialog calculator = new JDialog();
         setModal(true);
+        this.factory=factory;
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);

@@ -1,6 +1,7 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
+import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.io.FunctionsIO;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations.TabulatedDifferentialOperator;
 
@@ -32,21 +33,22 @@ public class DifferentialOperator extends JDialog {
     private final JFileChooser save = new JFileChooser();
     private final JFileChooser downloadChooser = new JFileChooser();
 
-    private final TabulatedDifferentialOperator differentialOperator = new TabulatedDifferentialOperator(Menu.factory);
+    private final TabulatedDifferentialOperator differentialOperator;
 
     protected TabulatedFunction functionResult;
     protected TabulatedFunction functionInitial;
 
 
-    protected DifferentialOperator() {
+    protected DifferentialOperator(TabulatedFunctionFactory factory) {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 800, 700);
+        differentialOperator= new TabulatedDifferentialOperator(factory);
 
         compose();
-        addButtonListeners();
+        addButtonListeners(factory);
 
         CreatingArray.checkBoxSave.setVisible(false);
         CreatingFunction.checkBoxSave.setVisible(false);
@@ -57,7 +59,7 @@ public class DifferentialOperator extends JDialog {
         setVisible(true);
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(TabulatedFunctionFactory factory) {
         //создание функции
         buttonCreate.addActionListener(e -> {
             Object[] buttonsName = {"Массив", "Функция", "Отмена"};
@@ -98,7 +100,7 @@ public class DifferentialOperator extends JDialog {
             double[] arrayY = convert(yValuesInitial);
 
             //подсчет производной и вставка в таблицу
-            functionResult = differentialOperator.derive(Menu.factory.create(arrayX, arrayY));
+            functionResult = differentialOperator.derive(factory.create(arrayX, arrayY));
             for (int i = 0; i < functionResult.getCount(); i++) {
                 xValuesResult.add(i, String.valueOf(functionResult.getX(i)));
                 yValuesResult.add(i, String.valueOf(functionResult.getY(i)));
@@ -267,11 +269,6 @@ public class DifferentialOperator extends JDialog {
         }
         return array;
 
-    }
-
-    public static void main(String[] args) {
-        DifferentialOperator differentialOperator = new DifferentialOperator();
-        differentialOperator.setVisible(true);
     }
 }
 

@@ -43,14 +43,14 @@ public class Menu extends JFrame {
         calculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Calculator calculator = new Calculator();
+                Calculator calculator = new Calculator(factory);
                 calculator.setVisible(true);
             }
         });
         diff.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DifferentialOperator differentialOperator = new DifferentialOperator();
+                DifferentialOperator differentialOperator = new DifferentialOperator(factory);
                 differentialOperator.setVisible(true);
             }
         });
