@@ -28,7 +28,7 @@ public class CreatingFunction extends JDialog {
     Map<String, MathFunction> functionMap = new HashMap<>();
     JComboBox<String> comboBoxFunctions = showComboBox();
 
-    protected CreatingFunction(TabulatedFunctionFactory factory,Consumer<? super TabulatedFunction> callback) {
+    protected CreatingFunction(Consumer<? super TabulatedFunction> callback) {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,14 +49,14 @@ public class CreatingFunction extends JDialog {
         getContentPane().add(comboBoxFunctions);
 
         compose();
-        addButtonListeners(factory);
+        addButtonListeners();
         setVisible(true);
 
         callback.accept(function);
         dispose();
     }
 
-    private void addButtonListeners(TabulatedFunctionFactory factory) {
+    private void addButtonListeners() {
         buttonCreateFunction.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
@@ -66,11 +66,11 @@ public class CreatingFunction extends JDialog {
                     if (str.equals("Константная функция")) {
                         String result = JOptionPane.showInputDialog("Введите значение константы");
                         double constant = Double.parseDouble(result);
-                        function = factory.create(new ConstantFunction(constant), from, to, count);
+                        function = Menu.factory.create(new ConstantFunction(constant), from, to, count);
                     } else {
                         MathFunction mathFunction = functionMap.get(str);
 
-                        function = factory.create(mathFunction, from, to, count);
+                        function = Menu.factory.create(mathFunction, from, to, count);
                     }
                     dispose();
                     System.out.println(function.toString());

@@ -39,16 +39,16 @@ public class DifferentialOperator extends JDialog {
     protected TabulatedFunction functionInitial;
 
 
-    protected DifferentialOperator(TabulatedFunctionFactory factory) {
+    protected DifferentialOperator() {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 800, 700);
-        differentialOperator= new TabulatedDifferentialOperator(factory);
+        differentialOperator= new TabulatedDifferentialOperator(Menu.factory);
 
         compose();
-        addButtonListeners(factory);
+        addButtonListeners();
 
         CreatingArray.checkBoxSave.setVisible(false);
         CreatingFunction.checkBoxSave.setVisible(false);
@@ -59,7 +59,7 @@ public class DifferentialOperator extends JDialog {
         setVisible(true);
     }
 
-    private void addButtonListeners(TabulatedFunctionFactory factory) {
+    private void addButtonListeners() {
         //создание функции
         buttonCreate.addActionListener(e -> {
             Object[] buttonsName = {"Массив", "Функция", "Отмена"};
@@ -100,7 +100,7 @@ public class DifferentialOperator extends JDialog {
             double[] arrayY = convert(yValuesInitial);
 
             //подсчет производной и вставка в таблицу
-            functionResult = differentialOperator.derive(factory.create(arrayX, arrayY));
+            functionResult = differentialOperator.derive(Menu.factory.create(arrayX, arrayY));
             for (int i = 0; i < functionResult.getCount(); i++) {
                 xValuesResult.add(i, String.valueOf(functionResult.getX(i)));
                 yValuesResult.add(i, String.valueOf(functionResult.getY(i)));

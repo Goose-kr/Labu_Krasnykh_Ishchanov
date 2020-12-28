@@ -47,27 +47,27 @@ public class Calculator extends JDialog {
         JFileChooser fileOpen1 = new JFileChooser();
         fileOpen1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen1.setDialogTitle("Загрузка функции");
-        fileOpen1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        fileOpen1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "bin"));
         fileOpen1.setAcceptAllFileFilterUsed(false);
         JFileChooser fileOpen2 = new JFileChooser();
         fileOpen2.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen2.setDialogTitle("Загрузка функции");
-        fileOpen2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        fileOpen2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "bin"));
         fileOpen2.setAcceptAllFileFilterUsed(false);
         JFileChooser fileSave1 = new JFileChooser();
         fileSave1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave1.setDialogTitle("Сохранение функции");
-        fileSave1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        fileSave1.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "bin"));
         fileSave1.setAcceptAllFileFilterUsed(false);
         JFileChooser fileSave2 = new JFileChooser();
         fileSave2.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave2.setDialogTitle("Сохранение функции");
-        fileSave2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        fileSave2.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "bin"));
         fileSave2.setAcceptAllFileFilterUsed(false);
         JFileChooser fileSave3 = new JFileChooser();
         fileSave3.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileSave3.setDialogTitle("Сохранение функции");
-        fileSave3.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "txt"));
+        fileSave3.addChoosableFileFilter(new FileNameExtensionFilter("Text files", "bin"));
         fileSave3.setAcceptAllFileFilterUsed(false);
         stringsX1 = new ArrayList<>();
         stringsY1 = new ArrayList<>();
@@ -125,8 +125,8 @@ public class Calculator extends JDialog {
                 fileOpen1.showOpenDialog(calculator);
                 File file = fileOpen1.getSelectedFile();
                 if (file != null) {
-                    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-                        TabulatedFunction function = FunctionsIO.readTabulatedFunction(in, factory);
+                    try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(file))) {
+                        TabulatedFunction function = FunctionsIO.deserialize(in);
                         for (int i = 0; i < function.getCount(); i++) {
                             stringsX1.add(i, String.valueOf(function.getX(i)));
                             stringsY1.add(i, String.valueOf(function.getY(i)));
@@ -141,7 +141,7 @@ public class Calculator extends JDialog {
                         size = function.getCount();
                         System.out.println(function.toString());
                         function1 = factory.create(xValues, yValues);
-                    } catch (IOException err) {
+                    } catch (IOException | ClassNotFoundException err) {
                         err.printStackTrace();
                     }
                 }
@@ -166,8 +166,8 @@ public class Calculator extends JDialog {
 
                         function1 = factory.create(xValues, yValues);
 
-                        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-                            FunctionsIO.writeTabulatedFunction(out, function1);
+                        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+                            FunctionsIO.serialize(out, function1);
                         } catch (IOException error) {
                             error.printStackTrace();
                         }

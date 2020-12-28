@@ -25,7 +25,7 @@ public class CreatingArray extends JDialog {
     public TabulatedFunction function;
     protected static JCheckBox checkBoxSave = new JCheckBox("Сохранить функцию");
 
-    protected CreatingArray(TabulatedFunctionFactory factory,Consumer<? super TabulatedFunction> callback) {
+    protected CreatingArray(Consumer<? super TabulatedFunction> callback) {
         super();
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -39,7 +39,7 @@ public class CreatingArray extends JDialog {
         getContentPane().add(checkBoxSave);
 
         compose();
-        addButtonListeners(factory);
+        addButtonListeners();
 
         tableXY.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setVisible(true);
@@ -48,7 +48,7 @@ public class CreatingArray extends JDialog {
         dispose();
     }
 
-    private void addButtonListeners(TabulatedFunctionFactory factory) {
+    private void addButtonListeners() {
         buttonCreateTable.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
@@ -67,7 +67,7 @@ public class CreatingArray extends JDialog {
             double[] arrayX = convert(xValues);
             double[] arrayY = convert(yValues);
 
-            function = factory.create(arrayX, arrayY);
+            function = Menu.factory.create(arrayX, arrayY);
 
             tableXY.setCellSelectionEnabled(true);
             dispose();

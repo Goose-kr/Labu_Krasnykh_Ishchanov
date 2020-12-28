@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
     private int size;
-    TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
+    protected static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     private final JMenu menuSettings = new JMenu("Настройки");
     private final JMenuBar menuBar = new JMenuBar();
     private final JMenu menuTab = new JMenu("Табулированная функция");
@@ -50,7 +50,7 @@ public class Menu extends JFrame {
         diff.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DifferentialOperator differentialOperator = new DifferentialOperator(factory);
+                DifferentialOperator differentialOperator = new DifferentialOperator();
                 differentialOperator.setVisible(true);
             }
         });
