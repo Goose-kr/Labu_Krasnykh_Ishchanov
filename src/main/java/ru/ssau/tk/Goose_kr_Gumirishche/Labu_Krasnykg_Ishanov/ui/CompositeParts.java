@@ -8,22 +8,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CompositeParts extends JDialog {
     private String functionStr1;
     private String functionStr2;
-    private Map<String, MathFunction> map = new HashMap<>();
+    private final Map<String, MathFunction> map = new HashMap<>();
     private double constant;
     private MathFunction part1;
     private MathFunction part2;
-    private TabulatedFunctionFactory factory;
 
     public CompositeParts(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
-        this.factory = factory;
         setModal(true);
         setSize(new Dimension(400, 200));
         setLocationRelativeTo(null);

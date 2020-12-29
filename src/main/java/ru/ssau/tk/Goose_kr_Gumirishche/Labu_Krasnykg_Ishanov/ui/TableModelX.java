@@ -49,8 +49,6 @@ public class TableModelX extends AbstractTableModel {
     public void setValueAt(Object o, int rowIndex, int columnIndex) {
         if (columnIndex == VALUE_X_COLUMN_NUMBER) {
             strings.set(rowIndex, String.valueOf(o));
-        } else {
-            return;
         }
     }
 

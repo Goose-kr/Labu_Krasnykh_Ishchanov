@@ -6,33 +6,20 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.operations.Tabulate
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperatorFun extends JDialog {
-    private Map<String, TabulatedFunction> map = new HashMap<>();
-    private final TabulatedFunctionOperationService service;
+    private final Map<String, TabulatedFunction> map = new HashMap<>();
     TabulatedFunction function3;
-    private final ArrayList<String> stringsX3;
-    private final ArrayList<String> stringsY3;
 
-    public OperatorFun(int size, TabulatedFunctionFactory factory, TabulatedFunction function1, TabulatedFunction function2) {
-        JDialog dialog = new JDialog();
+    public OperatorFun(TabulatedFunctionFactory factory, TabulatedFunction function1, TabulatedFunction function2) {
+        super();
         setModal(true);
         setSize(new Dimension(400, 100));
         setLocationRelativeTo(null);
-        service = new TabulatedFunctionOperationService(factory);
-        stringsY3 = new ArrayList<>();
-        stringsX3 = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            stringsX3.add("");
-            stringsY3.add("");
-        }
+        TabulatedFunctionOperationService service = new TabulatedFunctionOperationService(factory);
         JComboBox<String> box = new JComboBox<>(new String[]{"", "Сумма", "Разность", "Произведение", "Частное"
         });
         map.put("Сумма", service.sum(function1, function2));
@@ -57,17 +44,5 @@ public class OperatorFun extends JDialog {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup().addComponent(box).addComponent(result)));
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(box).addComponent(result)));
-    }
-
-    public TabulatedFunction getFunction3() {
-        return function3;
-    }
-
-    public ArrayList<String> getStringsX3() {
-        return stringsX3;
-    }
-
-    public ArrayList<String> getStringsY3() {
-        return stringsY3;
     }
 }

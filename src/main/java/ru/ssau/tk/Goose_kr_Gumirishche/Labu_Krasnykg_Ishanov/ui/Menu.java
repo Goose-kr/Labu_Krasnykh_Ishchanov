@@ -5,16 +5,9 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.T
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
-    private int size;
     protected static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
-    private final JMenu menuSettings = new JMenu("Настройки");
-    private final JMenuBar menuBar = new JMenuBar();
-    private final JMenu menuTab = new JMenu("Табулированная функция");
-    private final JMenu menuMath = new JMenu("Математичекские функции");
 
     public Menu() {
         super("Подручный");
@@ -26,10 +19,14 @@ public class Menu extends JFrame {
             }
         });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JMenu menuTab = new JMenu("Табулированная функция");
         menuTab.add(createTabulatedFunction());
+        JMenu menuMath = new JMenu("Математичекские функции");
         menuMath.add(createMathFunction());
+        JMenuBar menuBar = new JMenuBar();
         menuBar.add(menuTab);
         menuBar.add(menuMath);
+        JMenu menuSettings = new JMenu("Настройки");
         menuBar.add(menuSettings);
         menuSettings.add(settings());
         setJMenuBar(menuBar);
@@ -84,10 +81,6 @@ public class Menu extends JFrame {
         });
 
         return menuMath;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public TabulatedFunctionFactory getFactory() {

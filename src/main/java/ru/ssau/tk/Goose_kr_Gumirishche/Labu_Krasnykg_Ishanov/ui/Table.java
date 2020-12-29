@@ -6,17 +6,12 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.T
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Table extends JDialog {
     private final ArrayList<String> stringsX;
     private final ArrayList<String> stringsY;
-    private final AbstractTableModel tableModel;
-    private final JTable table;
     private TabulatedFunction function;
-    private TabulatedFunctionFactory factory;
     private double[] xValues;
     private double[] yValues;
     int ex = 1;
@@ -24,15 +19,14 @@ public class Table extends JDialog {
     public Table(int size, TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
         setModal(true);
-        this.factory = factory;
         stringsY = new ArrayList<>(size);
         stringsX = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             stringsX.add("");
             stringsY.add("");
         }
-        tableModel = new TableModel(stringsX, stringsY);
-        table = new JTable(tableModel);
+        AbstractTableModel tableModel = new TableModel(stringsX, stringsY);
+        JTable table = new JTable(tableModel);
         setSize(new Dimension(500, 500));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JButton create = new JButton("Создать");
@@ -70,14 +64,6 @@ public class Table extends JDialog {
 
     public TabulatedFunction getFunction() {
         return function;
-    }
-
-    public double[] getXValues() {
-        return xValues;
-    }
-
-    public double[] getYValues() {
-        return yValues;
     }
 
     public ArrayList<String> getStringsX() {

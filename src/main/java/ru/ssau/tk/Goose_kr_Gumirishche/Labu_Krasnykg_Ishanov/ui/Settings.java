@@ -6,8 +6,6 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.T
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Settings extends JDialog {
     private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();

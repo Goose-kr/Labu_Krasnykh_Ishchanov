@@ -5,22 +5,17 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.T
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MathFunctionWindow extends JDialog {
     private String functionStr;
-    private final TabulatedFunctionFactory factory;
-    private Map<String, MathFunction> map = new HashMap<>();
+    private final Map<String, MathFunction> map = new HashMap<>();
     private MathFunction function;
 
     public MathFunctionWindow(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
-        this.factory = factory;
         setModal(true);
         setSize(new Dimension(400, 220));
         setLocationRelativeTo(null);
@@ -54,14 +49,11 @@ public class MathFunctionWindow extends JDialog {
         JComboBox<String> box = new JComboBox<>(new String[]{"", "Двойная ф-я", "Единичная ф-я", "Квадратная ф-я", "Нулевая ф-я", "Тождественная ф-я"
         });
         box.setEditable(true);
-        box.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    functionStr = e.getItem().toString();
-                    System.out.println(functionStr);
-                    function = map.get(functionStr);
-                }
+        box.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                functionStr = e.getItem().toString();
+                System.out.println(functionStr);
+                function = map.get(functionStr);
             }
         });
         JButton create = new JButton("Создать");

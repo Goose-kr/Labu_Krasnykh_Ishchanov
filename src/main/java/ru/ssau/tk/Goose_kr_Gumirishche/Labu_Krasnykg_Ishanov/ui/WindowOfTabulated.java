@@ -3,15 +3,11 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.TabulatedFunction;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 
-import java.awt.event.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class WindowOfTabulated extends JDialog {
 
     public TabulatedFunction tabulatedFunction;
-    private ArrayList<String> stringsX;
-    private ArrayList<String> stringsY;
 
     public WindowOfTabulated(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();
@@ -27,13 +23,11 @@ public class WindowOfTabulated extends JDialog {
             } else {
                 JDialog progressBar = new ProgressBar();
                 progressBar.setVisible(true);
-                Integer size;
-                size = Integer.valueOf(input.getText());
+                int size;
+                size = Integer.parseInt(input.getText());
                 Table table = new Table(size, factory);
                 table.setVisible(true);
                 tabulatedFunction = table.getFunction();
-                stringsX = table.getStringsX();
-                stringsY = table.getStringsY();
                 dispose();
             }
         });

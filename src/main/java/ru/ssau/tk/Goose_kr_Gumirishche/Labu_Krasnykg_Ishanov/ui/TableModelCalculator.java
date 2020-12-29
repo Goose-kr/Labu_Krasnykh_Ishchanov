@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class TableModelCalculator extends AbstractTableModel {
     private static final int VALUE_X_COLUMN_NUMBER = 0;
     private static final int VALUE_Y_COLUMN_NUMBER = 1;
+    private static final long serialVersionUID = 5443440103834775966L;
     private final ArrayList<String> stringsX;
     private final ArrayList<String> stringsY;
 
@@ -52,8 +53,6 @@ public class TableModelCalculator extends AbstractTableModel {
             stringsX.set(rowIndex, String.valueOf(o));
         } else if (columnIndex == VALUE_Y_COLUMN_NUMBER) {
             stringsY.set(rowIndex, String.valueOf(o));
-        } else {
-            return;
         }
     }
 

@@ -6,39 +6,24 @@ import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.T
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TableMath extends JDialog {
     private final ArrayList<String> stringsX;
-    private final ArrayList<String> stringsY;
-    private final AbstractTableModel tableModelX;
-    private final JTable tableX;
-    private String functionStr;
-    private TabulatedFunctionFactory factory;
-    private MathFunction function;
     private TabulatedFunction functionTab;
-    private Map<String, Integer> map = new HashMap<>();
     private int ex = 1;
 
     public TableMath(TabulatedFunctionFactory factory, MathFunction function, int size) {
         JDialog dialog = new JDialog();
         setModal(true);
-        this.function = function;
         stringsX = new ArrayList<>(size);
-        stringsY = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             stringsX.add("");
-            stringsY.add("");
         }
-        tableModelX = new TableModelX(stringsX);
-        tableX = new JTable(tableModelX);
+        AbstractTableModel tableModelX = new TableModelX(stringsX);
+        JTable tableX = new JTable(tableModelX);
         setSize(new Dimension(500, 500));
         tableX.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.factory = factory;
         JButton create = new JButton("Создать");
         create.addActionListener(e -> {
             for (int i = 0; i < size - 1; i++) {

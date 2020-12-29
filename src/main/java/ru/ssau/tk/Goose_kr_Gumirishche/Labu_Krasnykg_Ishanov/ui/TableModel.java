@@ -2,11 +2,11 @@ package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TableModel extends AbstractTableModel {
     private static final int VALUE_X_COLUMN_NUMBER = 0;
     private static final int VALUE_Y_COLUMN_NUMBER = 1;
+    private static final long serialVersionUID = -364511902038178058L;
     private final ArrayList<String> stringsX;
     private final ArrayList<String> stringsY;
 
@@ -55,8 +55,6 @@ public class TableModel extends AbstractTableModel {
             stringsX.set(rowIndex, String.valueOf(o));
         } else if (columnIndex == VALUE_Y_COLUMN_NUMBER) {
             stringsY.set(rowIndex, String.valueOf(o));
-        } else {
-            return;
         }
     }
 

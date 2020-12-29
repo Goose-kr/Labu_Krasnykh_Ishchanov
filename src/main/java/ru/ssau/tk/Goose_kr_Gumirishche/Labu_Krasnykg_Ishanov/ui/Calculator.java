@@ -1,7 +1,6 @@
 package ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.ui;
 
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.*;
-import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.Goose_kr_Gumirishche.Labu_Krasnykg_Ishanov.io.FunctionsIO;
 
@@ -9,14 +8,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
 public class Calculator extends JDialog {
-    JMenu menuSettings = new JMenu("Выбор фабрики");
-    JMenuBar menuBar = new JMenuBar();
 
     private final ArrayList<String> stringsX1;
     private final ArrayList<String> stringsY1;
@@ -33,17 +28,12 @@ public class Calculator extends JDialog {
     private TabulatedFunction function1;
     private TabulatedFunction function2;
     private TabulatedFunction function3;
-    private TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     int size;
     int ex = 1;
 
     public Calculator(TabulatedFunctionFactory factory) {
         JDialog calculator = new JDialog();
         setModal(true);
-        this.factory=factory;
-        menuBar.add(menuSettings);
-        menuSettings.add(settings());
-        setJMenuBar(menuBar);
         JFileChooser fileOpen1 = new JFileChooser();
         fileOpen1.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileOpen1.setDialogTitle("Загрузка функции");
@@ -266,7 +256,7 @@ public class Calculator extends JDialog {
                 JOptionPane.showMessageDialog(calculator, "У функций разные размеры");
             } else if (ex == 0) {
             } else {
-                OperatorFun operatorFun = new OperatorFun(size, factory, function1, function2);
+                OperatorFun operatorFun = new OperatorFun(factory, function1, function2);
                 operatorFun.setVisible(true);
                 for (int i = 0; i < size; i++) {
                     stringsX3.add(String.valueOf(operatorFun.function3.getX(i)));
@@ -305,18 +295,6 @@ public class Calculator extends JDialog {
                 .addGroup(layout.createParallelGroup().addComponent(tableScrollPane1).addComponent(tableScrollPane2).addComponent(tableScrollPane3))
                 .addGroup(layout.createSequentialGroup()));
         setLocationRelativeTo(null);
-    }
-
-    private JMenu settings() {
-        JMenu set = new JMenu("Выбор фабрики");
-        JMenuItem item = new JMenuItem("Открыть");
-        set.add(item);
-        item.addActionListener(e -> {
-            Settings settings = new Settings();
-            settings.setVisible(true);
-            factory = settings.getFactory();
-        });
-        return set;
     }
 
 }
