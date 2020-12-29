@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class WindowOfTabulated extends JDialog {
 
-    public TabulatedFunction tabulatedFunction;
+    private TabulatedFunction tabulatedFunction;
 
     public WindowOfTabulated(TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();

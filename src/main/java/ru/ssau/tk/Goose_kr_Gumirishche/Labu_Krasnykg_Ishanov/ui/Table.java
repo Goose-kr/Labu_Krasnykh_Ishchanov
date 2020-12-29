@@ -14,7 +14,7 @@ public class Table extends JDialog {
     private TabulatedFunction function;
     private double[] xValues;
     private double[] yValues;
-    int ex = 1;
+    private int ex = 1;
 
     public Table(int size, TabulatedFunctionFactory factory) {
         JDialog dialog = new JDialog();

@@ -28,8 +28,8 @@ public class Calculator extends JDialog {
     private TabulatedFunction function1;
     private TabulatedFunction function2;
     private TabulatedFunction function3;
-    int size;
-    int ex = 1;
+    private int size;
+    private int ex = 1;
 
     public Calculator(TabulatedFunctionFactory factory) {
         JDialog calculator = new JDialog();
@@ -247,7 +247,7 @@ public class Calculator extends JDialog {
             stringsX3.clear();
             stringsY3.clear();
             for (int i = 0; i < size - 1; i++) {
-                if (Double.parseDouble(stringsX1.get(i))!=Double.parseDouble(stringsX2.get(i))) {
+                if (Double.parseDouble(stringsX1.get(i)) != Double.parseDouble(stringsX2.get(i))) {
                     JOptionPane.showMessageDialog(calculator, "Х не равны");
                     ex = 0;
                 }
