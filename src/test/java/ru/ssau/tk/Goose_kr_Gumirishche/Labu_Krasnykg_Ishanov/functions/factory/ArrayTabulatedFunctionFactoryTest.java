@@ -36,4 +36,11 @@ public class ArrayTabulatedFunctionFactoryTest {
         TabulatedFunction function = array.createUnmodifiable(xValues, yValues);
         assertTrue(function instanceof UnmodifiableTabulatedFunction);
     }
+
+    @Test
+    public void testCreateStrictUnmodifiable() {
+        TabulatedFunction function = array.createStrictUnmodifiable(xValues, yValues);
+        assertThrows(UnsupportedOperationException.class, () -> function.setY(0, 0));
+        assertThrows(UnsupportedOperationException.class, () -> function.apply(0));
+    }
 }
